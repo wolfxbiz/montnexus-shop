@@ -36,8 +36,8 @@ export default function NewArticlePage() {
     else setCoverPreview(null)
   }
 
-  async function handleSubmit(e: React.MouseEvent, publish: boolean) {
-    e.preventDefault()
+  async function handleSubmit(e: React.MouseEvent | null, publish: boolean) {
+    e?.preventDefault()
     if (!form.title || !form.content) { setError('Title and content are required.'); return }
     if (!user) { setError('Not logged in.'); return }
     setError('')
@@ -131,10 +131,10 @@ export default function NewArticlePage() {
             {error && <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-error)' }}>{error}</p>}
 
             <div style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'flex-end' }}>
-              <Button variant="secondary" onClick={e => handleSubmit(e as unknown as React.MouseEvent, false)} disabled={loading}>
+              <Button variant="secondary" onClick={() => handleSubmit(null, false)} disabled={loading}>
                 Save draft
               </Button>
-              <Button variant="primary" onClick={e => handleSubmit(e as unknown as React.MouseEvent, true)} disabled={loading}>
+              <Button variant="primary" onClick={() => handleSubmit(null, true)} disabled={loading}>
                 {loading ? status || 'Saving…' : 'Publish'}
               </Button>
             </div>

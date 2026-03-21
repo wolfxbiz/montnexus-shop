@@ -9,10 +9,10 @@ export async function createClient() {
     {
       cookies: {
         getAll() { return cookieStore.getAll() },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookieStore.set(name, value, options as never)
             )
           } catch {}
         },
@@ -29,10 +29,10 @@ export async function createServiceClient() {
     {
       cookies: {
         getAll() { return cookieStore.getAll() },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              cookieStore.set(name, value, options as never)
             )
           } catch {}
         },
