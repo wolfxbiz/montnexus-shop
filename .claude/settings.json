@@ -3,7 +3,11 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(ls /c/Users/vimal/Montnexus-shop/montnexus-shop/app/api/articles/[slug]/)"
+      "Bash(ls /c/Users/vimal/Montnexus-shop/montnexus-shop/app/api/articles/[slug]/)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npx tsc:*)"
     ],
     "additionalDirectories": [
       "C:\\Users\\vimal\\Montnexus-shop\\montnexus-shop\\app\\api\\articles",
