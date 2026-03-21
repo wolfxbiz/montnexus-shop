@@ -32,7 +32,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ slug
 
   if (!article) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
-  const creatorUserId = (article.creators as { user_id: string })?.user_id
+  const creatorUserId = (article.creators as unknown as { user_id: string })?.user_id
   if (creatorUserId !== userId) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const { data, error } = await supabase
