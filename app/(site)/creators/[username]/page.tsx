@@ -22,7 +22,7 @@ export default async function CreatorPage({ params }: Props) {
   if (!creator) notFound()
 
   const [{ data: products }, { data: articles }] = await Promise.all([
-    supabase.from('products').select('id, title, slug, short_desc, cover_url, price_cents, is_free, category, file_count, published, created_at').eq('creator_id', creator.id).eq('published', true),
+    supabase.from('products').select('id, title, slug, description, short_desc, cover_url, price_cents, is_free, category, file_count, published, created_at').eq('creator_id', creator.id).eq('published', true),
     supabase.from('articles').select('id, title, slug, excerpt, cover_url, published_at').eq('creator_id', creator.id).eq('published', true).order('published_at', { ascending: false }),
   ])
 
