@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (event.type === 'checkout.session.completed') {
-    const session = event.data.object as { metadata: { productId: string; userId: string }; id: string; payment_intent: string; customer_email: string | null; amount_total: number | null }
+    const session = event.data.object as unknown as { metadata: { productId: string; userId: string }; id: string; payment_intent: string; customer_email: string | null; amount_total: number | null }
 
     const { productId, userId } = session.metadata || {}
     if (!productId || !userId) return NextResponse.json({ received: true })
