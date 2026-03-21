@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(ls /c/Users/vimal/Montnexus-shop/montnexus-shop/app/api/articles/[slug]/)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\vimal\\Montnexus-shop\\montnexus-shop\\app\\api\\articles",
+      "C:\\Users\\vimal\\Montnexus-shop\\montnexus-shop\\app\\api\\articles\\[slug]"
+    ]
+  }
+}
