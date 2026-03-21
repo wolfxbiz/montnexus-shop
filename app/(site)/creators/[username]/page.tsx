@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Nav } from '@/components/layout/Nav'
 import { Card } from '@/components/ui/Card'
 import { createServiceClient } from '@/lib/supabase/server'
+import type { ProductPublic } from '@/types'
 
 interface Props { params: Promise<{ username: string }> }
 
@@ -96,7 +97,7 @@ export default async function CreatorPage({ params }: Props) {
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)' }}>{products.length} item{products.length !== 1 ? 's' : ''}</span>
               </div>
               <div className="product-grid">
-                {products.map(p => <Card key={p.id} product={p} />)}
+                {products.map(p => <Card key={p.id} product={p as unknown as ProductPublic} />)}
               </div>
             </div>
           </section>
