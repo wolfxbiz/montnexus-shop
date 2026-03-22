@@ -8,7 +8,7 @@ import { Tag } from '@/components/ui/Tag'
 import { useAuth } from '@/context/AuthContext'
 import { createClient } from '@/lib/supabase/client'
 
-type Tab = 'purchases' | 'products' | 'articles' | 'settings'
+type Tab = 'purchases' | 'products' | 'services' | 'showcase' | 'articles' | 'settings'
 
 export default function DashboardPage() {
   const { user, loading } = useAuth()
@@ -17,6 +17,8 @@ export default function DashboardPage() {
   const [creator, setCreator] = useState<{ id: string; username: string; display_name: string } | null>(null)
   const [orders, setOrders] = useState<{ id: string; status: string; amount_cents: number; created_at: string; products: { title: string; slug: string } }[]>([])
   const [products, setProducts] = useState<{ id: string; title: string; slug: string; price_cents: number; published: boolean }[]>([])
+  const [services, setServices] = useState<{ id: string; title: string; slug: string; published: boolean; category: string }[]>([])
+  const [showcasePosts, setShowcasePosts] = useState<{ id: string; caption: string; published: boolean; created_at: string }[]>([])
   const [articles, setArticles] = useState<{ id: string; title: string; slug: string; published: boolean; published_at: string }[]>([])
 
   useEffect(() => {
@@ -35,6 +37,8 @@ export default function DashboardPage() {
         if (data) {
           setCreator(data)
           supabase.from('products').select('*').eq('creator_id', data.id).then(({ data: p }) => setProducts(p || []))
+          supabase.from('services').select('*').eq('creator_id', data.id).then(({ data: s }) => setServices(s || []))
+          supabase.from('showcase_posts').select('*').eq('creator_id', data.id).order('created_at', { ascending: false }).then(({ data: sp }) => setShowcasePosts(sp || []))
           supabase.from('articles').select('*').eq('creator_id', data.id).then(({ data: a }) => setArticles(a || []))
         }
       })
@@ -48,8 +52,10 @@ export default function DashboardPage() {
 
   const tabs: { id: Tab; label: string }[] = [
     { id: 'purchases', label: 'Purchases' },
-    { id: 'products', label: 'My Products' },
-    { id: 'articles', label: 'My Articles' },
+    { id: 'products', label: 'Products' },
+    { id: 'services', label: 'Services' },
+    { id: 'showcase', label: 'Showcase' },
+    { id: 'articles', label: 'Articles' },
     { id: 'settings', label: 'Settings' },
   ]
 
@@ -150,6 +156,76 @@ export default function DashboardPage() {
                               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)' }}>${(p.price_cents / 100).toFixed(2)}</div>
                             </div>
                             <Tag variant={p.published ? 'accent' : 'default'}>{p.published ? 'Published' : 'Draft'}</Tag>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* My Services tab */}
+            {tab === 'services' && (
+              <div>
+                {!creator ? (
+                  <div style={{ textAlign: 'center', padding: 'var(--space-10) 0' }}>
+                    <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--space-6)' }}>You need a creator profile to offer services.</p>
+                    <Button href="/dashboard/become-creator" variant="primary">Create your profile</Button>
+                  </div>
+                ) : (
+                  <>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--space-6)' }}>
+                      <Button href="/dashboard/services/new" variant="primary">+ New service</Button>
+                    </div>
+                    {services.length === 0 ? (
+                      <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: 'var(--space-8) 0' }}>No services yet.</p>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+                        {services.map(s => (
+                          <div key={s.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-5)', background: 'var(--color-bg-raised)', border: '1px solid var(--color-border-muted)', borderRadius: 'var(--radius-lg)', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+                            <div>
+                              <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', color: 'var(--color-text-primary)', marginBottom: 4 }}>{s.title}</div>
+                              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)' }}>{s.category}</div>
+                            </div>
+                            <Tag variant={s.published ? 'accent' : 'default'}>{s.published ? 'Published' : 'Draft'}</Tag>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* My Showcase tab */}
+            {tab === 'showcase' && (
+              <div>
+                {!creator ? (
+                  <div style={{ textAlign: 'center', padding: 'var(--space-10) 0' }}>
+                    <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--space-6)' }}>You need a creator profile to post in the showcase.</p>
+                    <Button href="/dashboard/become-creator" variant="primary">Create your profile</Button>
+                  </div>
+                ) : (
+                  <>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--space-6)' }}>
+                      <Button href="/dashboard/showcase/new" variant="primary">+ New post</Button>
+                    </div>
+                    {showcasePosts.length === 0 ? (
+                      <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: 'var(--space-8) 0' }}>No showcase posts yet.</p>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+                        {showcasePosts.map(sp => (
+                          <div key={sp.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-5)', background: 'var(--color-bg-raised)', border: '1px solid var(--color-border-muted)', borderRadius: 'var(--radius-lg)', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+                            <div>
+                              <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', color: 'var(--color-text-primary)', marginBottom: 4 }}>
+                                {sp.caption ? (sp.caption.length > 60 ? sp.caption.slice(0, 60) + '…' : sp.caption) : 'Untitled post'}
+                              </div>
+                              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)' }}>
+                                {new Date(sp.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              </div>
+                            </div>
+                            <Tag variant={sp.published ? 'accent' : 'default'}>{sp.published ? 'Published' : 'Draft'}</Tag>
                           </div>
                         ))}
                       </div>

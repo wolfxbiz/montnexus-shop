@@ -57,7 +57,8 @@ export function Nav() {
       {/* Nav links */}
       <div className={`nav-links ${open ? 'nav-links-open' : ''}`} style={{ display: 'flex', gap: 'var(--space-6)', alignItems: 'center' }}>
         <Link href="/bundles" onClick={() => setOpen(false)}>Browse</Link>
-        <Link href="/bundles?free=true" onClick={() => setOpen(false)}>Free</Link>
+        <Link href="/services" onClick={() => setOpen(false)}>Services</Link>
+        <Link href="/showcase" onClick={() => setOpen(false)}>Showcase</Link>
         <Link href="/articles" onClick={() => setOpen(false)}>Articles</Link>
         <Link href="/creators" onClick={() => setOpen(false)}>Creators</Link>
         {user ? (
