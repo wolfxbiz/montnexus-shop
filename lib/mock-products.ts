@@ -1,88 +1,123 @@
-import { ProductPublic } from '@/types'
+import type { ProductPublic, ProductCategory } from '@/types'
 
-export const mockProducts: ProductPublic[] = [
-  {
-    id: '1',
-    title: 'Slate UI Kit',
-    slug: 'slate-ui-kit',
-    description: 'A comprehensive dark-mode UI kit with 120+ components built for Figma. Includes design tokens, auto-layout frames, and a full component library ready for production use.',
-    short_desc: '120+ dark-mode Figma components with design tokens.',
-    category: 'design',
-    price_cents: 2900,
-    is_free: false,
-    cover_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
-    file_count: 3,
-    published: true,
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: '2',
-    title: 'Next.js Starter',
-    slug: 'nextjs-starter',
-    description: 'Production-ready Next.js 14 starter with TypeScript, Tailwind, authentication, and database setup. Save hours of boilerplate and ship faster.',
-    short_desc: 'Production Next.js 14 + TypeScript + Tailwind starter.',
-    category: 'dev',
-    price_cents: 1900,
-    is_free: false,
-    cover_url: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
-    file_count: 1,
-    published: true,
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: '3',
-    title: 'Icon Pack — Forest',
-    slug: 'icon-pack-forest',
-    description: 'A free set of 48 hand-crafted SVG icons with an organic, nature-inspired aesthetic. Available in stroke and fill variants.',
-    short_desc: '48 hand-crafted SVG icons — stroke and fill variants.',
-    category: 'icon',
-    price_cents: 0,
-    is_free: true,
-    cover_url: 'https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=800&q=80',
-    file_count: 2,
-    published: true,
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: '4',
-    title: 'The Indie Creator Handbook',
-    slug: 'indie-creator-handbook',
-    description: 'A practical guide to building and monetizing digital products as a solo creator. Covers pricing, distribution, marketing, and building an audience from scratch.',
-    short_desc: 'Practical guide to building digital products solo.',
-    category: 'ebook',
-    price_cents: 1200,
-    is_free: false,
-    cover_url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
-    file_count: 1,
-    published: true,
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: '5',
-    title: 'Notion OS Dashboard',
-    slug: 'notion-os-dashboard',
-    description: 'A complete second-brain Notion template with project management, habit tracking, reading list, and weekly review systems.',
-    short_desc: 'Complete Notion second-brain and productivity template.',
-    category: 'template',
-    price_cents: 800,
-    is_free: false,
-    cover_url: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
-    file_count: 1,
-    published: true,
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: '6',
-    title: 'Figma Variables Starter',
-    slug: 'figma-variables-starter',
-    description: 'A free Figma file with a complete design token setup using Figma Variables. Includes light/dark mode, semantic color system, and typography scale.',
-    short_desc: 'Free Figma Variables template with semantic tokens.',
-    category: 'design',
-    price_cents: 0,
-    is_free: true,
-    cover_url: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
-    file_count: 1,
-    published: true,
-    created_at: new Date().toISOString(),
-  },
+// ─── Data pools ──────────────────────────────────────────────────────────────
+const IMAGES = [
+  'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
+  'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80',
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+  'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80',
+  'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80',
+  'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
+  'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80',
+  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
+  'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
+  'https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=800&q=80',
+  'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800&q=80',
+  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+  'https://images.unsplash.com/photo-1545665277-5937489579f2?w=800&q=80',
+  'https://images.unsplash.com/photo-1618004912476-29818d81ae2e?w=800&q=80',
 ]
+
+interface Template {
+  title: string
+  slug: string
+  short_desc: string
+  description: string
+  category: ProductCategory
+  price_cents: number
+  is_free: boolean
+  file_count: number
+}
+
+const TEMPLATES: Template[] = [
+  // ── design ──────────────────────────────────────────────────────────────
+  { title: 'Slate UI Kit', slug: 'slate-ui-kit', short_desc: '120+ dark-mode Figma components with design tokens.', description: 'A comprehensive dark-mode UI kit with 120+ components built for Figma. Includes design tokens, auto-layout frames, and a full component library ready for production use.', category: 'design', price_cents: 2900, is_free: false, file_count: 3 },
+  { title: 'Minimal Dashboard UI', slug: 'minimal-dashboard-ui', short_desc: 'Clean analytics dashboard Figma kit — 60+ screens.', description: 'A minimal, data-dense dashboard UI kit with 60+ screens, dark and light modes, and a full chart component set. Built for SaaS and data products.', category: 'design', price_cents: 3500, is_free: false, file_count: 2 },
+  { title: 'Landing Page System', slug: 'landing-page-system', short_desc: '80+ Figma sections for rapid landing page design.', description: 'A modular Figma kit with 80+ pre-built sections — heros, features, pricing, testimonials, CTAs — snap together any landing page in minutes.', category: 'design', price_cents: 1900, is_free: false, file_count: 2 },
+  { title: 'Figma Variables Starter', slug: 'figma-variables-starter', short_desc: 'Free Figma Variables template with semantic tokens.', description: 'A free Figma file with a complete design token setup using Figma Variables. Includes light/dark mode, semantic color system, and typography scale.', category: 'design', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Mobile App UI Kit', slug: 'mobile-app-ui-kit', short_desc: '150+ mobile UI components for iOS and Android design.', description: 'A complete mobile UI kit with 150+ components covering navigation, forms, cards, modals, and more. Follows iOS HIG and Material 3 guidelines.', category: 'design', price_cents: 4900, is_free: false, file_count: 4 },
+  { title: 'Wireframe Kit Pro', slug: 'wireframe-kit-pro', short_desc: 'Low-fidelity Figma wireframe library — 200+ elements.', description: 'A professional wireframe kit for rapid prototyping. 200+ grayscale elements, flow diagram shapes, and annotation components.', category: 'design', price_cents: 1200, is_free: false, file_count: 1 },
+  { title: 'Design Token Library', slug: 'design-token-library', short_desc: 'Structured design token system for multi-platform teams.', description: 'A structured token library covering color, spacing, typography, elevation, and motion. JSON exports for Style Dictionary and Theo.', category: 'design', price_cents: 2200, is_free: false, file_count: 2 },
+  { title: 'E-commerce UI Components', slug: 'ecommerce-ui-components', short_desc: '100+ Figma components for online store design.', description: 'Everything you need to design a modern e-commerce product — product cards, cart, checkout flow, order tracking, and more.', category: 'design', price_cents: 3900, is_free: false, file_count: 3 },
+  { title: 'Brand Guidelines Template', slug: 'brand-guidelines-template', short_desc: 'Editable Figma brand book template for agencies.', description: 'A professional brand guidelines document template. Present logo usage, color system, typography, photography style, and tone of voice.', category: 'design', price_cents: 1500, is_free: false, file_count: 1 },
+  { title: 'Icon Pack — Forest', slug: 'icon-pack-forest', short_desc: '48 hand-crafted SVG icons — stroke and fill variants.', description: 'A free set of 48 hand-crafted SVG icons with an organic, nature-inspired aesthetic. Available in stroke and fill variants.', category: 'icon', price_cents: 0, is_free: true, file_count: 2 },
+  { title: 'Glassmorphism UI Kit', slug: 'glassmorphism-ui-kit', short_desc: 'Glass-effect Figma component set — 90+ elements.', description: 'A trendy glassmorphism UI kit with blur effects, frosted glass panels, and gradient accents. Includes 90+ components and 30 example screens.', category: 'design', price_cents: 2500, is_free: false, file_count: 2 },
+  { title: 'Typography Specimen Sheet', slug: 'typography-specimen-sheet', short_desc: 'Free Figma type-testing template with 20 pairings.', description: 'A free Figma file to test font pairings. Includes 20 curated combinations and all specimen variants — headings, body, mono, and captions.', category: 'design', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Onboarding Flow Kit', slug: 'onboarding-flow-kit', short_desc: '40+ Figma screens for web app onboarding design.', description: 'A focused kit for designing onboarding experiences — welcome screens, progress steps, form flows, tooltips, and empty states.', category: 'design', price_cents: 1800, is_free: false, file_count: 2 },
+  { title: 'SaaS Dashboard Starter', slug: 'saas-dashboard-starter', short_desc: 'Full-featured SaaS admin dashboard Figma template.', description: 'A production-grade SaaS dashboard template covering analytics, user management, billing, settings, and team views. Dark and light modes.', category: 'design', price_cents: 4500, is_free: false, file_count: 3 },
+  { title: 'Icon Pack — Monoline', slug: 'icon-pack-monoline', short_desc: '120 consistent monoline SVG icons for UI.', description: 'A set of 120 consistent monoline icons optimised for web interfaces. Available in 16, 24, and 32px sizes with Figma component set.', category: 'icon', price_cents: 1400, is_free: false, file_count: 2 },
+  { title: 'Presentation System', slug: 'presentation-system', short_desc: 'Slide deck Figma template — 50 editable slides.', description: 'A flexible presentation template with 50 layouts covering title slides, section dividers, data charts, timelines, and feature showcases.', category: 'design', price_cents: 900, is_free: false, file_count: 1 },
+  { title: 'Accessibility Checklist Kit', slug: 'accessibility-checklist-kit', short_desc: 'Free Figma annotation kit for accessibility audits.', description: 'A free kit for annotating designs with WCAG accessibility requirements — focus indicators, reading order, ARIA labels, and colour contrast badges.', category: 'design', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Component Audit Template', slug: 'component-audit-template', short_desc: 'Figma template for auditing existing UI component sets.', description: 'A systematic template for auditing a design system — inventory sheets, coverage maps, inconsistency flags, and improvement roadmap slides.', category: 'design', price_cents: 1200, is_free: false, file_count: 1 },
+  { title: 'Icon Pack — Duotone', slug: 'icon-pack-duotone', short_desc: '80 duotone SVG icons with customisable accent layer.', description: '80 duotone icons using a foreground/accent two-layer system. Swap the accent colour in Figma with a single variable change.', category: 'icon', price_cents: 1800, is_free: false, file_count: 2 },
+  { title: 'Web3 / Crypto UI Kit', slug: 'web3-crypto-ui-kit', short_desc: '70+ Figma components for crypto app design.', description: 'A dark-mode crypto dashboard UI kit with wallet cards, token charts, swap flows, and NFT gallery components.', category: 'design', price_cents: 3200, is_free: false, file_count: 2 },
+
+  // ── dev ─────────────────────────────────────────────────────────────────
+  { title: 'Next.js Starter', slug: 'nextjs-starter', short_desc: 'Production Next.js 14 + TypeScript + Tailwind starter.', description: 'Production-ready Next.js 14 starter with TypeScript, Tailwind, authentication, and database setup. Save hours of boilerplate and ship faster.', category: 'dev', price_cents: 1900, is_free: false, file_count: 1 },
+  { title: 'React Component Library Starter', slug: 'react-component-library-starter', short_desc: 'Vite + Storybook + Vitest setup for publishing a component lib.', description: 'A fully configured starter for building and publishing a React component library. Includes Vite, Storybook, Vitest, Changeset versioning, and GitHub Actions.', category: 'dev', price_cents: 2400, is_free: false, file_count: 1 },
+  { title: 'SaaS Boilerplate — T3 Stack', slug: 'saas-boilerplate-t3', short_desc: 'T3 Stack SaaS starter: Next.js + tRPC + Prisma + Stripe.', description: 'Full SaaS boilerplate using the T3 stack — Next.js, tRPC, Prisma, NextAuth, Stripe subscriptions, and Resend emails. Ship in days, not weeks.', category: 'dev', price_cents: 4900, is_free: false, file_count: 1 },
+  { title: 'Supabase Auth Starter', slug: 'supabase-auth-starter', short_desc: 'Next.js + Supabase auth with email, OAuth and RLS.', description: 'A complete Next.js auth starter using Supabase. Covers email/password, magic link, OAuth (Google + GitHub), protected routes, and Row Level Security.', category: 'dev', price_cents: 1500, is_free: false, file_count: 1 },
+  { title: 'CLI Tool Template', slug: 'cli-tool-template', short_desc: 'TypeScript CLI starter with Commander, Ink, and tests.', description: 'A production-ready CLI tool template using TypeScript, Commander.js, Ink for interactive UI, and Vitest for testing. Ready to publish to npm.', category: 'dev', price_cents: 1200, is_free: false, file_count: 1 },
+  { title: 'Electron App Starter', slug: 'electron-app-starter', short_desc: 'Electron + Vite + React desktop app boilerplate.', description: 'A modern Electron starter using Vite, React, and TypeScript. Includes auto-updater, native menus, IPC setup, and a clean main/renderer split.', category: 'dev', price_cents: 2900, is_free: false, file_count: 1 },
+  { title: 'GraphQL API Starter', slug: 'graphql-api-starter', short_desc: 'Node.js GraphQL API with Pothos, Prisma, and JWT auth.', description: 'A type-safe GraphQL API using Pothos schema builder, Prisma ORM, PostgreSQL, and JWT authentication. Includes DataLoader batching and pagination.', category: 'dev', price_cents: 2200, is_free: false, file_count: 1 },
+  { title: 'Chrome Extension Template', slug: 'chrome-extension-template', short_desc: 'Manifest V3 Chrome extension starter with React UI.', description: 'A modern Chrome extension starter using Manifest V3, React, Vite, and TypeScript. Includes popup, content script, background service worker, and options page.', category: 'dev', price_cents: 900, is_free: false, file_count: 1 },
+  { title: 'REST API Starter — Hono', slug: 'rest-api-starter-hono', short_desc: 'Edge-ready REST API with Hono, Zod, and Drizzle ORM.', description: 'A fast, lightweight REST API template using Hono for routing, Zod for validation, Drizzle ORM for type-safe queries, and JWT authentication.', category: 'dev', price_cents: 1800, is_free: false, file_count: 1 },
+  { title: 'Stripe Integration Kit', slug: 'stripe-integration-kit', short_desc: 'Next.js Stripe checkout, subscriptions, and webhook kit.', description: 'A complete Stripe integration for Next.js covering one-time payments, subscription plans, customer portal, and webhook handling with idempotency.', category: 'dev', price_cents: 2700, is_free: false, file_count: 1 },
+  { title: 'Email Templates — React Email', slug: 'email-templates-react-email', short_desc: '20 React Email transactional email templates.', description: '20 production-ready transactional email templates built with React Email. Covers onboarding, password reset, order confirmation, receipts, and newsletters.', category: 'dev', price_cents: 1600, is_free: false, file_count: 1 },
+  { title: 'Turborepo Monorepo Starter', slug: 'turborepo-monorepo-starter', short_desc: 'Full-stack Turborepo: apps, packages, shared UI.', description: 'A production-grade Turborepo monorepo with Next.js apps, a shared component library, shared configs, Prisma, and full CI pipeline.', category: 'dev', price_cents: 3400, is_free: false, file_count: 1 },
+  { title: 'Data Table Component', slug: 'data-table-component', short_desc: 'Free headless React data table with sorting and filters.', description: 'A free, accessible headless data table component for React using TanStack Table. Covers sorting, filtering, pagination, row selection, and column resizing.', category: 'dev', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'React Hook Library', slug: 'react-hook-library', short_desc: '50 production-ready custom React hooks.', description: 'A curated collection of 50 custom React hooks for data fetching, browser APIs, animations, forms, and utilities. TypeScript, tree-shakable, fully tested.', category: 'dev', price_cents: 1400, is_free: false, file_count: 1 },
+  { title: 'tRPC Starter Kit', slug: 'trpc-starter-kit', short_desc: 'Next.js + tRPC + Zod end-to-end type safety starter.', description: 'A minimal but complete tRPC starter for Next.js. Fully typed API routes, Zod input validation, React Query integration, and authentication middleware.', category: 'dev', price_cents: 1700, is_free: false, file_count: 1 },
+  { title: 'WebSocket Starter', slug: 'websocket-starter', short_desc: 'Real-time app starter with Socket.io and Next.js.', description: 'A real-time app template using Socket.io, Next.js App Router, and Redis for pub/sub. Includes a live chat demo, typing indicators, and presence tracking.', category: 'dev', price_cents: 2100, is_free: false, file_count: 1 },
+  { title: 'Prisma Schema Templates', slug: 'prisma-schema-templates', short_desc: '15 ready-made Prisma schema patterns — free download.', description: 'Free Prisma schema templates for common patterns: multi-tenancy, soft deletes, tagging, audit logs, tree hierarchies, versioning, and RBAC.', category: 'dev', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Astro Blog Starter', slug: 'astro-blog-starter', short_desc: 'Astro 4 + MDX blog starter with RSS and SEO.', description: 'A fast, minimal Astro blog starter with MDX content, syntax highlighting, RSS feed, Open Graph images, and perfect Lighthouse scores out of the box.', category: 'dev', price_cents: 1100, is_free: false, file_count: 1 },
+  { title: 'Remix SaaS Starter', slug: 'remix-saas-starter', short_desc: 'Full-stack Remix starter with Prisma, Stripe, and auth.', description: 'A production-ready Remix SaaS starter — includes Prisma, SQLite/Postgres, Stripe, magic link auth, and optimistic UI patterns throughout.', category: 'dev', price_cents: 3900, is_free: false, file_count: 1 },
+  { title: 'AI SDK Starter — Vercel', slug: 'ai-sdk-starter-vercel', short_desc: 'Next.js + Vercel AI SDK chat and streaming starter.', description: 'A Next.js starter wiring the Vercel AI SDK to OpenAI. Includes streaming responses, tool calls, chat history with Zustand, and a clean message UI.', category: 'dev', price_cents: 2600, is_free: false, file_count: 1 },
+
+  // ── ebook ────────────────────────────────────────────────────────────────
+  { title: 'The Indie Creator Handbook', slug: 'indie-creator-handbook', short_desc: 'Practical guide to building digital products solo.', description: 'A practical guide to building and monetizing digital products as a solo creator. Covers pricing, distribution, marketing, and building an audience from scratch.', category: 'ebook', price_cents: 1200, is_free: false, file_count: 1 },
+  { title: 'Design Systems in Practice', slug: 'design-systems-in-practice', short_desc: 'Field guide to building scalable design systems.', description: "A practitioner's guide to building and maintaining design systems. Covers token architecture, component API design, documentation, adoption strategy, and team workflows.", category: 'ebook', price_cents: 1800, is_free: false, file_count: 1 },
+  { title: 'Freelance Pricing Masterclass', slug: 'freelance-pricing-masterclass', short_desc: 'Stop undercharging — a guide to value-based pricing.', description: 'Everything you need to price freelance work confidently. Covers value-based pricing, proposal writing, handling objections, and raising rates with existing clients.', category: 'ebook', price_cents: 900, is_free: false, file_count: 1 },
+  { title: 'TypeScript Deep Dive', slug: 'typescript-deep-dive', short_desc: 'Advanced TypeScript patterns for production codebases.', description: 'An advanced TypeScript guide covering conditional types, template literals, infer, mapped types, branded types, and complex real-world patterns.', category: 'ebook', price_cents: 1500, is_free: false, file_count: 1 },
+  { title: 'The React Mental Model', slug: 'react-mental-model', short_desc: 'Build correct intuitions for React rendering and state.', description: 'A conceptual guide to understanding React from first principles. Covers the component model, reconciliation, concurrent features, and common pitfall patterns.', category: 'ebook', price_cents: 1200, is_free: false, file_count: 1 },
+  { title: 'Content Creator Starter Kit', slug: 'content-creator-starter-kit', short_desc: 'Free guide to growing an audience as a creator.', description: 'A free guide to starting your creator journey — platform selection, content strategy, consistency systems, and first-1000-followers tactics.', category: 'ebook', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'UX Writing in Practice', slug: 'ux-writing-in-practice', short_desc: 'Microcopy and interface writing guide for designers.', description: 'A practical guide to writing better UI copy — error messages, empty states, onboarding flows, tooltips, and CTAs. Includes before/after rewrites.', category: 'ebook', price_cents: 800, is_free: false, file_count: 1 },
+  { title: 'Open Source Handbook', slug: 'open-source-handbook', short_desc: 'How to build, grow, and sustain open-source projects.', description: 'A field guide to open-source project maintenance — READMEs, CONTRIBUTING guides, release management, community building, and monetization strategies.', category: 'ebook', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'The Portfolio Playbook', slug: 'portfolio-playbook', short_desc: 'Build a portfolio that wins clients and job offers.', description: 'A step-by-step guide to building a compelling creative portfolio. Covers case study writing, project selection, structure, copywriting, and outreach.', category: 'ebook', price_cents: 1000, is_free: false, file_count: 1 },
+  { title: 'Accessibility for Designers', slug: 'accessibility-for-designers', short_desc: 'WCAG 2.2 explained for non-technical designers.', description: 'A designer-friendly guide to accessibility — colour contrast, focus management, keyboard navigation, ARIA, and designing for assistive technology.', category: 'ebook', price_cents: 700, is_free: false, file_count: 1 },
+  { title: 'Product Analytics Playbook', slug: 'product-analytics-playbook', short_desc: 'Measure what matters with Mixpanel, Amplitude, or PostHog.', description: 'A practical guide to product analytics for founders and PMs. Covers event taxonomy, funnel analysis, retention, cohort analysis, and A/B testing.', category: 'ebook', price_cents: 1400, is_free: false, file_count: 1 },
+  { title: 'CSS Architecture Guide', slug: 'css-architecture-guide', short_desc: 'Free guide to scalable CSS — BEM, layers, and tokens.', description: 'A free guide to writing maintainable CSS — BEM naming, Cascade Layers, custom properties, utility classes, and design token integration.', category: 'ebook', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Launch Checklist eBook', slug: 'launch-checklist-ebook', short_desc: '100-point checklist for launching a web product.', description: 'A 100-point pre-launch checklist for web products — SEO, performance, security, accessibility, legal, analytics, error monitoring, and post-launch tasks.', category: 'ebook', price_cents: 600, is_free: false, file_count: 1 },
+  { title: 'Building in Public Playbook', slug: 'building-in-public-playbook', short_desc: 'How to grow an audience by sharing your work openly.', description: 'A practical guide to building in public — what to share, when to share it, which platforms to use, and how to turn an audience into customers.', category: 'ebook', price_cents: 900, is_free: false, file_count: 1 },
+  { title: 'Web Performance Handbook', slug: 'web-performance-handbook', short_desc: 'Core Web Vitals optimisation for frontend developers.', description: 'A deep-dive into Core Web Vitals — LCP, FID, CLS, and INP. Covers image optimisation, font loading, JavaScript bundling, and caching strategies.', category: 'ebook', price_cents: 1100, is_free: false, file_count: 1 },
+
+  // ── template ─────────────────────────────────────────────────────────────
+  { title: 'Notion OS Dashboard', slug: 'notion-os-dashboard', short_desc: 'Complete Notion second-brain and productivity template.', description: 'A complete second-brain Notion template with project management, habit tracking, reading list, and weekly review systems.', category: 'template', price_cents: 800, is_free: false, file_count: 1 },
+  { title: 'Freelance Invoice Pack', slug: 'freelance-invoice-pack', short_desc: '5 professional invoice templates — Word, PDF, and Notion.', description: '5 clean, professional invoice templates for freelancers. Available in Word, Google Docs, PDF, and Notion. Includes a tracker spreadsheet.', category: 'template', price_cents: 500, is_free: false, file_count: 5 },
+  { title: 'Client Onboarding Kit', slug: 'client-onboarding-kit', short_desc: 'Notion template for onboarding freelance clients.', description: 'A Notion workspace template for managing client projects. Includes welcome guide, project brief, deliverables tracker, and feedback log.', category: 'template', price_cents: 700, is_free: false, file_count: 1 },
+  { title: 'Annual Review Template', slug: 'annual-review-template', short_desc: 'Free Notion template for a yearly personal review.', description: 'A free, structured Notion template for conducting an annual personal and professional review. Covers goals, wins, lessons, and next-year planning.', category: 'template', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Content Calendar — Notion', slug: 'content-calendar-notion', short_desc: 'Full social media content planning Notion workspace.', description: 'A complete content planning workspace in Notion. Plan posts across Twitter, LinkedIn, YouTube, and newsletters with editorial calendar, drafts, and analytics notes.', category: 'template', price_cents: 900, is_free: false, file_count: 1 },
+  { title: 'Product Roadmap Template', slug: 'product-roadmap-template', short_desc: 'Notion roadmap template for indie founders and PMs.', description: 'A clean product roadmap in Notion with themes, epics, features, and a public changelog view. Supports quarterly and now/next/later views.', category: 'template', price_cents: 600, is_free: false, file_count: 1 },
+  { title: 'Reading & Learning Tracker', slug: 'reading-learning-tracker', short_desc: 'Track books, courses, and notes in Notion.', description: 'A Notion workspace for managing your reading list, course notes, highlights, and summaries. Includes a progress tracker and spaced-repetition review queue.', category: 'template', price_cents: 400, is_free: false, file_count: 1 },
+  { title: 'Freelance CRM — Notion', slug: 'freelance-crm-notion', short_desc: 'Lightweight Notion CRM for managing leads and clients.', description: 'A lightweight CRM for freelancers in Notion. Track leads, proposals, active projects, and recurring clients. Includes follow-up reminders and revenue pipeline.', category: 'template', price_cents: 1200, is_free: false, file_count: 1 },
+  { title: 'Habit Tracker System', slug: 'habit-tracker-system', short_desc: 'Free Notion habit tracker with streaks and analytics.', description: 'A free Notion habit tracker that supports daily, weekly, and monthly habits. Includes a streak counter, success rate graphs, and reflection journal.', category: 'template', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Side Project Planner', slug: 'side-project-planner', short_desc: 'Notion template for managing and launching side projects.', description: 'A practical Notion workspace for indie hackers — idea backlog, project sprints, launch checklist, revenue tracker, and post-mortems.', category: 'template', price_cents: 800, is_free: false, file_count: 1 },
+  { title: 'Meeting Notes System', slug: 'meeting-notes-system', short_desc: 'Structured Notion workspace for team meeting notes.', description: 'A Notion template for organised meeting notes — agenda builder, action item tracker, decision log, and weekly team digest rollup.', category: 'template', price_cents: 500, is_free: false, file_count: 1 },
+  { title: 'Job Search Tracker', slug: 'job-search-tracker', short_desc: 'Free Notion template to manage your job applications.', description: 'A free Notion board for tracking job applications, contacts, interviews, and offers. Includes a Kanban pipeline and application stats dashboard.', category: 'template', price_cents: 0, is_free: true, file_count: 1 },
+  { title: 'Personal Finance Dashboard', slug: 'personal-finance-dashboard', short_desc: 'Notion + spreadsheet template for personal budgeting.', description: 'A personal finance template covering monthly budgets, expense tracking, savings goals, and net worth tracking. Includes Notion and Google Sheets versions.', category: 'template', price_cents: 700, is_free: false, file_count: 2 },
+  { title: 'Newsletter OS', slug: 'newsletter-os', short_desc: 'End-to-end Notion workspace for newsletter creators.', description: 'A complete newsletter workflow in Notion — content ideation, issue drafting, subscriber notes, sponsorship tracker, and growth analytics.', category: 'template', price_cents: 1000, is_free: false, file_count: 1 },
+  { title: 'Design Sprint Template', slug: 'design-sprint-template', short_desc: 'Run a 5-day design sprint with this Notion + FigJam kit.', description: 'A complete design sprint facilitation kit — day-by-day agendas, voting templates, How Might We exercises, user story maps, and decision frameworks.', category: 'template', price_cents: 1400, is_free: false, file_count: 2 },
+]
+
+function daysAgo(n: number) {
+  return new Date(Date.now() - n * 86400000).toISOString()
+}
+
+export const mockProducts: ProductPublic[] = TEMPLATES.map((t, i) => ({
+  id: String(i + 1),
+  ...t,
+  cover_url: IMAGES[i % IMAGES.length],
+  published: true,
+  created_at: daysAgo(i * 3),
+}))

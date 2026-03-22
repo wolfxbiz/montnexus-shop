@@ -40,9 +40,7 @@ export function Card({ product }: CardProps) {
             }
           </div>
           <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
-            <Tag variant={product.is_free ? 'free' : 'paid'}>
-              {product.is_free ? 'Free' : 'Paid'}
-            </Tag>
+            <Tag variant="default">{product.category}</Tag>
             <Tag variant="default">{product.file_count} {product.file_count === 1 ? 'file' : 'files'}</Tag>
           </div>
         </div>

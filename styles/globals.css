@@ -411,6 +411,35 @@ img, video { max-width: 100%; display: block; }
   .tier-builder { grid-template-columns: 1fr; }
 
   .showcase-overlay { opacity: 1; }
+
+  .services-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-7) !important;
+  }
+
+  .services-hero-visual { display: none !important; }
+
+  .community-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-7) !important;
+  }
+
+  .community-mosaic {
+    max-width: 100% !important;
+  }
+
+  .articles-feed-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-stats {
+    gap: var(--space-5) !important;
+  }
+}
+
+/* ─── Article card hover ─── */
+.article-card:hover {
+  border-color: var(--color-border-strong) !important;
 }
 
 @media (max-width: 480px) {

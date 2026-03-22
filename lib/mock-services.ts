@@ -1,156 +1,112 @@
-import type { Service } from '@/types'
+import type { Service, ServiceCategory, ServiceTier } from '@/types'
 
-export const mockServices: Service[] = [
-  {
-    id: 's1',
-    creator_id: 'c1',
-    title: 'Custom Logo & Brand Identity',
-    slug: 'custom-logo-brand-identity',
-    description: 'I will design a unique, memorable logo and brand identity system for your product or startup. Includes logo mark, wordmark, color palette, and typography guidelines. Perfect for indie developers launching a new product or creators building their personal brand.',
-    short_desc: 'Unique logo and brand identity for your product or startup.',
-    category: 'design',
-    cover_url: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80',
-    delivery_time_days: 7,
-    published: true,
-    created_at: new Date().toISOString(),
-    tiers: [
-      {
-        id: 'st1a', service_id: 's1', name: 'basic', title: 'Logo Only',
-        description: 'One logo concept with 2 revisions.',
-        price_cents: 4900, delivery_time_days: 5, revisions: 2,
-        features: ['1 logo concept', 'PNG + SVG files', '2 revisions'],
-      },
-      {
-        id: 'st1b', service_id: 's1', name: 'standard', title: 'Logo + Brand Kit',
-        description: 'Two logo concepts with full brand kit.',
-        price_cents: 9900, delivery_time_days: 7, revisions: 4,
-        features: ['2 logo concepts', 'PNG + SVG + AI files', 'Color palette', 'Typography guide', '4 revisions'],
-      },
-      {
-        id: 'st1c', service_id: 's1', name: 'premium', title: 'Full Identity System',
-        description: 'Complete brand identity with social templates.',
-        price_cents: 19900, delivery_time_days: 14, revisions: 8,
-        features: ['3 logo concepts', 'All source files', 'Brand guidelines PDF', 'Social media templates', 'Business card design', '8 revisions'],
-      },
-    ],
-    creator: {
-      id: 'c1', user_id: 'u1', username: 'elena-design', display_name: 'Elena Vasquez',
-      bio: 'Brand designer with 8 years of experience.', avatar_url: null,
-      website: null, twitter: null, total_products: 3, total_sales: 45, created_at: new Date().toISOString(),
-    },
-  },
-  {
-    id: 's2',
-    creator_id: 'c2',
-    title: 'React Component Development',
-    slug: 'react-component-development',
-    description: 'I will build production-ready React components with TypeScript, proper accessibility, and full test coverage. Specializing in complex UI: data tables, drag-and-drop interfaces, form builders, and animation-heavy components.',
-    short_desc: 'Production-ready React + TypeScript components with tests.',
-    category: 'dev',
-    cover_url: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
-    delivery_time_days: 5,
-    published: true,
-    created_at: new Date().toISOString(),
-    tiers: [
-      {
-        id: 'st2a', service_id: 's2', name: 'basic', title: 'Single Component',
-        description: 'One React component with TypeScript.',
-        price_cents: 7500, delivery_time_days: 3, revisions: 2,
-        features: ['1 component', 'TypeScript', 'Basic tests', '2 revisions'],
-      },
-      {
-        id: 'st2b', service_id: 's2', name: 'standard', title: 'Component Suite',
-        description: 'Up to 3 related components with full tests.',
-        price_cents: 15000, delivery_time_days: 7, revisions: 4,
-        features: ['Up to 3 components', 'TypeScript', 'Full test coverage', 'Storybook stories', 'A11y compliant', '4 revisions'],
-      },
-      {
-        id: 'st2c', service_id: 's2', name: 'premium', title: 'Full Feature Module',
-        description: 'Complete feature module with API integration.',
-        price_cents: 30000, delivery_time_days: 14, revisions: 6,
-        features: ['Full feature module', 'API integration', 'State management', 'E2E tests', 'Documentation', 'Code review walkthrough', '6 revisions'],
-      },
-    ],
-    creator: {
-      id: 'c2', user_id: 'u2', username: 'kai-dev', display_name: 'Kai Nakamura',
-      bio: 'Senior frontend engineer. React specialist.', avatar_url: null,
-      website: null, twitter: null, total_products: 2, total_sales: 31, created_at: new Date().toISOString(),
-    },
-  },
-  {
-    id: 's3',
-    creator_id: 'c3',
-    title: 'UI/UX Audit & Redesign',
-    slug: 'ui-ux-audit-redesign',
-    description: 'I will review your existing product and provide a detailed UX audit with actionable recommendations, annotated screenshots, and optional redesign mockups. I focus on conversion optimization, accessibility, and modern design patterns.',
-    short_desc: 'Detailed UX audit with redesign mockups for your product.',
-    category: 'consulting',
-    cover_url: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80',
-    delivery_time_days: 5,
-    published: true,
-    created_at: new Date().toISOString(),
-    tiers: [
-      {
-        id: 'st3a', service_id: 's3', name: 'basic', title: 'Quick Audit',
-        description: 'Written UX review with top 10 issues.',
-        price_cents: 5900, delivery_time_days: 3, revisions: 1,
-        features: ['Up to 5 pages reviewed', 'Top 10 issues report', 'Priority matrix', '1 revision'],
-      },
-      {
-        id: 'st3b', service_id: 's3', name: 'standard', title: 'Full Audit',
-        description: 'Comprehensive audit with annotated screenshots.',
-        price_cents: 12900, delivery_time_days: 7, revisions: 2,
-        features: ['Full app review', 'Annotated screenshots', 'Competitor analysis', 'A11y checklist', '30-min video walkthrough', '2 revisions'],
-      },
-      {
-        id: 'st3c', service_id: 's3', name: 'premium', title: 'Audit + Redesign',
-        description: 'Full audit plus hi-fi redesign mockups.',
-        price_cents: 24900, delivery_time_days: 14, revisions: 4,
-        features: ['Everything in Full Audit', 'Hi-fi redesign (up to 5 screens)', 'Interactive prototype', 'Design system tokens', 'Handoff-ready Figma file', '4 revisions'],
-      },
-    ],
-    creator: {
-      id: 'c3', user_id: 'u3', username: 'sam-ux', display_name: 'Sam Torres',
-      bio: 'Product designer focused on developer tools.', avatar_url: null,
-      website: null, twitter: null, total_products: 1, total_sales: 22, created_at: new Date().toISOString(),
-    },
-  },
-  {
-    id: 's4',
-    creator_id: 'c1',
-    title: 'Custom Illustration Pack',
-    slug: 'custom-illustration-pack',
-    description: 'Hand-drawn digital illustrations tailored to your brand. Perfect for landing pages, onboarding flows, and marketing materials. I work in a modern, minimal style with subtle texture.',
-    short_desc: 'Custom hand-drawn illustrations for your brand.',
-    category: 'design',
-    cover_url: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80',
-    delivery_time_days: 10,
-    published: true,
-    created_at: new Date().toISOString(),
-    tiers: [
-      {
-        id: 'st4a', service_id: 's4', name: 'basic', title: '3 Illustrations',
-        description: 'Three spot illustrations.',
-        price_cents: 8900, delivery_time_days: 7, revisions: 2,
-        features: ['3 illustrations', 'PNG + SVG', 'One art style', '2 revisions'],
-      },
-      {
-        id: 'st4b', service_id: 's4', name: 'standard', title: '6 Illustrations',
-        description: 'Six illustrations with consistent style.',
-        price_cents: 15900, delivery_time_days: 10, revisions: 3,
-        features: ['6 illustrations', 'All source files', 'Consistent style guide', 'Light + dark variants', '3 revisions'],
-      },
-      {
-        id: 'st4c', service_id: 's4', name: 'premium', title: '12 Illustrations',
-        description: 'Full illustration system.',
-        price_cents: 27900, delivery_time_days: 18, revisions: 5,
-        features: ['12 illustrations', 'All source files', 'Animation-ready layers', 'Style guide document', 'Icon companions', '5 revisions'],
-      },
-    ],
-    creator: {
-      id: 'c1', user_id: 'u1', username: 'elena-design', display_name: 'Elena Vasquez',
-      bio: 'Brand designer with 8 years of experience.', avatar_url: null,
-      website: null, twitter: null, total_products: 3, total_sales: 45, created_at: new Date().toISOString(),
-    },
-  },
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+function daysAgo(n: number) { return new Date(Date.now() - n * 86400000).toISOString() }
+
+const COVERS = [
+  'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80',
+  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
+  'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80',
+  'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80',
+  'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80',
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+  'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+  'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
 ]
+
+function c(i: number) { return COVERS[i % COVERS.length] }
+
+function tiers(sid: string, basic: [string,string,number,number,number,string[]], standard: [string,string,number,number,number,string[]], premium: [string,string,number,number,number,string[]]): ServiceTier[] {
+  return [
+    { id: `${sid}a`, service_id: sid, name: 'basic',    title: basic[0],    description: basic[1],    price_cents: basic[2],    delivery_time_days: basic[3],    revisions: basic[4],    features: basic[5] },
+    { id: `${sid}b`, service_id: sid, name: 'standard', title: standard[0], description: standard[1], price_cents: standard[2], delivery_time_days: standard[3], revisions: standard[4], features: standard[5] },
+    { id: `${sid}c`, service_id: sid, name: 'premium',  title: premium[0],  description: premium[1],  price_cents: premium[2],  delivery_time_days: premium[3],  revisions: premium[4],  features: premium[5] },
+  ]
+}
+
+function creator(id: string, uid: string, username: string, displayName: string, bio: string) {
+  return { id, user_id: uid, username, display_name: displayName, bio, avatar_url: null, website: null, twitter: null, total_products: 0, total_sales: 0, created_at: daysAgo(200) }
+}
+
+// ─── Service definitions ──────────────────────────────────────────────────────
+interface ServiceDef {
+  id: string; creatorId: string; title: string; slug: string; description: string; short_desc: string
+  category: ServiceCategory; delivery: number; imgIdx: number
+  tiers: [string,string,number,number,number,string[]][]
+  creator: ReturnType<typeof creator>
+}
+
+const DEFS: ServiceDef[] = [
+  // ── DESIGN ──────────────────────────────────────────────────────────────────
+  { id:'s1', creatorId:'c1', title:'Custom Logo & Brand Identity', slug:'custom-logo-brand-identity', short_desc:'Unique logo and brand identity for your product or startup.', description:'I will design a unique, memorable logo and brand identity system for your product or startup. Includes logo mark, wordmark, colour palette, and typography guidelines.', category:'design', delivery:7, imgIdx:0, creator:creator('c1','u1','elena-design','Elena Vasquez','Brand designer with 8 years of experience.'),
+    tiers:[['Logo Only','One logo concept with 2 revisions.',4900,5,2,['1 logo concept','PNG + SVG files','2 revisions']],['Logo + Brand Kit','Two concepts with full brand kit.',9900,7,4,['2 logo concepts','PNG + SVG + AI files','Colour palette','Typography guide','4 revisions']],['Full Identity System','Complete brand identity with social templates.',19900,14,8,['3 logo concepts','All source files','Brand guidelines PDF','Social media templates','8 revisions']]] },
+  { id:'s2', creatorId:'c2', title:'React Component Development', slug:'react-component-development', short_desc:'Production-ready React + TypeScript components with tests.', description:'I will build production-ready React components with TypeScript, accessibility, and full test coverage. Specialising in complex UI: data tables, drag-and-drop, form builders.', category:'dev', delivery:5, imgIdx:1, creator:creator('c2','u2','kai-dev','Kai Nakamura','Senior frontend engineer. React specialist.'),
+    tiers:[['Single Component','One React component with TypeScript.',7500,3,2,['1 component','TypeScript','Basic tests','2 revisions']],['Component Suite','Up to 3 related components with full tests.',15000,7,4,['Up to 3 components','TypeScript','Full test coverage','Storybook stories','A11y compliant','4 revisions']],['Full Feature Module','Complete feature module with API integration.',30000,14,6,['Full feature module','API integration','State management','E2E tests','Documentation','6 revisions']]] },
+  { id:'s3', creatorId:'c3', title:'UI/UX Audit & Redesign', slug:'ui-ux-audit-redesign', short_desc:'Detailed UX audit with redesign mockups for your product.', description:'I will review your product and provide a detailed UX audit with actionable recommendations, annotated screenshots, and optional redesign mockups.', category:'consulting', delivery:5, imgIdx:2, creator:creator('c3','u3','sam-ux','Sam Torres','Product designer focused on developer tools.'),
+    tiers:[['Quick Audit','Written UX review with top 10 issues.',5900,3,1,['Up to 5 pages reviewed','Top 10 issues report','Priority matrix','1 revision']],['Full Audit','Comprehensive audit with annotated screenshots.',12900,7,2,['Full app review','Annotated screenshots','Competitor analysis','A11y checklist','30-min video walkthrough','2 revisions']],['Audit + Redesign','Full audit plus hi-fi redesign mockups.',24900,14,4,['Everything in Full Audit','Hi-fi redesign (up to 5 screens)','Interactive prototype','Handoff-ready Figma file','4 revisions']]] },
+  { id:'s4', creatorId:'c1', title:'Custom Illustration Pack', slug:'custom-illustration-pack', short_desc:'Custom hand-drawn illustrations for your brand.', description:'Hand-drawn digital illustrations tailored to your brand. Perfect for landing pages, onboarding flows, and marketing materials. I work in a modern, minimal style with subtle texture.', category:'design', delivery:10, imgIdx:3, creator:creator('c1','u1','elena-design','Elena Vasquez','Brand designer with 8 years of experience.'),
+    tiers:[['3 Illustrations','Three spot illustrations.',8900,7,2,['3 illustrations','PNG + SVG','One art style','2 revisions']],['6 Illustrations','Six illustrations with consistent style.',15900,10,3,['6 illustrations','All source files','Style guide','Light + dark variants','3 revisions']],['12 Illustrations','Full illustration system.',27900,18,5,['12 illustrations','All source files','Animation-ready layers','Style guide document','Icon companions','5 revisions']]] },
+  { id:'s5', creatorId:'c4', title:'Mobile App UI Design', slug:'mobile-app-ui-design', short_desc:'Full mobile app UI design — iOS or Android.', description:'I will design a polished mobile app UI from scratch or redesign your existing app. Deliverables include all screens, component set, and a handoff-ready Figma file.', category:'design', delivery:14, imgIdx:4, creator:creator('c4','u4','mira-design','Mira Chen','Mobile UI designer — iOS & Android specialist.'),
+    tiers:[['5 Screens','Core screens only.',7900,7,2,['5 key screens','Light mode','Figma file','2 revisions']],['15 Screens','Full core flow.',16900,14,3,['15 screens','Light + dark mode','Component set','Prototype','3 revisions']],['Full App','All screens + design system.',32900,21,6,['Full app screens','Component library','Design tokens','Interaction specs','6 revisions']]] },
+  { id:'s6', creatorId:'c5', title:'Framer Website Build', slug:'framer-website-build', short_desc:'Custom Framer website — no code, fully animated.', description:'I will build your marketing website in Framer with smooth animations, CMS integration, responsive layouts, and SEO best practices.', category:'dev', delivery:10, imgIdx:5, creator:creator('c5','u5','noah-framer','Noah Eriksson','Framer expert & no-code web builder.'),
+    tiers:[['Landing Page','Single page, up to 6 sections.',8900,5,2,['1 page','Mobile responsive','Basic animations','2 revisions']],['Multi-page Site','Up to 6 pages with CMS.',17900,10,3,['Up to 6 pages','Framer CMS blog','Custom animations','SEO setup','3 revisions']],['Full Website','Unlimited pages + e-commerce.',29900,14,5,['Unlimited pages','E-commerce setup','Custom interactions','Domain setup','5 revisions']]] },
+  { id:'s7', creatorId:'c6', title:'SEO Content Writing', slug:'seo-content-writing', short_desc:'Long-form SEO articles that rank and convert.', description:'I will write in-depth, SEO-optimised articles tailored to your target keywords and audience. Each piece includes keyword research, internal linking strategy, and meta copy.', category:'writing', delivery:5, imgIdx:6, creator:creator('c6','u6','pia-writes','Pia Lindqvist','SEO content strategist & writer.'),
+    tiers:[['1 Article','1,500-word SEO article.',4900,3,2,['1 article','~1,500 words','Keyword research','Meta description','2 revisions']],['3 Articles','Three SEO articles with topic cluster.',12900,7,3,['3 articles','Topic cluster map','Internal link strategy','3 revisions']],['10 Articles','Full content sprint.',38900,21,3,['10 articles','Content strategy doc','Editorial calendar','3 revisions per article']]] },
+  { id:'s8', creatorId:'c7', title:'Video Editing & Post-Production', slug:'video-editing-post-production', short_desc:'Professional video editing for YouTube, reels, and ads.', description:'I will edit your raw footage into a polished video — colour grading, motion graphics, sound design, and captions. Experience with YouTube, Instagram Reels, and ad content.', category:'audio-video', delivery:5, imgIdx:7, creator:creator('c7','u7','leo-video','Leo Osei','Video editor & motion designer.'),
+    tiers:[['Short Video','Up to 3 min video edit.',5900,3,2,['Up to 3 min','Colour grade','Captions','Basic music','2 revisions']],['Medium Video','5–10 min with motion graphics.',11900,5,3,['5–10 min','Motion graphics','Custom b-roll edits','Sound design','3 revisions']],['Long-form / Ad','Full production edit.',22900,10,5,['Up to 30 min or ad set','Full colour grade','Motion branding','Thumbnail design','5 revisions']]] },
+  { id:'s9', creatorId:'c8', title:'Webflow Website Development', slug:'webflow-website-development', short_desc:'Pixel-perfect Webflow sites from Figma designs.', description:'I will build your Webflow website from a Figma design or from scratch. Deliverables include responsive layouts, CMS setup, animations, and a Webflow Editor walkthrough.', category:'dev', delivery:10, imgIdx:0, creator:creator('c8','u8','zoe-webflow','Zoe Fischer','Webflow developer & interaction designer.'),
+    tiers:[['Landing Page','One-page Webflow site.',9900,5,2,['1 page','Responsive','Basic animations','Editor ready','2 revisions']],['Multi-page','Up to 8 Webflow pages + CMS.',21900,12,3,['Up to 8 pages','CMS blog','Custom animations','SEO optimised','3 revisions']],['Full Site','Unlimited pages with e-commerce.',39900,21,5,['Unlimited pages','Webflow E-Commerce','Custom logic','Video walkthrough','5 revisions']]] },
+  { id:'s10', creatorId:'c9', title:'Podcast Production & Editing', slug:'podcast-production-editing', short_desc:'End-to-end podcast editing — audio clean-up, show notes, clips.', description:'I will edit your raw podcast recording into a polished episode — noise removal, level balancing, intro/outro music, chapter markers, and show notes.', category:'audio-video', delivery:3, imgIdx:1, creator:creator('c9','u9','finn-audio','Finn Walsh','Podcast editor & audio engineer.'),
+    tiers:[['Single Episode','One episode up to 60 min.',3900,2,1,['Noise removal','Level balancing','Up to 60 min','1 revision']],['4 Episodes','Monthly retainer — 4 episodes.',13900,4,2,['4 episodes','Custom intro/outro','Show notes','Timestamps','2 revisions']],['Full Production','Weekly show with clips and social assets.',24900,7,3,['Weekly episodes','30-sec reel clips','Newsletter summary','3 revisions each']]] },
+  { id:'s11', creatorId:'c10', title:'Technical Blog Writing', slug:'technical-blog-writing', short_desc:'Developer-focused tutorials and technical articles.', description:'I will write deep-dive technical content — tutorials, how-to guides, and opinion pieces — for developer-focused blogs, product docs, and DevRel content strategies.', category:'writing', delivery:4, imgIdx:2, creator:creator('c10','u10','ravi-writes','Ravi Patel','Developer advocate & technical writer.'),
+    tiers:[['1 Tutorial','One technical article ~2k words.',5900,3,2,['~2,000 words','Code samples','Diagrams','2 revisions']],['3 Tutorials','Three-part series.',15900,9,2,['3 articles','Consistent series tone','Internal linking','2 revisions each']],['10 Tutorials','Full content programme.',44900,25,2,['10 articles','Content strategy','SEO research','Topic clusters','2 revisions each']]] },
+  { id:'s12', creatorId:'c11', title:'API Integration Development', slug:'api-integration-development', short_desc:'Clean REST/GraphQL integrations for your web app.', description:'I will build robust third-party API integrations for your app — OAuth flows, webhooks, rate limiting, error handling, and full TypeScript type coverage.', category:'dev', delivery:7, imgIdx:3, creator:creator('c11','u11','theo-api','Theo Bergmann','Backend engineer specialising in integrations.'),
+    tiers:[['Single API','Integrate one third-party API.',5900,4,2,['1 integration','TypeScript types','Error handling','2 revisions']],['API Suite','Up to 3 APIs with shared auth layer.',14900,8,3,['Up to 3 integrations','Shared auth middleware','Webhook handling','Tests','3 revisions']],['Full Integration Platform','Complex multi-API system.',28900,16,5,['Unlimited APIs in scope','Event queue setup','Monitoring hooks','Documentation','5 revisions']]] },
+  { id:'s13', creatorId:'c12', title:'Brand Photography Direction', slug:'brand-photography-direction', short_desc:'Art direction and retouching for brand photo shoots.', description:'I will art-direct your brand photography remotely or on-site — mood boards, shot lists, on-set direction, and final retouching to brand guidelines.', category:'design', delivery:10, imgIdx:4, creator:creator('c12','u12','aiko-photo','Aiko Tanaka','Brand photographer & creative director.'),
+    tiers:[['Remote Direction','Mood board + shot list + async feedback.',4900,5,2,['Mood board','Shot list','Post-shoot feedback','2 revisions']],['On-set + Retouch','Full day on-site direction + 20 retouched images.',19900,7,2,['Full day direction','20 retouched images','Lightroom preset','2 revisions']],['Full Campaign','Multi-day shoot with campaign assets.',38900,14,3,['Multi-day direction','50+ retouched images','Social asset set','Usage guide','3 revisions']]] },
+  { id:'s14', creatorId:'c13', title:'Product Strategy Workshop', slug:'product-strategy-workshop', short_desc:'2-hour strategy session to align your product roadmap.', description:'I will facilitate a structured product strategy session with your team — opportunity mapping, assumption testing, roadmap prioritisation, and a clear next-step plan.', category:'consulting', delivery:3, imgIdx:5, creator:creator('c13','u13','nadia-pm','Nadia Kovacs','Product strategist — B2B SaaS specialist.'),
+    tiers:[['Single Session','90-min strategy call with summary doc.',5900,2,1,['90-min Zoom call','Pre-session questionnaire','Written summary','Action items','1 revision']],['Workshop','Half-day facilitated workshop for your team.',12900,3,1,['Half-day workshop','Opportunity map','Prioritised roadmap','Miro board','1 revision']],['Sprint','Full discovery sprint over 5 days.',24900,7,2,['5-day engagement','User interviews','Jobs-to-be-done map','Prototype validation','Strategy deck','2 revisions']]] },
+  { id:'s15', creatorId:'c14', title:'Email Marketing Setup', slug:'email-marketing-setup', short_desc:'Set up your email list, sequences, and automation flows.', description:'I will set up your full email marketing system — subscriber forms, welcome sequence, onboarding drip, broadcast templates, and analytics dashboards in your chosen platform.', category:'writing', delivery:7, imgIdx:6, creator:creator('c14','u14','sana-email','Sana Ibrahim','Email marketing strategist.'),
+    tiers:[['Basic Setup','List setup + welcome sequence.',4900,4,1,['ESP setup','Subscriber form','5-email welcome sequence','1 revision']],['Full Automation','Onboarding drip + 3 automations.',11900,10,2,['Full onboarding drip','3 behaviour automations','Broadcast template','Analytics setup','2 revisions']],['Growth System','Complete email growth engine.',22900,18,3,['Full system + strategy','Lead magnet creation','Re-engagement sequence','Monthly reporting','3 revisions']]] },
+  { id:'s16', creatorId:'c15', title:'Next.js Performance Audit', slug:'nextjs-performance-audit', short_desc:'Core Web Vitals audit and optimisation for Next.js apps.', description:'I will audit your Next.js application for performance issues — Core Web Vitals, bundle analysis, image optimisation, caching strategy, and server-side rendering decisions.', category:'consulting', delivery:5, imgIdx:7, creator:creator('c15','u15','axel-perf','Axel Johansson','Next.js specialist & web performance engineer.'),
+    tiers:[['Audit Report','Detailed written performance audit.',5900,3,1,['Bundle analysis','Lighthouse report','Top 10 issues','Priority matrix','1 revision']],['Audit + Fixes','Audit plus implementation of key fixes.',13900,7,2,['Full audit','Fix up to 5 critical issues','Before/after metrics','2 revisions']],['Full Optimisation','Deep optimisation engagement.',24900,14,3,['Full audit','All critical + major fixes','Custom caching strategy','CDN setup','3 revisions']]] },
+  { id:'s17', creatorId:'c16', title:'Copywriting for Landing Pages', slug:'copywriting-for-landing-pages', short_desc:'Conversion-focused copy for SaaS and product landing pages.', description:'I will write high-converting landing page copy tailored to your audience — headline, sub-headline, features section, social proof, objection handling, and CTA.', category:'writing', delivery:5, imgIdx:0, creator:creator('c16','u16','lena-copy','Lena Ferreira','Conversion copywriter — SaaS and digital products.'),
+    tiers:[['Single Page','Full copy for one landing page.',4900,4,2,['Headline + sub','Features section','CTA copy','Meta title/description','2 revisions']],['Full Site','Homepage + 3 key landing pages.',12900,10,3,['4 pages of copy','Messaging framework','Tone of voice guide','3 revisions']],['Launch Package','Full copy suite for a product launch.',22900,14,4,['Landing page','Email sequence','Social posts','Press kit copy','4 revisions']]] },
+  { id:'s18', creatorId:'c17', title:'iOS App Development', slug:'ios-app-development', short_desc:'Native Swift iOS apps — from MVP to App Store submission.', description:'I will build your iOS app in SwiftUI — clean architecture, App Store submission, push notifications, in-app purchases, and a maintainable codebase.', category:'dev', delivery:21, imgIdx:1, creator:creator('c17','u17','omar-ios','Omar Diallo','iOS developer — 6 years, 20+ apps shipped.'),
+    tiers:[['MVP','Core features, no backend.',14900,14,2,['Up to 5 screens','SwiftUI','CoreData','App Store submission','2 revisions']],['Standard App','Full-featured app with backend.',29900,21,3,['Up to 15 screens','Backend integration','Push notifications','Analytics','3 revisions']],['Full Product','Complex app with IAP and subscriptions.',54900,35,5,['Full scope','In-app purchases','StoreKit 2','Admin dashboard','5 revisions']]] },
+  { id:'s19', creatorId:'c18', title:'Design System Documentation', slug:'design-system-documentation', short_desc:'Write and structure documentation for your design system.', description:'I will write clear, comprehensive documentation for your design system — component APIs, usage guidelines, do/don\'t examples, token references, and contribution guides.', category:'writing', delivery:10, imgIdx:2, creator:creator('c18','u18','isla-docs','Isla Sørensen','Design systems engineer & technical writer.'),
+    tiers:[['Component Docs','Document up to 10 components.',4900,7,2,['10 components documented','Usage guidelines','Code examples','2 revisions']],['Full DS Docs','Complete design system documentation site.',12900,14,2,['All components','Token reference','Getting started guide','Contribution guide','2 revisions']],['DS + Storybook','Documentation + Storybook stories.',22900,21,3,['All docs','Storybook stories','MDX pages','Automated changelog','3 revisions']]] },
+  { id:'s20', creatorId:'c19', title:'Growth Strategy Consulting', slug:'growth-strategy-consulting', short_desc:'Data-driven growth strategy for early-stage products.', description:'I will audit your current acquisition channels, analyse your funnel, identify growth levers, and deliver a prioritised 90-day growth plan with specific experiments to run.', category:'consulting', delivery:7, imgIdx:3, creator:creator('c19','u19','felix-growth','Felix Larsson','Growth strategist — 0 to 1 stage specialist.'),
+    tiers:[['Audit','Full funnel audit + 3-month roadmap.',7900,5,1,['Funnel audit','Channel analysis','90-day roadmap','Priority matrix','1 revision']],['Strategy Sprint','2-week growth strategy engagement.',15900,10,2,['Audit + strategy','Experiment backlog','Metrics framework','Weekly check-in','2 revisions']],['Advisory Retainer','Monthly strategy + execution support.',29900,30,3,['Monthly retainer','Weekly 1:1 sessions','Experiment reviews','Async Slack support','Quarterly planning']]] },
+  { id:'s21', creatorId:'c20', title:'Shopify Theme Development', slug:'shopify-theme-development', short_desc:'Custom Shopify store design and Liquid development.', description:'I will build or customise your Shopify store — custom theme sections, performance optimisation, metafields, app integrations, and a conversion-optimised checkout.', category:'dev', delivery:14, imgIdx:4, creator:creator('c20','u20','amara-shopify','Amara Mensah','Shopify developer & e-commerce consultant.'),
+    tiers:[['Theme Customisation','Customise an existing Shopify theme.',6900,7,2,['Up to 5 section edits','CSS/Liquid','Mobile responsive','2 revisions']],['Custom Sections','3 fully custom Shopify sections.',14900,10,3,['3 custom sections','Schema settings','Metafield support','3 revisions']],['Full Custom Theme','Complete bespoke Shopify theme.',32900,21,5,['Full custom theme','All pages','Performance optimised','CRO best practices','5 revisions']]] },
+  { id:'s22', creatorId:'c1', title:'Figma to Code — React', slug:'figma-to-react', short_desc:'Convert Figma designs to pixel-perfect React components.', description:'I will convert your Figma designs to clean, accessible, production-ready React components — TypeScript, CSS variables, responsive, and matching the design exactly.', category:'dev', delivery:7, imgIdx:5, creator:creator('c1','u1','elena-design','Elena Vasquez','Brand designer with 8 years of experience.'),
+    tiers:[['5 Components','Five Figma components converted.',5900,5,2,['5 components','TypeScript','Responsive','2 revisions']],['15 Components','Full screen conversion.',14900,10,3,['15 components','Shared theme tokens','Storybook','3 revisions']],['Full Page Build','Complete page build from Figma.',27900,16,4,['Full page','All components','Animation','4 revisions']]] },
+  { id:'s23', creatorId:'c3', title:'Accessibility Audit', slug:'accessibility-audit', short_desc:'WCAG 2.2 audit with VPAT and remediation guide.', description:'I will audit your web product against WCAG 2.2 Level AA criteria — screen reader testing, keyboard navigation, colour contrast, and a detailed remediation roadmap.', category:'consulting', delivery:5, imgIdx:6, creator:creator('c3','u3','sam-ux','Sam Torres','Product designer focused on developer tools.'),
+    tiers:[['Basic Audit','Top-level WCAG AA audit.',4900,3,1,['Manual audit','Top 20 issues','Priority list','1 revision']],['Full Audit','Complete WCAG 2.2 audit with VPAT.',11900,7,1,['Full WCAG 2.2 audit','VPAT document','Screen reader testing','Remediation guide','1 revision']],['Audit + Fix Plan','Full audit with sprint-ready tickets.',19900,10,2,['Full audit','Jira/Linear tickets ready','Developer notes','Re-test checklist','2 revisions']]] },
+  { id:'s24', creatorId:'c5', title:'Motion Design for UI', slug:'motion-design-for-ui', short_desc:'Micro-interactions and animation specs for your product.', description:'I will design and spec micro-interactions and animation systems for your product — loading states, transitions, gesture responses, and After Effects/Rive deliverables.', category:'design', delivery:10, imgIdx:7, creator:creator('c5','u5','noah-framer','Noah Eriksson','Framer expert & no-code web builder.'),
+    tiers:[['5 Interactions','Five micro-interaction designs.',5900,7,2,['5 animations designed','Figma prototype','Specs doc','2 revisions']],['Full Screen','Full screen transitions + interactions.',13900,12,3,['Full screen animations','After Effects source','Lottie/Rive export','3 revisions']],['Animation System','Complete UI animation system.',24900,18,4,['Full animation library','Brand motion language','Dev handoff guide','4 revisions']]] },
+  { id:'s25', creatorId:'c6', title:'LinkedIn Profile Optimisation', slug:'linkedin-profile-optimisation', short_desc:'Rewrite your LinkedIn profile to attract clients and recruiters.', description:'I will rewrite your LinkedIn headline, about section, experience entries, and featured section to position you as an authority and drive inbound opportunities.', category:'writing', delivery:3, imgIdx:0, creator:creator('c6','u6','pia-writes','Pia Lindqvist','SEO content strategist & writer.'),
+    tiers:[['Profile Review','Feedback and rewrite suggestions.',1900,2,1,['Written audit','Headline options','About section rewrite','1 revision']],['Full Rewrite','Complete profile rewrite.',3900,3,2,['Full profile rewrite','Headline + about + experience','Featured section plan','2 revisions']],['Personal Brand Package','Profile + content strategy.',7900,7,2,['Full rewrite','Content pillar strategy','30 post ideas','Creator roadmap','2 revisions']]] },
+]
+
+// ─── Export ──────────────────────────────────────────────────────────────────
+export const mockServices: Service[] = DEFS.map((d, i) => ({
+  id: d.id,
+  creator_id: d.creatorId,
+  title: d.title,
+  slug: d.slug,
+  description: d.description,
+  short_desc: d.short_desc,
+  category: d.category,
+  cover_url: COVERS[d.imgIdx % COVERS.length],
+  delivery_time_days: d.delivery,
+  published: true,
+  created_at: daysAgo(i * 4),
+  tiers: tiers(d.id,
+    d.tiers[0] as [string,string,number,number,number,string[]],
+    d.tiers[1] as [string,string,number,number,number,string[]],
+    d.tiers[2] as [string,string,number,number,number,string[]]
+  ),
+  creator: d.creator,
+}))
