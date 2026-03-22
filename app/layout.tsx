@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import '@/styles/globals.css'
 import { RevealObserver } from '@/components/RevealObserver'
 import { AuthProvider } from '@/context/AuthContext'
+import { ScrollThemeProvider } from '@/components/providers/ScrollThemeProvider'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <RevealObserver />
+        <ScrollThemeProvider />
         <AuthProvider>
           {children}
         </AuthProvider>

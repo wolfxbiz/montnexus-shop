@@ -62,6 +62,7 @@ const PILLARS = [
 export function HowItWorks() {
   return (
     <section
+      data-section-theme="blue"
       style={{
         background: 'var(--color-bg-raised)',
         borderTop: '1px solid var(--color-border)',

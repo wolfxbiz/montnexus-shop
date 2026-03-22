@@ -11,7 +11,7 @@ interface ProductGridProps {
 
 export function ProductGrid({ products, title, label, viewAllHref }: ProductGridProps) {
   return (
-    <section className="section">
+    <section className="section" data-section-theme="amber">
       <div className="container">
         {(label || title || viewAllHref) && (
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 'var(--space-4)', marginBottom: 'var(--space-8)', flexWrap: 'wrap' }}>

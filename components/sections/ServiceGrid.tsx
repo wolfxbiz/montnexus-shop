@@ -14,6 +14,7 @@ export function ServiceGrid({ services, title, label, viewAllHref, noPaddingTop 
   return (
     <section
       className="section"
+      data-section-theme="blue"
       style={noPaddingTop ? { paddingTop: 'var(--space-5)', background: 'var(--color-bg-raised)', borderBottom: '1px solid var(--color-border)' } : undefined}
     >
       <div className="container">

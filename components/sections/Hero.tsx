@@ -54,6 +54,7 @@ export function Hero() {
   return (
     <section
       className="grain-overlay"
+      data-section-theme="moss"
       style={{
         minHeight: 'min(90vh, 780px)',
         display: 'flex',

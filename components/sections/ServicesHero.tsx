@@ -69,6 +69,7 @@ export function ServicesHero() {
   return (
     <section
       className="services-hero-section"
+      data-section-theme="blue"
       style={{
         background: `radial-gradient(ellipse 80% 70% at 80% 50%, ${slide.accentSoft} 0%, transparent 60%), var(--color-bg-raised)`,
         borderTop: '1px solid var(--color-border)',

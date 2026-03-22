@@ -12,7 +12,9 @@ export function FreeSpotlight({ products, viewAllHref }: FreeSpotlightProps) {
   const items = products.slice(0, 6)
 
   return (
-    <section style={{
+    <section
+      data-section-theme="sage"
+      style={{
       padding: 'var(--space-8) 0',
       background: 'linear-gradient(180deg, var(--color-accent-glow) 0%, transparent 100%), var(--color-bg-base)',
       borderTop: '1px solid var(--color-border)',

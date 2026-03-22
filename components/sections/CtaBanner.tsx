@@ -5,10 +5,11 @@ const CATEGORIES = ['UI Kits', 'Code Templates', 'Icon Packs', 'eBooks', 'Servic
 export function CtaBanner() {
   return (
     <section
+      data-section-theme="purple"
       style={{
         background: `
-          radial-gradient(ellipse 80% 60% at 50% 100%, rgba(106,158,120,0.14) 0%, transparent 60%),
-          radial-gradient(ellipse 60% 60% at 10% 20%, rgba(100,148,168,0.09) 0%, transparent 50%),
+          radial-gradient(ellipse 80% 60% at 50% 100%, rgba(148,110,178,0.14) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 60% at 10% 20%, rgba(118,86,148,0.09) 0%, transparent 50%),
           var(--color-bg-raised)
         `,
         borderTop: '1px solid var(--color-border)',

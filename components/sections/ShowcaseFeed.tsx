@@ -11,7 +11,7 @@ interface ShowcaseFeedProps {
 
 export function ShowcaseFeed({ posts, title, label, viewAllHref }: ShowcaseFeedProps) {
   return (
-    <section style={{ padding: 'var(--space-8) 0', borderTop: '1px solid var(--color-border)' }}>
+    <section data-section-theme="amber" style={{ padding: 'var(--space-8) 0', borderTop: '1px solid var(--color-border)' }}>
       <div className="container">
         {(label || title || viewAllHref) && (
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 'var(--space-4)', marginBottom: 'var(--space-7)', flexWrap: 'wrap' }}>
