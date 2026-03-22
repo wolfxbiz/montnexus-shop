@@ -117,7 +117,7 @@ export default function NewProductPage() {
                 {CATEGORIES.map(c => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
               </select>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
               <Input label="Price (USD cents, 0 = free)" id="price" type="number" min={0} value={form.price_cents} onChange={set('price_cents')} />
               <Input label="Number of files" id="file_count" type="number" min={1} value={form.file_count} onChange={set('file_count')} />
             </div>

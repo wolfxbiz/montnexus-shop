@@ -38,7 +38,7 @@ export default async function ProductPage({ params }: Props) {
                   <Tag variant="default">{product.category}</Tag>
                   <Tag variant={product.is_free ? 'free' : 'paid'}>{product.is_free ? 'Free' : 'Paid'}</Tag>
                 </div>
-                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: 'var(--leading-tight)', marginBottom: 'var(--space-5)' }}>
+                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.75rem, 4vw, var(--text-3xl))', fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: 'var(--leading-tight)', marginBottom: 'var(--space-5)' }}>
                   {product.title}
                 </h1>
                 <p style={{ color: 'var(--color-text-secondary)', lineHeight: 'var(--leading-loose)', marginBottom: 'var(--space-8)', fontSize: 'var(--text-lg)' }}>

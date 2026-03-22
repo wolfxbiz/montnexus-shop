@@ -28,7 +28,7 @@ export default async function ArticlePage({ params }: Props) {
       <main>
         <article>
           {article.cover_url && (
-            <div style={{ position: 'relative', height: '45vh', minHeight: 320, background: 'var(--color-bg-raised)' }}>
+            <div style={{ position: 'relative', height: 'min(45vh, 360px)', minHeight: 200, background: 'var(--color-bg-raised)' }}>
               <Image src={article.cover_url} alt={article.title} fill style={{ objectFit: 'cover', opacity: 0.7 }} />
             </div>
           )}
@@ -37,7 +37,7 @@ export default async function ArticlePage({ params }: Props) {
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-accent)', letterSpacing: 'var(--tracking-wider)', textTransform: 'uppercase', marginBottom: 'var(--space-4)' }}>
                 {article.published_at ? new Date(article.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Article'}
               </div>
-              <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: 'var(--leading-tight)', marginBottom: 'var(--space-6)' }}>
+              <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.75rem, 4vw, var(--text-3xl))', fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: 'var(--leading-tight)', marginBottom: 'var(--space-6)' }}>
                 {article.title}
               </h1>
               {article.creator && (

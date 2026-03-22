@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/Button'
 
 export function Hero() {
   return (
-    <section className="hero-bg-slate grain-overlay section" style={{ minHeight: '85vh', display: 'flex', alignItems: 'center' }}>
+    <section className="hero-bg-slate grain-overlay section" style={{ minHeight: 'min(85vh, 700px)', display: 'flex', alignItems: 'center', paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-8)' }}>
       <div className="container">
         <div style={{ maxWidth: 'var(--content-width)' }}>
           <p className="reveal" style={{ marginBottom: 'var(--space-5)', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-accent)', letterSpacing: 'var(--tracking-wider)', textTransform: 'uppercase' }}>

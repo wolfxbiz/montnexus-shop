@@ -13,7 +13,7 @@ export function CtaBanner() {
         <p className="section-label" style={{ justifyContent: 'center' }}>Start building today</p>
         <h2 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'var(--text-3xl)',
+          fontSize: 'clamp(1.75rem, 4vw, var(--text-3xl))',
           fontWeight: 400,
           color: 'var(--color-text-primary)',
           marginBottom: 'var(--space-5)',

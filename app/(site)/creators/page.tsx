@@ -16,7 +16,7 @@ export default function CreatorsPage() {
       <Nav />
       <main>
         {/* Hero */}
-        <section className="hero-bg-slate section" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center' }}>
+        <section className="hero-bg-slate section" style={{ minHeight: 'min(60vh, 500px)', display: 'flex', alignItems: 'center' }}>
           <div className="container">
             <div style={{ maxWidth: 'var(--content-width)' }}>
               <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-accent)', letterSpacing: 'var(--tracking-wider)', textTransform: 'uppercase', marginBottom: 'var(--space-5)' }}>

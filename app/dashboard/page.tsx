@@ -70,7 +70,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Tab bar */}
-            <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--color-border-muted)', marginBottom: 'var(--space-8)' }}>
+            <div style={{ display: 'flex', gap: 0, borderBottom: '1px solid var(--color-border-muted)', marginBottom: 'var(--space-8)', overflowX: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
               {tabs.map(t => (
                 <button
                   key={t.id}
@@ -88,6 +88,9 @@ export default function DashboardPage() {
                     cursor: 'pointer',
                     transition: 'color var(--transition-fast)',
                     marginBottom: -1,
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
+                    minHeight: 44,
                   }}
                 >
                   {t.label}

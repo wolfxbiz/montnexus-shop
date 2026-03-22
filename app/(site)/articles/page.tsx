@@ -28,7 +28,7 @@ export default async function ArticlesPage() {
         <section style={{ padding: 'var(--space-9) 0 var(--space-6)' }}>
           <div className="container">
             <div className="section-label">From creators</div>
-            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 400, color: 'var(--color-text-primary)', marginBottom: 'var(--space-3)' }}>
+            <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.75rem, 4vw, var(--text-3xl))', fontWeight: 400, color: 'var(--color-text-primary)', marginBottom: 'var(--space-3)' }}>
               Articles & Guides
             </h1>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-lg)', marginBottom: 'var(--space-9)' }}>
@@ -42,7 +42,7 @@ export default async function ArticlesPage() {
                 </p>
               </div>
             ) : (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 'var(--space-6)' }}>
+              <div className="product-grid">
                 {articles.map((article: { id: string; slug: string; cover_url: string | null; title: string; excerpt: string; published_at: string; creator: { username: string; display_name: string } }) => (
                   <Link key={article.id} href={`/articles/${article.slug}`} style={{ textDecoration: 'none' }}>
                     <article className="card" style={{ height: '100%' }}>

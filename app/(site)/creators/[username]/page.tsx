@@ -47,7 +47,7 @@ export default async function CreatorPage({ params }: Props) {
                 }
               </div>
               <div style={{ flex: 1, minWidth: 0, paddingBottom: 'var(--space-2)' }}>
-                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 400, color: 'var(--color-text-primary)', marginBottom: 'var(--space-1)' }}>
+                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.75rem, 4vw, var(--text-3xl))', fontWeight: 400, color: 'var(--color-text-primary)', marginBottom: 'var(--space-1)' }}>
                   {creator.display_name}
                 </h1>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)', letterSpacing: 'var(--tracking-wider)' }}>
@@ -111,7 +111,7 @@ export default async function CreatorPage({ params }: Props) {
                 <div className="section-label" style={{ margin: 0 }}>Articles</div>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)' }}>{articles.length} post{articles.length !== 1 ? 's' : ''}</span>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
+              <div className="product-grid">
                 {articles.map(a => (
                   <Link key={a.id} href={`/articles/${a.slug}`} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', background: 'var(--color-bg-raised)', border: '1px solid var(--color-border-muted)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', transition: 'border-color var(--transition-fast)' }}>
                     {a.cover_url && (

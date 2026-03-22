@@ -251,6 +251,17 @@ img, video { max-width: 100%; display: block; }
 }
 .section-label::before, .section-label::after { content: ''; flex: 1; height: 1px; background: var(--color-border); }
 
+/* ─── Footer ─── */
+.site-footer {
+  border-top: 1px solid var(--color-border-muted);
+  padding: var(--space-8) var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
 /* ─── Atmosphere ─── */
 .hero-bg-slate {
   background:
@@ -273,3 +284,83 @@ img, video { max-width: 100%; display: block; }
 .reveal-group.visible > *:nth-child(2) { transition-delay:  80ms; opacity: 1; transform: none; }
 .reveal-group.visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: none; }
 .reveal-group.visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: none; }
+
+/* ─── Mobile Responsive ─── */
+@media (max-width: 768px) {
+  :root {
+    --text-2xl: 1.75rem;
+    --text-3xl: 2.25rem;
+    --text-4xl: 3rem;
+    --space-9: 3.5rem;
+    --space-10: 5rem;
+  }
+
+  .nav {
+    padding: var(--space-3) var(--gutter);
+    flex-wrap: wrap;
+  }
+
+  .nav-hamburger { display: flex !important; }
+
+  .nav-links {
+    display: none !important;
+    flex-direction: column;
+    width: 100%;
+    gap: 0 !important;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-muted);
+    margin-top: var(--space-3);
+  }
+
+  .nav-links-open { display: flex !important; }
+
+  .nav-links a,
+  .nav-links button {
+    padding: var(--space-3) 0 !important;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--color-border-muted);
+  }
+
+  .nav-logo { font-size: var(--text-lg); }
+
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    padding: var(--space-6) var(--gutter);
+  }
+
+  .section { padding: var(--space-7) 0; }
+  .section-sm { padding: var(--space-5) 0; }
+  .section-label { margin-bottom: var(--space-5); }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .card-body { padding: var(--space-4); }
+
+  .btn {
+    padding: 0.75rem 1.4rem;
+    font-size: 0.7rem;
+    min-height: 44px;
+  }
+
+  .tag { min-height: 36px; padding: 0.3rem 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.5rem;
+    --gutter: 1rem;
+  }
+
+  .product-grid { gap: var(--space-3); }
+  .card-cover { aspect-ratio: 3/2; }
+}
