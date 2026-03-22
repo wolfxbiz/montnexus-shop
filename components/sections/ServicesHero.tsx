@@ -72,8 +72,7 @@ export function ServicesHero() {
       style={{
         background: `radial-gradient(ellipse 80% 70% at 80% 50%, ${slide.accentSoft} 0%, transparent 60%), var(--color-bg-raised)`,
         borderTop: '1px solid var(--color-border)',
-        borderBottom: '1px solid var(--color-border)',
-        padding: 'var(--space-9) 0',
+        padding: 'var(--space-7) 0 var(--space-5)',
         transition: 'background 0.6s ease',
       }}
     >

@@ -442,6 +442,18 @@ img, video { max-width: 100%; display: block; }
   border-color: var(--color-border-strong) !important;
 }
 
+/* ─── Free Spotlight ─── */
+.free-card:hover {
+  border-color: var(--color-accent) !important;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .free-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
 @media (max-width: 480px) {
   :root {
     --text-2xl: 1.5rem;

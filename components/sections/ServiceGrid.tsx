@@ -7,11 +7,15 @@ interface ServiceGridProps {
   title?: string
   label?: string
   viewAllHref?: string
+  noPaddingTop?: boolean
 }
 
-export function ServiceGrid({ services, title, label, viewAllHref }: ServiceGridProps) {
+export function ServiceGrid({ services, title, label, viewAllHref, noPaddingTop }: ServiceGridProps) {
   return (
-    <section className="section">
+    <section
+      className="section"
+      style={noPaddingTop ? { paddingTop: 'var(--space-5)', background: 'var(--color-bg-raised)', borderBottom: '1px solid var(--color-border)' } : undefined}
+    >
       <div className="container">
         {(label || title || viewAllHref) && (
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 'var(--space-4)', marginBottom: 'var(--space-8)', flexWrap: 'wrap' }}>

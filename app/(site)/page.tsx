@@ -12,6 +12,7 @@ import { ServiceGrid } from '@/components/sections/ServiceGrid'
 import { ShowcaseFeed } from '@/components/sections/ShowcaseFeed'
 import { ServicesHero } from '@/components/sections/ServicesHero'
 import { ArticlesFeed } from '@/components/sections/ArticlesFeed'
+import { FreeSpotlight } from '@/components/sections/FreeSpotlight'
 import { mockProducts } from '@/lib/mock-products'
 import { mockServices } from '@/lib/mock-services'
 import { mockShowcase } from '@/lib/mock-showcase'
@@ -91,8 +92,8 @@ export default async function HomePage() {
         <HowItWorks />
         <ProductGrid products={featured} label="Featured bundles" title="Popular this month" viewAllHref="/bundles" />
         <ServicesHero />
-        <ServiceGrid services={featuredServices} label="Hire a creator" title="Featured services" viewAllHref="/services" />
-        <ProductGrid products={free} label="Free downloads" title="Grab for free" viewAllHref="/bundles?free=true" />
+        <ServiceGrid services={featuredServices} label="Hire a creator" title="Featured services" viewAllHref="/services" noPaddingTop />
+        <FreeSpotlight products={free} viewAllHref="/bundles?free=true" />
         <ShowcaseFeed posts={recentShowcase} label="Community" title="Fresh work from creators" viewAllHref="/showcase" />
         <ArticlesFeed articles={articles.slice(0, 6)} />
         <CtaBanner />
