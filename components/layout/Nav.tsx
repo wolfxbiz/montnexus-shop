@@ -12,7 +12,7 @@ export function Nav() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <nav className="nav">
+    <nav className="nav" suppressHydrationWarning>
       <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <Image
           src="/mnx-logo.png"
