@@ -22,7 +22,8 @@ export default function LoginPage() {
     setLoading(true)
     try {
       await login(email, password)
-      router.push('/dashboard')
+      localStorage.setItem('show_signin_toast', '1')
+      router.push('/')
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Login failed. Check your credentials.')
     } finally {

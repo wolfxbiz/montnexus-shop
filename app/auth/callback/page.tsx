@@ -10,6 +10,7 @@ function CallbackHandler() {
   useEffect(() => {
     const supabase = createClient()
     const code = searchParams.get('code')
+    const next = searchParams.get('next') || '/'
 
     async function handleAuth() {
       if (code) {
@@ -18,7 +19,8 @@ function CallbackHandler() {
 
       const { data: { session } } = await supabase.auth.getSession()
       if (session) {
-        router.push('/dashboard')
+        localStorage.setItem('show_signin_toast', '1')
+        router.push(next)
       } else {
         router.push('/auth/login')
       }

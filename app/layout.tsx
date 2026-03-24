@@ -3,6 +3,7 @@ import '@/styles/globals.css'
 import { RevealObserver } from '@/components/RevealObserver'
 import { AuthProvider } from '@/context/AuthContext'
 import { ScrollThemeProvider } from '@/components/providers/ScrollThemeProvider'
+import { SignInToast } from '@/components/ui/SignInToast'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <RevealObserver />
         <ScrollThemeProvider />
         <AuthProvider>
+          <SignInToast />
           {children}
         </AuthProvider>
       </body>
