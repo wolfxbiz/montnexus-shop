@@ -16,8 +16,9 @@ interface AuthContextValue {
   profile: Profile | null
   loading: boolean
   login: (email: string, password: string) => Promise<void>
-  loginWithMagicLink: (email: string) => Promise<void>
   signup: (email: string, password: string, name?: string) => Promise<void>
+  loginWithGoogle: () => Promise<void>
+  loginWithApple: () => Promise<void>
   logout: () => Promise<void>
 }
 
@@ -49,10 +50,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     })
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
         setUser(session.user)
         fetchProfile(session.user.id)
+
+        // Send welcome email on first sign-up (any provider)
+        if (event === 'SIGNED_IN') {
+          const isNew = session.user.created_at &&
+            Date.now() - new Date(session.user.created_at).getTime() < 60_000
+          if (isNew) {
+            fetch('/api/auth/welcome', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: session.user.email,
+                name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || null,
+              }),
+            }).catch(() => {})
+          }
+        }
       } else {
         setUser(null)
         setProfile(null)
@@ -68,21 +85,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (error) throw error
   }
 
-  async function loginWithMagicLink(email: string) {
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback` },
-    })
-    if (error) throw error
-  }
-
   async function signup(email: string, password: string, name?: string) {
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: name },
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+    if (error) throw error
+  }
+
+  async function loginWithGoogle() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: { access_type: 'offline', prompt: 'consent' },
+      },
+    })
+    if (error) throw error
+  }
+
+  async function loginWithApple() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'apple',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     })
     if (error) throw error
@@ -93,7 +123,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, login, loginWithMagicLink, signup, logout }}>
+    <AuthContext.Provider value={{ user, profile, loading, login, signup, loginWithGoogle, loginWithApple, logout }}>
       {children}
     </AuthContext.Provider>
   )

@@ -88,13 +88,33 @@ export function Nav() {
             </button>
           </>
         ) : (
-          <Link
-            href="/auth/login"
-            onClick={() => setOpen(false)}
-            style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', letterSpacing: 'var(--tracking-wider)', textTransform: 'uppercase' }}
-          >
-            Sign in
-          </Link>
+          <>
+            <Link
+              href="/auth/login"
+              onClick={() => setOpen(false)}
+              style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', letterSpacing: 'var(--tracking-wider)', textTransform: 'uppercase' }}
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/auth/signup"
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                letterSpacing: 'var(--tracking-wider)',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                padding: '8px 20px',
+                borderRadius: 'var(--radius-md)',
+                background: 'var(--color-text-primary)',
+                color: 'var(--color-bg-base)',
+                fontWeight: 500,
+              }}
+            >
+              Sign up
+            </Link>
+          </>
         )}
       </div>
     </nav>
