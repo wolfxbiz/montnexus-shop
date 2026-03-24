@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from '@/context/AuthContext'
@@ -7,6 +7,9 @@ import { useAuth } from '@/context/AuthContext'
 export function Nav() {
   const { user, logout } = useAuth()
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
 
   return (
     <nav className="nav">
@@ -61,7 +64,7 @@ export function Nav() {
         <Link href="/showcase" onClick={() => setOpen(false)}>Showcase</Link>
         <Link href="/articles" onClick={() => setOpen(false)}>Articles</Link>
         <Link href="/creators" onClick={() => setOpen(false)}>Creators</Link>
-        {user ? (
+        {mounted && user ? (
           <>
             <Link
               href="/dashboard"
