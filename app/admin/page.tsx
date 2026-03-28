@@ -9,7 +9,7 @@ import { Nav } from '@/components/layout/Nav'
 
 const ADMIN_EMAILS = ['vivekshajilekha@gmail.com']
 
-type Tab = 'pending' | 'history' | 'creators' | 'users'
+type Tab = 'pending' | 'history' | 'creators' | 'users' | 'enquiries'
 
 type Product = {
   id: string; title: string; slug: string; category: string
@@ -31,6 +31,12 @@ type UserRecord = {
   orders: { id: string; status: string; amount_cents: number; created_at: string; products: { title: string; slug: string } }[]
 }
 
+type Enquiry = {
+  id: string; name: string; email: string; phone: string | null
+  service: string | null; budget: string | null; description: string
+  status: 'new' | 'contacted' | 'closed'; created_at: string
+}
+
 export default function AdminPage() {
   const { user, loading } = useAuth()
   const router = useRouter()
@@ -39,6 +45,7 @@ export default function AdminPage() {
   const [history, setHistory] = useState<Product[]>([])
   const [creators, setCreators] = useState<Creator[]>([])
   const [users, setUsers] = useState<UserRecord[]>([])
+  const [enquiries, setEnquiries] = useState<Enquiry[]>([])
   const [fetching, setFetching] = useState(false)
   const [actionId, setActionId] = useState<string | null>(null)
   const [expandedId, setExpandedId] = useState<string | null>(null)
@@ -75,6 +82,8 @@ export default function AdminPage() {
       authFetch('/api/admin/creators').then(r => r.json()).then(d => { setCreators(Array.isArray(d) ? d : []); setFetching(false) })
     } else if (tab === 'users') {
       authFetch('/api/admin/users').then(r => r.json()).then(d => { setUsers(Array.isArray(d) ? d : []); setFetching(false) })
+    } else if (tab === 'enquiries') {
+      authFetch('/api/enquiries').then(r => r.json()).then(d => { setEnquiries(Array.isArray(d) ? d : []); setFetching(false) })
     }
   }, [tab, isAdmin, authFetch])
 
@@ -104,11 +113,19 @@ export default function AdminPage() {
 
   if (loading || !user || !isAdmin) return null
 
+  async function updateEnquiryStatus(id: string, status: Enquiry['status']) {
+    setActionId(id)
+    await authFetch('/api/enquiries', { method: 'PATCH', body: JSON.stringify({ id, status }) })
+    setEnquiries(prev => prev.map(e => e.id === id ? { ...e, status } : e))
+    setActionId(null)
+  }
+
   const tabs: { id: Tab; label: string }[] = [
     { id: 'pending', label: `Pending${pending.length ? ` (${pending.length})` : ''}` },
     { id: 'history', label: 'Approved' },
     { id: 'creators', label: 'Creators' },
     { id: 'users', label: 'Users' },
+    { id: 'enquiries', label: `Enquiries${enquiries.filter(e => e.status === 'new').length ? ` (${enquiries.filter(e => e.status === 'new').length})` : ''}` },
   ]
 
   return (
@@ -271,6 +288,53 @@ export default function AdminPage() {
               ))}
             </div>
           )}
+          {/* ENQUIRIES TAB */}
+          {tab === 'enquiries' && !fetching && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+              {enquiries.length === 0 && <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', padding: 'var(--space-10) 0' }}>No enquiries yet.</p>}
+              {enquiries.map(e => (
+                <div key={e.id} style={{ background: 'var(--color-bg-raised)', border: '1px solid var(--color-border-muted)', borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
+                  <div style={{ padding: 'var(--space-5)', display: 'flex', gap: 'var(--space-4)', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', flexWrap: 'wrap', marginBottom: 6 }}>
+                        <span style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-base)', color: 'var(--color-text-primary)' }}>{e.name}</span>
+                        {e.service && <Tag variant="default">{e.service}</Tag>}
+                        {e.budget && <Tag variant="default">{e.budget}</Tag>}
+                        <Tag variant={e.status === 'new' ? 'paid' : e.status === 'contacted' ? 'accent' : 'free'}>
+                          {e.status}
+                        </Tag>
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-tertiary)', marginBottom: 10 }}>
+                        {e.email}{e.phone ? ` · ${e.phone}` : ''} · {new Date(e.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                      </div>
+                      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', lineHeight: 'var(--leading-relaxed)', whiteSpace: 'pre-wrap' }}>{e.description}</p>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', flexShrink: 0 }}>
+                      {(['new', 'contacted', 'closed'] as Enquiry['status'][]).map(s => (
+                        <button
+                          key={s}
+                          disabled={e.status === s || actionId === e.id}
+                          onClick={() => updateEnquiryStatus(e.id, s)}
+                          style={{
+                            fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: 'var(--tracking-wider)',
+                            textTransform: 'uppercase', padding: '5px 10px', borderRadius: 'var(--radius-sm)',
+                            border: '1px solid var(--color-border-strong)',
+                            background: e.status === s ? 'var(--color-accent-soft)' : 'var(--color-bg-overlay)',
+                            color: e.status === s ? 'var(--color-accent)' : 'var(--color-text-secondary)',
+                            cursor: e.status === s ? 'default' : 'pointer',
+                            opacity: actionId === e.id ? 0.5 : 1,
+                          }}
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
         </div>
       </main>
     </>

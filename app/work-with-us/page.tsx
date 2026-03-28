@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
+import { EnquiryProvider, useEnquiry } from '@/components/work-with-us/EnquiryModal'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import {
   Globe,
@@ -402,7 +403,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
         fontFamily: HEADING_FONT,
         color: '#1B2A4A',
         fontSize: 'clamp(2rem, 4vw, 3.25rem)',
-        fontWeight: 700,
+        fontWeight: 400,
         lineHeight: 1.2,
         letterSpacing: '0.015em',
       }}
@@ -468,7 +469,7 @@ function WhatsAppIcon({ size = 24 }: { size?: number }) {
 
 // ─── Section: Nav ─────────────────────────────────────────────────────────────
 
-function StickyNav() {
+function StickyNav({ onCta }: { onCta: () => void }) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -548,7 +549,7 @@ function StickyNav() {
         </div>
 
         <button
-          onClick={() => scrollTo('contact')}
+          onClick={onCta}
           style={{
             fontFamily: FONT,
             fontWeight: 600,
@@ -574,7 +575,7 @@ function StickyNav() {
 
 // ─── Section: Hero ────────────────────────────────────────────────────────────
 
-function Hero() {
+function Hero({ onCta }: { onCta: () => void }) {
   const headline = ['We', 'Build', 'Digital', 'Products', 'That', 'Grow', 'Your', 'Business']
 
   return (
@@ -642,37 +643,13 @@ function Hero() {
           textAlign: 'center',
         }}
       >
-        {/* Eyebrow badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: 'easeOut' }}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            backgroundColor: 'rgba(196,92,26,0.08)',
-            border: '1px solid rgba(196,92,26,0.2)',
-            color: '#C45C1A',
-            fontFamily: FONT,
-            fontWeight: 600,
-            fontSize: '0.8rem',
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            padding: '6px 16px',
-            borderRadius: '2px',
-            marginBottom: '32px',
-          }}
-        >
-          Specialist Studio · AI-Powered · Global Clients
-        </motion.div>
 
         {/* Headline — staggered word entrance */}
         <h1
           aria-label="We Build Digital Products That Grow Your Business"
           style={{
             fontFamily: HEADING_FONT,
-            fontWeight: 700,
+            fontWeight: 400,
             lineHeight: 1.13,
             letterSpacing: '0.01em',
             color: '#1B2A4A',
@@ -729,6 +706,27 @@ function Hero() {
           }}
         >
           <button
+            onClick={onCta}
+            style={{
+              fontFamily: FONT,
+              fontWeight: 600,
+              fontSize: '1.15rem',
+              backgroundColor: '#C45C1A',
+              color: '#FAF8F4',
+              border: 'none',
+              borderRadius: '2px',
+              padding: '14px 36px',
+              cursor: 'pointer',
+              transition: 'background-color 0.18s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a04a14')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C45C1A')}
+            aria-label="Get a Free Quote"
+          >
+            Get a Free Quote
+          </button>
+
+          <button
             onClick={() => scrollTo('services')}
             style={{
               fontFamily: FONT,
@@ -782,35 +780,6 @@ function Hero() {
         </motion.div>
 
         {/* Trust indicators */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.8 }}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '12px 32px',
-            justifyContent: 'center',
-          }}
-        >
-          {[
-            '10+ projects delivered',
-            'Global clients',
-            'Fast turnaround',
-            'Fixed price quotes',
-          ].map((item, i) => (
-            <span
-              key={i}
-              style={{
-                fontFamily: FONT,
-                fontSize: '1rem',
-                color: '#57534E',
-              }}
-            >
-              <span style={{ color: '#1A7F5A' }}>✓</span> {item}
-            </span>
-          ))}
-        </motion.div>
       </div>
     </section>
   )
@@ -938,7 +907,7 @@ function ServicesSection() {
                   <h3
                     style={{
                       fontFamily: HEADING_FONT,
-                      fontWeight: 700,
+                      fontWeight: 400,
                       fontSize: '1.5rem',
                       color: '#1B2A4A',
                       marginBottom: '16px',
@@ -1049,7 +1018,7 @@ function HowItWorksSection() {
                       position: 'relative',
                       zIndex: 1,
                       fontFamily: HEADING_FONT,
-                      fontWeight: 700,
+                      fontWeight: 400,
                       fontSize: '1.25rem',
                       color: '#1B2A4A',
                       marginBottom: '10px',
@@ -1082,13 +1051,28 @@ function HowItWorksSection() {
 
 // ─── Section: Pricing ─────────────────────────────────────────────────────────
 
-function PricingSection() {
+function PricingSection({ onCta }: { onCta: () => void }) {
   return (
     <section
       id="pricing"
       style={{ backgroundColor: '#FAF8F4', padding: '96px 24px' }}
     >
-      <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
+      <style>{`
+        .pricing-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+          align-items: stretch;
+        }
+        @media (max-width: 900px) {
+          .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 540px) {
+          .pricing-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <FadeInView>
           <SectionTitle>Simple, Transparent Pricing</SectionTitle>
           <p
@@ -1106,95 +1090,95 @@ function PricingSection() {
           <Divider />
         </FadeInView>
 
-        {/* Horizontal scroll on mobile, grid on desktop */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '20px',
-            overflowX: 'auto',
-            paddingBottom: '8px',
-          }}
-          className="md:grid md:grid-cols-4 md:overflow-x-visible"
-        >
+        <div className="pricing-grid">
           {pricingTiers.map((tier, i) => (
-            <FadeInView key={i} delay={i * 0.08} slideFrom="scale">
+            <FadeInView key={i} delay={i * 0.08} slideFrom="scale" className="h-full">
               <div
                 style={{
                   position: 'relative',
-                  backgroundColor: tier.popular ? 'rgba(27,42,74,0.03)' : '#FFFFFF',
+                  backgroundColor: tier.popular ? '#F5F7FC' : '#FFFFFF',
                   border: tier.popular ? '2px solid #1B2A4A' : '1px solid #E7E2D9',
-                  borderRadius: '2px',
-                  padding: '28px 24px',
-                  paddingTop: tier.popular ? '40px' : '28px',
-                  marginTop: tier.popular ? '-8px' : '0',
-                  boxShadow: '0 2px 20px rgba(28,25,23,0.06)',
-                  minWidth: '240px',
+                  borderRadius: '4px',
+                  padding: '32px 28px',
+                  paddingTop: tier.popular ? '44px' : '32px',
+                  boxShadow: tier.popular
+                    ? '0 8px 32px rgba(27,42,74,0.12)'
+                    : '0 2px 16px rgba(28,25,23,0.05)',
                   display: 'flex',
                   flexDirection: 'column',
                   height: '100%',
+                  boxSizing: 'border-box',
                 }}
               >
                 {tier.popular && <PopularBadge />}
 
+                {/* Tier label */}
                 <div
                   style={{
                     fontFamily: FONT,
                     fontWeight: 600,
-                    fontSize: '0.78rem',
-                    letterSpacing: '0.12em',
+                    fontSize: '0.72rem',
+                    letterSpacing: '0.16em',
                     textTransform: 'uppercase',
-                    color: '#C45C1A',
-                    marginBottom: '8px',
+                    color: tier.popular ? '#1B2A4A' : '#C45C1A',
+                    marginBottom: '16px',
                   }}
                 >
                   {tier.name}
                 </div>
 
-                <div
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 700,
-                    fontSize: '1.4rem',
-                    color: '#1B2A4A',
-                    lineHeight: 1.35,
-                    marginBottom: '4px',
-                    whiteSpace: 'pre-line',
-                  }}
-                >
-                  {tier.priceRange}
+                {/* Price */}
+                <div style={{ marginBottom: '16px' }}>
+                  {tier.priceRange.split('\n').map((line, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        fontFamily: HEADING_FONT,
+                        fontWeight: 400,
+                        fontSize: idx === 0 ? '1.55rem' : '1.15rem',
+                        color: idx === 0 ? '#1B2A4A' : '#57534E',
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {line}
+                    </div>
+                  ))}
                 </div>
 
+                {/* Description + timeline */}
                 <div
                   style={{
                     fontFamily: FONT,
-                    fontSize: '1rem',
+                    fontSize: '0.95rem',
                     color: '#57534E',
-                    marginBottom: '6px',
+                    marginBottom: '4px',
                   }}
                 >
                   {tier.description}
                 </div>
-
                 <div
                   style={{
                     fontFamily: FONT,
                     fontWeight: 600,
-                    fontSize: '0.88rem',
+                    fontSize: '0.82rem',
                     color: '#C45C1A',
-                    marginBottom: '22px',
+                    marginBottom: '24px',
+                    paddingBottom: '24px',
+                    borderBottom: '1px solid #E7E2D9',
                   }}
                 >
-                  Timeline: {tier.timeline}
+                  {tier.timeline}
                 </div>
 
+                {/* Features */}
                 <ul
                   style={{
                     listStyle: 'none',
-                    margin: '0 0 auto',
+                    margin: 0,
                     padding: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '8px',
+                    gap: '10px',
                     flexGrow: 1,
                   }}
                 >
@@ -1206,32 +1190,34 @@ function PricingSection() {
                         alignItems: 'flex-start',
                         gap: '10px',
                         fontFamily: FONT,
-                        fontSize: '1rem',
+                        fontSize: '0.98rem',
                         color: '#57534E',
-                        lineHeight: 1.75,
+                        lineHeight: 1.7,
                       }}
                     >
-                      <Check size={14} color="#1A7F5A" style={{ flexShrink: 0, marginTop: '5px' }} />
+                      <Check size={13} color="#1A7F5A" style={{ flexShrink: 0, marginTop: '5px' }} />
                       {f}
                     </li>
                   ))}
                 </ul>
 
+                {/* CTA */}
                 <button
-                  onClick={() => scrollTo('contact')}
+                  onClick={onCta}
                   style={{
-                    marginTop: '28px',
+                    marginTop: '32px',
                     fontFamily: FONT,
                     fontWeight: 600,
-                    fontSize: '1rem',
+                    fontSize: '0.98rem',
                     backgroundColor: tier.popular ? '#1B2A4A' : 'transparent',
                     color: tier.popular ? '#FAF8F4' : '#1B2A4A',
-                    border: '2px solid #1B2A4A',
+                    border: '1.5px solid #1B2A4A',
                     borderRadius: '2px',
-                    padding: '11px 20px',
+                    padding: '12px 20px',
                     cursor: 'pointer',
                     transition: 'background-color 0.18s, color 0.18s',
                     width: '100%',
+                    letterSpacing: '0.02em',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#1B2A4A'
@@ -1253,14 +1239,13 @@ function PricingSection() {
           <p
             style={{
               fontFamily: FONT,
-              fontSize: '0.98rem',
+              fontSize: '0.95rem',
               color: '#57534E',
               textAlign: 'center',
-              marginTop: '32px',
+              marginTop: '36px',
             }}
           >
-            🌍 Working with a US, UK or Australian team? International rates apply —
-            typically 1.5–2× the base price.
+            🌍 Working with a US, UK or Australian team? International rates apply — typically 1.5–2× the base price.
           </p>
         </FadeInView>
       </div>
@@ -1519,7 +1504,7 @@ function TestimonialsSection() {
 
 // ─── Section: Maintenance Retainers ──────────────────────────────────────────
 
-function RetainersSection() {
+function RetainersSection({ onCta }: { onCta: () => void }) {
   return (
     <section style={{ backgroundColor: '#F3F0EA', padding: '96px 24px' }}>
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
@@ -1632,7 +1617,7 @@ function RetainersSection() {
                 </ul>
 
                 <button
-                  onClick={() => scrollTo('contact')}
+                  onClick={onCta}
                   style={{
                     marginTop: '28px',
                     fontFamily: FONT,
@@ -1785,347 +1770,74 @@ const labelStyle: React.CSSProperties = {
   marginBottom: '6px',
 }
 
-function ContactSection() {
-  const [form, setForm] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    budget: '',
-    description: '',
-    source: '',
-  })
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const set = (key: keyof FormData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => setForm((p) => ({ ...p, [key]: e.target.value }))
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    // Replace with your actual API endpoint
-    await new Promise((r) => setTimeout(r, 1100))
-    setSubmitted(true)
-    setLoading(false)
-  }
-
-  const focus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    (e.target.style.borderColor = '#1B2A4A')
-  const blur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    (e.target.style.borderColor = '#E7E2D9')
-
+function ContactSection({ onCta }: { onCta: () => void }) {
   return (
     <section
       id="contact"
       style={{ backgroundColor: '#F3F0EA', padding: '96px 24px' }}
     >
-      <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
         <FadeInView>
           <SectionTitle>Let&apos;s Build Something Together</SectionTitle>
-          <p
-            style={{
-              fontFamily: FONT,
-              fontSize: '1.15rem',
-              color: '#57534E',
-              lineHeight: 1.8,
-              marginTop: '12px',
-            }}
-          >
-            Tell us about your project and we will get back to you within 4 hours.
+          <p style={{ fontFamily: FONT, fontSize: '1.15rem', color: '#57534E', lineHeight: 1.8, marginTop: '12px' }}>
+            Share your project details and we will get back to you within 4 hours.
           </p>
           <Divider />
         </FadeInView>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '56px',
-            alignItems: 'start',
-          }}
-        >
-          {/* ── Form ── */}
-          <div>
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                style={{ padding: '64px 0', textAlign: 'center' }}
-              >
-                <p
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: '1.4rem',
-                    color: '#1A7F5A',
-                    lineHeight: 1.7,
-                  }}
-                >
-                  ✅ Received. We will be in touch within 4 hours.
-                </p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <div>
-                    <label htmlFor="cf-name" style={labelStyle}>Full Name *</label>
-                    <input
-                      id="cf-name"
-                      type="text"
-                      required
-                      placeholder="Your full name"
-                      value={form.name}
-                      onChange={set('name')}
-                      style={inputBaseStyle}
-                      onFocus={focus}
-                      onBlur={blur}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="cf-email" style={labelStyle}>Email *</label>
-                    <input
-                      id="cf-email"
-                      type="email"
-                      required
-                      placeholder="your@email.com"
-                      value={form.email}
-                      onChange={set('email')}
-                      style={inputBaseStyle}
-                      onFocus={focus}
-                      onBlur={blur}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="cf-phone" style={labelStyle}>WhatsApp / Phone</label>
-                  <input
-                    id="cf-phone"
-                    type="tel"
-                    placeholder="+1 234 567 8900"
-                    value={form.phone}
-                    onChange={set('phone')}
-                    style={inputBaseStyle}
-                    onFocus={focus}
-                    onBlur={blur}
-                  />
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                  <div>
-                    <label htmlFor="cf-service" style={labelStyle}>Service Interested In</label>
-                    <select
-                      id="cf-service"
-                      value={form.service}
-                      onChange={set('service')}
-                      style={inputBaseStyle}
-                      onFocus={focus}
-                      onBlur={blur}
-                    >
-                      <option value="">Select a service</option>
-                      <option>Website</option>
-                      <option>Web Application</option>
-                      <option>Mobile App</option>
-                      <option>Desktop Software</option>
-                      <option>Maintenance Retainer</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="cf-budget" style={labelStyle}>Budget Range</label>
-                    <select
-                      id="cf-budget"
-                      value={form.budget}
-                      onChange={set('budget')}
-                      style={inputBaseStyle}
-                      onFocus={focus}
-                      onBlur={blur}
-                    >
-                      <option value="">Select budget</option>
-                      <option>Under $500</option>
-                      <option>$500–$3,000</option>
-                      <option>$3,000–$15,000</option>
-                      <option>$15,000+</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="cf-description" style={labelStyle}>Project Description *</label>
-                  <textarea
-                    id="cf-description"
-                    required
-                    rows={5}
-                    placeholder="Tell us what you want to build..."
-                    value={form.description}
-                    onChange={set('description')}
-                    style={{ ...inputBaseStyle, resize: 'vertical' }}
-                    onFocus={focus}
-                    onBlur={blur}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="cf-source" style={labelStyle}>How Did You Find Me?</label>
-                  <select
-                    id="cf-source"
-                    value={form.source}
-                    onChange={set('source')}
-                    style={inputBaseStyle}
-                    onFocus={focus}
-                    onBlur={blur}
-                  >
-                    <option value="">Select an option</option>
-                    <option>Google</option>
-                    <option>LinkedIn</option>
-                    <option>Instagram</option>
-                    <option>WhatsApp</option>
-                    <option>Referral</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 600,
-                    fontSize: '1.15rem',
-                    backgroundColor: loading ? '#a04a14' : '#C45C1A',
-                    color: '#FAF8F4',
-                    border: 'none',
-                    borderRadius: '2px',
-                    padding: '15px 24px',
-                    cursor: loading ? 'not-allowed' : 'pointer',
-                    transition: 'background-color 0.18s',
-                    width: '100%',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!loading) e.currentTarget.style.backgroundColor = '#a04a14'
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!loading) e.currentTarget.style.backgroundColor = '#C45C1A'
-                  }}
-                >
-                  {loading ? 'Sending…' : 'Send My Project Details →'}
-                </button>
-              </form>
-            )}
+        <FadeInView delay={0.1}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', justifyContent: 'center', marginBottom: '48px' }}>
+            <button
+              onClick={onCta}
+              style={{
+                fontFamily: FONT, fontWeight: 600, fontSize: '1.15rem',
+                backgroundColor: '#C45C1A', color: '#FAF8F4',
+                border: 'none', borderRadius: '2px', padding: '15px 40px',
+                cursor: 'pointer', transition: 'background-color 0.18s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a04a14')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C45C1A')}
+            >
+              Send Us Your Project Details →
+            </button>
+            <a
+              href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+              style={{
+                fontFamily: FONT, fontWeight: 600, fontSize: '1.15rem',
+                backgroundColor: '#25D366', color: '#FFFFFF',
+                textDecoration: 'none', borderRadius: '2px', padding: '15px 32px',
+                display: 'inline-flex', alignItems: 'center', gap: '10px',
+                transition: 'background-color 0.18s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1daa52')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#25D366')}
+            >
+              <WhatsAppIcon size={20} /> Chat on WhatsApp
+            </a>
           </div>
+        </FadeInView>
 
-          {/* ── Right side info ── */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <FadeInView delay={0.2}>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Chat on WhatsApp"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '12px',
-                  fontFamily: FONT,
-                  fontWeight: 600,
-                  fontSize: '1.15rem',
-                  backgroundColor: '#25D366',
-                  color: '#FFFFFF',
-                  textDecoration: 'none',
-                  borderRadius: '2px',
-                  padding: '18px 24px',
-                  transition: 'background-color 0.18s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1daa52')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#25D366')}
-              >
-                <WhatsAppIcon size={24} />
-                Chat on WhatsApp
-              </a>
-            </FadeInView>
-
-            <FadeInView delay={0.3}>
-              <div
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E7E2D9',
-                  borderRadius: '2px',
-                  padding: '22px 24px',
-                  boxShadow: '0 2px 20px rgba(28,25,23,0.06)',
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 600,
-                    fontSize: '0.82rem',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: '#57534E',
-                    marginBottom: '6px',
-                  }}
-                >
-                  Email
-                </p>
-                <a
-                  href={`mailto:${EMAIL}`}
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: '1.1rem',
-                    color: '#2E5FA3',
-                    textDecoration: 'none',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  {EMAIL}
-                </a>
-              </div>
-            </FadeInView>
-
-            <FadeInView delay={0.4}>
-              <div
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E7E2D9',
-                  borderRadius: '2px',
-                  padding: '22px 24px',
-                  boxShadow: '0 2px 20px rgba(28,25,23,0.06)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 600,
-                    fontSize: '1.1rem',
-                    color: '#1B2A4A',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  <span style={{ color: '#C45C1A' }}>⚡</span> Average reply: under 4
-                  hours
-                </p>
-                <p
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: '1rem',
-                    color: '#57534E',
-                    lineHeight: 1.7,
-                  }}
-                >
-                  Available Mon–Sat, 9am–9pm GMT+5:30
-                </p>
-              </div>
-            </FadeInView>
+        <FadeInView delay={0.2}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', justifyContent: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#57534E', marginBottom: '6px' }}>Email</p>
+              <a href={`mailto:${EMAIL}`} style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#2E5FA3', textDecoration: 'none' }}
+                onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+                onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+              >{EMAIL}</a>
+            </div>
+            <div style={{ width: '1px', backgroundColor: '#E7E2D9' }} />
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#57534E', marginBottom: '6px' }}>Response time</p>
+              <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#1B2A4A' }}>⚡ Under 4 hours</p>
+            </div>
+            <div style={{ width: '1px', backgroundColor: '#E7E2D9' }} />
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#57534E', marginBottom: '6px' }}>Availability</p>
+              <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#1B2A4A' }}>Mon–Sat, 9am–9pm GMT+5:30</p>
+            </div>
           </div>
-        </div>
+        </FadeInView>
       </div>
     </section>
   )
@@ -2254,7 +1966,7 @@ function MontnexusBanner() {
         <h2
           style={{
             fontFamily: HEADING_FONT,
-            fontWeight: 700,
+            fontWeight: 400,
             fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
             color: '#FAF8F4',
             lineHeight: 1.25,
@@ -2344,9 +2056,10 @@ function FloatingWhatsApp() {
   )
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Page inner (needs EnquiryContext) ───────────────────────────────────────
 
-export default function StartPage() {
+function PageContent() {
+  const { open } = useEnquiry()
   return (
     <div
       style={{
@@ -2356,24 +2069,34 @@ export default function StartPage() {
         overflowX: 'hidden',
       }}
     >
-      <StickyNav />
+      <StickyNav onCta={open} />
 
       <main>
-        <Hero />
+        <Hero onCta={open} />
         <SocialProofBar />
         <ServicesSection />
         <HowItWorksSection />
-        <PricingSection />
+        <PricingSection onCta={open} />
         <WhyMeSection />
         <TestimonialsSection />
-        <RetainersSection />
+        <RetainersSection onCta={open} />
         <FAQSection />
-        <ContactSection />
+        <ContactSection onCta={open} />
       </main>
 
       <MontnexusBanner />
       <Footer />
       <FloatingWhatsApp />
     </div>
+  )
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+export default function StartPage() {
+  return (
+    <EnquiryProvider>
+      <PageContent />
+    </EnquiryProvider>
   )
 }
