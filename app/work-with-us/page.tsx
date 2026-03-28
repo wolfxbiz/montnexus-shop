@@ -19,7 +19,7 @@ import {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const WHATSAPP_URL = 'https://wa.me/918197871221'
+const WHATSAPP_URL = 'https://wa.me/918137871221'
 const EMAIL = 'hello@montnexus.com'
 const FONT = "var(--font-eb-garamond), 'EB Garamond', Georgia, serif"
 const HEADING_FONT = "'The Seasons', Georgia, serif"
