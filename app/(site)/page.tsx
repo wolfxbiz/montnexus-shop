@@ -2,11 +2,13 @@ export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 import { Nav } from '@/components/layout/Nav'
+import { AnnouncementBanner } from '@/components/layout/AnnouncementBanner'
 import { Footer } from '@/components/layout/Footer'
 import { Hero } from '@/components/sections/Hero'
 import { ProductGrid } from '@/components/sections/ProductGrid'
 import { HowItWorks } from '@/components/sections/HowItWorks'
 import { CtaBanner } from '@/components/sections/CtaBanner'
+import { WorkWithUsCta } from '@/components/sections/WorkWithUsCta'
 import { Newsletter } from '@/components/sections/Newsletter'
 import { ServiceGrid } from '@/components/sections/ServiceGrid'
 import { ShowcaseFeed } from '@/components/sections/ShowcaseFeed'
@@ -86,6 +88,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <AnnouncementBanner />
       <Nav />
       <main>
         <Hero />
@@ -96,6 +99,7 @@ export default async function HomePage() {
         <FreeSpotlight products={free} viewAllHref="/bundles?free=true" />
         <ShowcaseFeed posts={recentShowcase} label="Community" title="Fresh work from creators" viewAllHref="/showcase" />
         <ArticlesFeed articles={articles.slice(0, 6)} />
+        <WorkWithUsCta />
         <CtaBanner />
         <Newsletter />
       </main>

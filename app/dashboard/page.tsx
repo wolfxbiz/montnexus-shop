@@ -10,12 +10,20 @@ import { createClient } from '@/lib/supabase/client'
 
 type Tab = 'purchases' | 'products' | 'services' | 'showcase' | 'articles' | 'settings'
 
+async function redownload(orderId: string): Promise<string | null> {
+  const res = await fetch(`/api/orders/${orderId}/download`, { method: 'POST' })
+  if (!res.ok) return null
+  const data = await res.json()
+  return data.downloadUrl ?? null
+}
+
 export default function DashboardPage() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const [tab, setTab] = useState<Tab>('purchases')
   const [creator, setCreator] = useState<{ id: string; username: string; display_name: string } | null>(null)
   const [orders, setOrders] = useState<{ id: string; status: string; amount_cents: number; created_at: string; products: { title: string; slug: string } }[]>([])
+  const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const [products, setProducts] = useState<{ id: string; title: string; slug: string; price_cents: number; published: boolean }[]>([])
   const [services, setServices] = useState<{ id: string; title: string; slug: string; published: boolean; category: string }[]>([])
   const [showcasePosts, setShowcasePosts] = useState<{ id: string; caption: string; published: boolean; created_at: string }[]>([])
