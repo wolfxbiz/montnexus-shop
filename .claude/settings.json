@@ -13,7 +13,8 @@
     ],
     "additionalDirectories": [
       "C:\\Users\\vimal\\Montnexus-shop\\montnexus-shop\\app\\api\\articles",
-      "C:\\Users\\vimal\\Montnexus-shop\\montnexus-shop\\app\\api\\articles\\[slug]"
+      "C:\\Users\\vimal\\Montnexus-shop\\montnexus-shop\\app\\api\\articles\\[slug]",
+      "C:\\Users\\vimal\\Montnexus-shop\\montnexus-app\\ios"
     ]
   }
 }

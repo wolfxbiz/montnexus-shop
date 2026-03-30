@@ -45,10 +45,10 @@ const inputStyle: React.CSSProperties = {
   fontSize: '1.05rem',
   width: '100%',
   padding: '11px 14px',
-  backgroundColor: '#FAF8F4',
-  border: '1px solid #E7E2D9',
+  backgroundColor: '#FFFFFF',
+  border: '1px solid #E2E2E2',
   borderRadius: '2px',
-  color: '#1C1917',
+  color: '#111111',
   outline: 'none',
   boxSizing: 'border-box',
   transition: 'border-color 0.15s',
@@ -61,14 +61,14 @@ const labelStyle: React.CSSProperties = {
   fontSize: '0.7rem',
   letterSpacing: '0.13em',
   textTransform: 'uppercase',
-  color: '#57534E',
+  color: '#666666',
   marginBottom: '6px',
 }
 
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
-      <label style={labelStyle}>{label}{required && <span style={{ color: '#C45C1A', marginLeft: 2 }}>*</span>}</label>
+      <label style={labelStyle}>{label}{required && <span style={{ color: '#111111', marginLeft: 2 }}>*</span>}</label>
       {children}
     </div>
   )
@@ -118,9 +118,9 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
       setForm(p => ({ ...p, [key]: e.target.value }))
 
   const focus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    (e.target.style.borderColor = '#1B2A4A')
+    (e.target.style.borderColor = '#111111')
   const blur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    (e.target.style.borderColor = '#E7E2D9')
+    (e.target.style.borderColor = '#E2E2E2')
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -158,7 +158,7 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
               onClick={close}
               style={{
                 position: 'fixed', inset: 0, zIndex: 200,
-                backgroundColor: 'rgba(28,25,23,0.55)',
+                backgroundColor: 'rgba(0,0,0,0.55)',
                 backdropFilter: 'blur(4px)',
               }}
             />
@@ -177,9 +177,9 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                 zIndex: 201,
                 width: 'min(600px, calc(100vw - 32px))',
                 maxHeight: 'calc(100vh - 48px)',
-                backgroundColor: '#FAF8F4',
+                backgroundColor: '#FFFFFF',
                 borderRadius: '4px',
-                boxShadow: '0 24px 80px rgba(28,25,23,0.22)',
+                boxShadow: '0 24px 80px rgba(0,0,0,0.18)',
                 display: 'flex',
                 flexDirection: 'column',
                 overflow: 'hidden',
@@ -189,7 +189,7 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
               <div
                 style={{
                   padding: '28px 32px 24px',
-                  borderBottom: '1px solid #E7E2D9',
+                  borderBottom: '1px solid #E2E2E2',
                   display: 'flex',
                   alignItems: 'flex-start',
                   justifyContent: 'space-between',
@@ -202,14 +202,14 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                       fontFamily: HEADING_FONT,
                       fontWeight: 400,
                       fontSize: '1.75rem',
-                      color: '#1B2A4A',
+                      color: '#111111',
                       lineHeight: 1.2,
                       marginBottom: '6px',
                     }}
                   >
                     Tell Us About Your Project
                   </h2>
-                  <p style={{ fontFamily: FONT, fontSize: '1rem', color: '#57534E', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: FONT, fontSize: '1rem', color: '#666666', lineHeight: 1.7 }}>
                     We&apos;ll get back to you within 4 hours.
                   </p>
                 </div>
@@ -218,11 +218,11 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                   aria-label="Close"
                   style={{
                     background: 'none', border: 'none', cursor: 'pointer',
-                    padding: '4px', color: '#57534E', flexShrink: 0,
+                    padding: '4px', color: '#666666', flexShrink: 0,
                     transition: 'color 0.15s',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#1B2A4A')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#57534E')}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#111111')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = '#666666')}
                 >
                   <X size={20} />
                 </button>
@@ -239,22 +239,22 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                     <div
                       style={{
                         width: 56, height: 56, borderRadius: '50%',
-                        backgroundColor: 'rgba(26,127,90,0.1)',
+                        backgroundColor: 'rgba(0,0,0,0.07)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         margin: '0 auto 20px',
                       }}
                     >
-                      <Check size={24} color="#1A7F5A" />
+                      <Check size={24} color="#111111" />
                     </div>
                     <h3
                       style={{
                         fontFamily: HEADING_FONT, fontWeight: 400,
-                        fontSize: '1.5rem', color: '#1B2A4A', marginBottom: '10px',
+                        fontSize: '1.5rem', color: '#111111', marginBottom: '10px',
                       }}
                     >
                       Enquiry Received
                     </h3>
-                    <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#57534E', lineHeight: 1.8 }}>
+                    <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#666666', lineHeight: 1.8 }}>
                       Thank you. We will review your project and be in touch within 4 hours.
                     </p>
                     <button
@@ -262,7 +262,7 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                       style={{
                         marginTop: '28px',
                         fontFamily: FONT, fontWeight: 600, fontSize: '1rem',
-                        backgroundColor: '#1B2A4A', color: '#FAF8F4',
+                        backgroundColor: '#111111', color: '#FFFFFF',
                         border: 'none', borderRadius: '2px',
                         padding: '12px 32px', cursor: 'pointer',
                       }}
@@ -323,7 +323,7 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                     </Field>
 
                     {error && (
-                      <p style={{ fontFamily: FONT, fontSize: '0.95rem', color: '#C45C1A' }}>{error}</p>
+                      <p style={{ fontFamily: FONT, fontSize: '0.95rem', color: '#111111' }}>{error}</p>
                     )}
 
                     <button
@@ -331,21 +331,21 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                       disabled={loading}
                       style={{
                         fontFamily: FONT, fontWeight: 600, fontSize: '1.1rem',
-                        backgroundColor: loading ? '#a04a14' : '#C45C1A',
-                        color: '#FAF8F4', border: 'none', borderRadius: '2px',
+                        backgroundColor: loading ? '#333333' : '#111111',
+                        color: '#FFFFFF', border: 'none', borderRadius: '2px',
                         padding: '14px 24px', cursor: loading ? 'not-allowed' : 'pointer',
                         transition: 'background-color 0.18s', width: '100%',
                       }}
-                      onMouseEnter={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#a04a14' }}
-                      onMouseLeave={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#C45C1A' }}
+                      onMouseEnter={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#333333' }}
+                      onMouseLeave={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#111111' }}
                     >
                       {loading ? 'Sending…' : 'Send My Project Details →'}
                     </button>
 
-                    <p style={{ fontFamily: FONT, fontSize: '0.88rem', color: '#57534E', textAlign: 'center' }}>
+                    <p style={{ fontFamily: FONT, fontSize: '0.88rem', color: '#666666', textAlign: 'center' }}>
                       Or reach us directly on{' '}
                       <a href="https://wa.me/918137871221" target="_blank" rel="noopener noreferrer"
-                        style={{ color: '#1A7F5A', textDecoration: 'none' }}>
+                        style={{ color: '#111111', textDecoration: 'none' }}>
                         WhatsApp
                       </a>
                     </p>

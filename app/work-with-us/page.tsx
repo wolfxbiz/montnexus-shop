@@ -401,7 +401,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
     <h2
       style={{
         fontFamily: HEADING_FONT,
-        color: '#1B2A4A',
+        color: '#111111',
         fontSize: 'clamp(2rem, 4vw, 3.25rem)',
         fontWeight: 400,
         lineHeight: 1.2,
@@ -419,7 +419,7 @@ function Divider() {
       style={{
         height: '1px',
         width: '72px',
-        backgroundColor: '#E7E2D9',
+        backgroundColor: '#E2E2E2',
         marginTop: '20px',
         marginBottom: '48px',
       }}
@@ -435,8 +435,8 @@ function PopularBadge() {
         top: '-13px',
         left: '50%',
         transform: 'translateX(-50%)',
-        backgroundColor: '#C45C1A',
-        color: '#FAF8F4',
+        backgroundColor: '#111111',
+        color: '#FFFFFF',
         fontFamily: FONT,
         fontSize: '0.78rem',
         fontWeight: 600,
@@ -499,9 +499,9 @@ function StickyNav({ onCta }: { onCta: () => void }) {
         left: 0,
         right: 0,
         zIndex: 50,
-        backgroundColor: scrolled ? '#FAF8F4' : 'transparent',
-        borderBottom: scrolled ? '1px solid #E7E2D9' : '1px solid transparent',
-        boxShadow: scrolled ? '0 2px 20px rgba(28,25,23,0.06)' : 'none',
+        backgroundColor: scrolled ? '#FFFFFF' : 'transparent',
+        borderBottom: scrolled ? '1px solid #E2E2E2' : '1px solid transparent',
+        boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.05)' : 'none',
         padding: '14px 24px',
         transition: 'background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
       }}
@@ -533,15 +533,15 @@ function StickyNav({ onCta }: { onCta: () => void }) {
               style={{
                 fontFamily: FONT,
                 fontSize: '1.05rem',
-                color: '#1B2A4A',
+                color: '#111111',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
                 padding: '0',
                 transition: 'color 0.15s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#C45C1A')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#1B2A4A')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#111111')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#111111')}
             >
               {link.label}
             </button>
@@ -554,16 +554,16 @@ function StickyNav({ onCta }: { onCta: () => void }) {
             fontFamily: FONT,
             fontWeight: 600,
             fontSize: '1rem',
-            backgroundColor: '#C45C1A',
-            color: '#FAF8F4',
+            backgroundColor: '#111111',
+            color: '#FFFFFF',
             border: 'none',
             borderRadius: '2px',
             padding: '8px 20px',
             cursor: 'pointer',
             transition: 'background-color 0.15s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a04a14')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C45C1A')}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#333333')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#111111')}
           aria-label="Contact"
         >
           Let&apos;s Talk
@@ -588,7 +588,7 @@ function Hero({ onCta }: { onCta: () => void }) {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '136px 24px 96px',
-        backgroundColor: '#FAF8F4',
+        backgroundColor: '#FFFFFF',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -600,7 +600,7 @@ function Hero({ onCta }: { onCta: () => void }) {
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse 90% 70% at 50% 40%, rgba(27,42,74,0.045) 0%, transparent 68%)',
+            'radial-gradient(ellipse 90% 70% at 50% 40%, rgba(0,0,0,0.03) 0%, transparent 68%)',
           pointerEvents: 'none',
         }}
       />
@@ -625,7 +625,7 @@ function Hero({ onCta }: { onCta: () => void }) {
           height: '400px',
           borderRadius: '50%',
           background:
-            'radial-gradient(ellipse, rgba(196,92,26,0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse, rgba(0,0,0,0.04) 0%, transparent 70%)',
           top: '20%',
           left: '50%',
           transform: 'translateX(-50%)',
@@ -652,7 +652,7 @@ function Hero({ onCta }: { onCta: () => void }) {
             fontWeight: 400,
             lineHeight: 1.13,
             letterSpacing: '0.01em',
-            color: '#1B2A4A',
+            color: '#111111',
             fontSize: 'clamp(2.6rem, 6vw, 5rem)',
             marginBottom: '32px',
           }}
@@ -682,7 +682,7 @@ function Hero({ onCta }: { onCta: () => void }) {
           style={{
             fontFamily: FONT,
             fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)',
-            color: '#57534E',
+            color: '#666666',
             lineHeight: 1.8,
             maxWidth: '640px',
             margin: '0 auto 44px',
@@ -711,16 +711,16 @@ function Hero({ onCta }: { onCta: () => void }) {
               fontFamily: FONT,
               fontWeight: 600,
               fontSize: '1.15rem',
-              backgroundColor: '#C45C1A',
-              color: '#FAF8F4',
+              backgroundColor: '#111111',
+              color: '#FFFFFF',
               border: 'none',
               borderRadius: '2px',
               padding: '14px 36px',
               cursor: 'pointer',
               transition: 'background-color 0.18s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a04a14')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C45C1A')}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#333333')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#111111')}
             aria-label="Get a Free Quote"
           >
             Get a Free Quote
@@ -732,16 +732,16 @@ function Hero({ onCta }: { onCta: () => void }) {
               fontFamily: FONT,
               fontWeight: 600,
               fontSize: '1.15rem',
-              backgroundColor: '#1B2A4A',
-              color: '#FAF8F4',
+              backgroundColor: '#111111',
+              color: '#FFFFFF',
               border: 'none',
               borderRadius: '2px',
               padding: '14px 36px',
               cursor: 'pointer',
               transition: 'background-color 0.18s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#253d6b')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1B2A4A')}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#333333')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#111111')}
             aria-label="See Our Services"
           >
             See Our Services
@@ -756,8 +756,8 @@ function Hero({ onCta }: { onCta: () => void }) {
               fontWeight: 600,
               fontSize: '1.15rem',
               backgroundColor: 'transparent',
-              color: '#1B2A4A',
-              border: '2px solid #1B2A4A',
+              color: '#111111',
+              border: '2px solid #111111',
               borderRadius: '2px',
               padding: '12px 36px',
               cursor: 'pointer',
@@ -766,12 +766,12 @@ function Hero({ onCta }: { onCta: () => void }) {
               transition: 'background-color 0.18s, color 0.18s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#1B2A4A'
-              e.currentTarget.style.color = '#FAF8F4'
+              e.currentTarget.style.backgroundColor = '#111111'
+              e.currentTarget.style.color = '#FFFFFF'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent'
-              e.currentTarget.style.color = '#1B2A4A'
+              e.currentTarget.style.color = '#111111'
             }}
             aria-label="Let's Talk on WhatsApp"
           >
@@ -797,14 +797,14 @@ function SocialProofBar() {
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 1 }}
-      style={{ backgroundColor: '#F3F0EA', padding: '22px 24px' }}
+      style={{ backgroundColor: '#F5F5F5', padding: '22px 24px' }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
         <p
           style={{
             fontFamily: FONT,
             fontSize: '1.1rem',
-            color: '#57534E',
+            color: '#666666',
             lineHeight: 1.9,
           }}
         >
@@ -827,7 +827,7 @@ function ServicesSection() {
   return (
     <section
       id="services"
-      style={{ backgroundColor: '#FAF8F4', padding: '96px 24px' }}
+      style={{ backgroundColor: '#FFFFFF', padding: '96px 24px' }}
     >
       <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
         <FadeInView>
@@ -849,24 +849,24 @@ function ServicesSection() {
                 <div
                   style={{
                     backgroundColor: '#FFFFFF',
-                    border: '1px solid #E7E2D9',
-                    borderLeft: '1px solid #E7E2D9',
+                    border: '1px solid #E2E2E2',
+                    borderLeft: '1px solid #E2E2E2',
                     borderRadius: '2px',
                     padding: '32px',
-                    boxShadow: '0 2px 20px rgba(28,25,23,0.06)',
+                    boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
                     transition: 'box-shadow 0.25s, transform 0.25s, border-left 0.2s',
                     cursor: 'default',
                     height: '100%',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 10px 40px rgba(28,25,23,0.13)'
+                    e.currentTarget.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)'
                     e.currentTarget.style.transform = 'translateY(-3px)'
-                    e.currentTarget.style.borderLeft = '3px solid #1B2A4A'
+                    e.currentTarget.style.borderLeft = '3px solid #111111'
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '0 2px 20px rgba(28,25,23,0.06)'
+                    e.currentTarget.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)'
                     e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.borderLeft = '1px solid #E7E2D9'
+                    e.currentTarget.style.borderLeft = '1px solid #E2E2E2'
                   }}
                 >
                   <div
@@ -880,22 +880,22 @@ function ServicesSection() {
                     <div
                       style={{
                         padding: '10px',
-                        backgroundColor: 'rgba(27,42,74,0.07)',
+                        backgroundColor: 'rgba(0,0,0,0.07)',
                         borderRadius: '2px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                       }}
                     >
-                      <Icon size={22} color="#1B2A4A" />
+                      <Icon size={22} color="#111111" />
                     </div>
                     <span
                       style={{
                         fontFamily: FONT,
                         fontWeight: 600,
                         fontSize: '0.88rem',
-                        backgroundColor: '#C45C1A',
-                        color: '#FAF8F4',
+                        backgroundColor: '#111111',
+                        color: '#FFFFFF',
                         padding: '4px 12px',
                         borderRadius: '2px',
                       }}
@@ -909,7 +909,7 @@ function ServicesSection() {
                       fontFamily: HEADING_FONT,
                       fontWeight: 400,
                       fontSize: '1.5rem',
-                      color: '#1B2A4A',
+                      color: '#111111',
                       marginBottom: '16px',
                       letterSpacing: '0.01em',
                     }}
@@ -927,11 +927,11 @@ function ServicesSection() {
                           gap: '10px',
                           fontFamily: FONT,
                           fontSize: '1.05rem',
-                          color: '#57534E',
+                          color: '#666666',
                           lineHeight: 1.75,
                         }}
                       >
-                        <Check size={15} color="#1A7F5A" style={{ flexShrink: 0, marginTop: '4px' }} />
+                        <Check size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
                         {feat}
                       </li>
                     ))}
@@ -952,7 +952,7 @@ function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      style={{ backgroundColor: '#F3F0EA', padding: '96px 24px' }}
+      style={{ backgroundColor: '#F5F5F5', padding: '96px 24px' }}
     >
       <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
         <FadeInView>
@@ -984,7 +984,7 @@ function HowItWorksSection() {
                       fontWeight: 700,
                       fontSize: '6.5rem',
                       lineHeight: 1,
-                      color: '#1B2A4A',
+                      color: '#111111',
                       opacity: 0.06,
                       userSelect: 'none',
                       pointerEvents: 'none',
@@ -1004,13 +1004,13 @@ function HowItWorksSection() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       backgroundColor: '#FFFFFF',
-                      border: '1px solid #E7E2D9',
+                      border: '1px solid #E2E2E2',
                       borderRadius: '2px',
-                      boxShadow: '0 2px 12px rgba(28,25,23,0.06)',
+                      boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
                       marginBottom: '16px',
                     }}
                   >
-                    <Icon size={22} color="#1B2A4A" />
+                    <Icon size={22} color="#111111" />
                   </div>
 
                   <h3
@@ -1020,7 +1020,7 @@ function HowItWorksSection() {
                       fontFamily: HEADING_FONT,
                       fontWeight: 400,
                       fontSize: '1.25rem',
-                      color: '#1B2A4A',
+                      color: '#111111',
                       marginBottom: '10px',
                       letterSpacing: '0.01em',
                     }}
@@ -1033,7 +1033,7 @@ function HowItWorksSection() {
                       zIndex: 1,
                       fontFamily: FONT,
                       fontSize: '1.05rem',
-                      color: '#57534E',
+                      color: '#666666',
                       lineHeight: 1.8,
                     }}
                   >
@@ -1055,7 +1055,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
   return (
     <section
       id="pricing"
-      style={{ backgroundColor: '#FAF8F4', padding: '96px 24px' }}
+      style={{ backgroundColor: '#FFFFFF', padding: '96px 24px' }}
     >
       <style>{`
         .pricing-grid {
@@ -1079,7 +1079,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
             style={{
               fontFamily: FONT,
               fontSize: '1.15rem',
-              color: '#57534E',
+              color: '#666666',
               lineHeight: 1.8,
               marginTop: '12px',
             }}
@@ -1096,13 +1096,13 @@ function PricingSection({ onCta }: { onCta: () => void }) {
               <div
                 style={{
                   position: 'relative',
-                  backgroundColor: tier.popular ? '#F5F7FC' : '#FFFFFF',
-                  border: tier.popular ? '2px solid #1B2A4A' : '1px solid #E7E2D9',
+                  backgroundColor: tier.popular ? '#F5F5F5' : '#FFFFFF',
+                  border: tier.popular ? '2px solid #111111' : '1px solid #E2E2E2',
                   borderRadius: '4px',
                   padding: '32px 28px',
                   paddingTop: tier.popular ? '44px' : '32px',
                   boxShadow: tier.popular
-                    ? '0 8px 32px rgba(27,42,74,0.12)'
+                    ? '0 8px 32px rgba(0,0,0,0.1)'
                     : '0 2px 16px rgba(28,25,23,0.05)',
                   display: 'flex',
                   flexDirection: 'column',
@@ -1120,7 +1120,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                     fontSize: '0.72rem',
                     letterSpacing: '0.16em',
                     textTransform: 'uppercase',
-                    color: tier.popular ? '#1B2A4A' : '#C45C1A',
+                    color: tier.popular ? '#111111' : '#111111',
                     marginBottom: '16px',
                   }}
                 >
@@ -1136,7 +1136,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                         fontFamily: HEADING_FONT,
                         fontWeight: 400,
                         fontSize: idx === 0 ? '1.55rem' : '1.15rem',
-                        color: idx === 0 ? '#1B2A4A' : '#57534E',
+                        color: idx === 0 ? '#111111' : '#666666',
                         lineHeight: 1.3,
                       }}
                     >
@@ -1150,7 +1150,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                   style={{
                     fontFamily: FONT,
                     fontSize: '0.95rem',
-                    color: '#57534E',
+                    color: '#666666',
                     marginBottom: '4px',
                   }}
                 >
@@ -1161,10 +1161,10 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                     fontFamily: FONT,
                     fontWeight: 600,
                     fontSize: '0.82rem',
-                    color: '#C45C1A',
+                    color: '#111111',
                     marginBottom: '24px',
                     paddingBottom: '24px',
-                    borderBottom: '1px solid #E7E2D9',
+                    borderBottom: '1px solid #E2E2E2',
                   }}
                 >
                   {tier.timeline}
@@ -1191,11 +1191,11 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                         gap: '10px',
                         fontFamily: FONT,
                         fontSize: '0.98rem',
-                        color: '#57534E',
+                        color: '#666666',
                         lineHeight: 1.7,
                       }}
                     >
-                      <Check size={13} color="#1A7F5A" style={{ flexShrink: 0, marginTop: '5px' }} />
+                      <Check size={13} color="#111111" style={{ flexShrink: 0, marginTop: '5px' }} />
                       {f}
                     </li>
                   ))}
@@ -1209,9 +1209,9 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                     fontFamily: FONT,
                     fontWeight: 600,
                     fontSize: '0.98rem',
-                    backgroundColor: tier.popular ? '#1B2A4A' : 'transparent',
-                    color: tier.popular ? '#FAF8F4' : '#1B2A4A',
-                    border: '1.5px solid #1B2A4A',
+                    backgroundColor: tier.popular ? '#111111' : 'transparent',
+                    color: tier.popular ? '#FFFFFF' : '#111111',
+                    border: '1.5px solid #111111',
                     borderRadius: '2px',
                     padding: '12px 20px',
                     cursor: 'pointer',
@@ -1220,12 +1220,12 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                     letterSpacing: '0.02em',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#1B2A4A'
-                    e.currentTarget.style.color = '#FAF8F4'
+                    e.currentTarget.style.backgroundColor = '#111111'
+                    e.currentTarget.style.color = '#FFFFFF'
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = tier.popular ? '#1B2A4A' : 'transparent'
-                    e.currentTarget.style.color = tier.popular ? '#FAF8F4' : '#1B2A4A'
+                    e.currentTarget.style.backgroundColor = tier.popular ? '#111111' : 'transparent'
+                    e.currentTarget.style.color = tier.popular ? '#FFFFFF' : '#111111'
                   }}
                 >
                   Get Started
@@ -1240,7 +1240,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
             style={{
               fontFamily: FONT,
               fontSize: '0.95rem',
-              color: '#57534E',
+              color: '#666666',
               textAlign: 'center',
               marginTop: '36px',
             }}
@@ -1257,7 +1257,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
 
 function WhyMeSection() {
   return (
-    <section style={{ backgroundColor: '#F3F0EA', padding: '96px 24px' }}>
+    <section style={{ backgroundColor: '#F5F5F5', padding: '96px 24px' }}>
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
         <FadeInView>
           <SectionTitle>Why Work With Us Over a Larger Agency?</SectionTitle>
@@ -1269,7 +1269,7 @@ function WhyMeSection() {
             style={{
               borderRadius: '2px',
               overflow: 'hidden',
-              border: '1px solid #E7E2D9',
+              border: '1px solid #E2E2E2',
             }}
           >
             {/* Header row */}
@@ -1287,8 +1287,8 @@ function WhyMeSection() {
                   fontFamily: FONT,
                   fontWeight: 700,
                   fontSize: '1.1rem',
-                  color: '#1A7F5A',
-                  borderLeft: '1px solid #E7E2D9',
+                  color: '#111111',
+                  borderLeft: '1px solid #E2E2E2',
                 }}
               >
                 Working with us
@@ -1299,8 +1299,8 @@ function WhyMeSection() {
                   fontFamily: FONT,
                   fontWeight: 700,
                   fontSize: '1.1rem',
-                  color: '#57534E',
-                  borderLeft: '1px solid #E7E2D9',
+                  color: '#666666',
+                  borderLeft: '1px solid #E2E2E2',
                 }}
               >
                 Large agency
@@ -1313,8 +1313,8 @@ function WhyMeSection() {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 2fr 2fr',
-                  borderTop: '1px solid #E7E2D9',
-                  backgroundColor: i % 2 === 0 ? '#FFFFFF' : '#FAF8F4',
+                  borderTop: '1px solid #E2E2E2',
+                  backgroundColor: i % 2 === 0 ? '#FFFFFF' : '#FFFFFF',
                 }}
               >
                 <div
@@ -1323,7 +1323,7 @@ function WhyMeSection() {
                     fontFamily: FONT,
                     fontWeight: 600,
                     fontSize: '0.95rem',
-                    color: '#1B2A4A',
+                    color: '#111111',
                     display: 'flex',
                     alignItems: 'center',
                   }}
@@ -1335,15 +1335,15 @@ function WhyMeSection() {
                     padding: '14px 20px',
                     fontFamily: FONT,
                     fontSize: '1rem',
-                    color: '#57534E',
+                    color: '#666666',
                     lineHeight: 1.75,
-                    borderLeft: '1px solid #E7E2D9',
+                    borderLeft: '1px solid #E2E2E2',
                     display: 'flex',
                     alignItems: 'flex-start',
                     gap: '10px',
                   }}
                 >
-                  <Check size={15} color="#1A7F5A" style={{ flexShrink: 0, marginTop: '4px' }} />
+                  <Check size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
                   {row.me}
                 </div>
                 <div
@@ -1351,15 +1351,15 @@ function WhyMeSection() {
                     padding: '14px 20px',
                     fontFamily: FONT,
                     fontSize: '1rem',
-                    color: '#57534E',
+                    color: '#666666',
                     lineHeight: 1.75,
-                    borderLeft: '1px solid #E7E2D9',
+                    borderLeft: '1px solid #E2E2E2',
                     display: 'flex',
                     alignItems: 'flex-start',
                     gap: '10px',
                   }}
                 >
-                  <X size={15} color="#C45C1A" style={{ flexShrink: 0, marginTop: '4px' }} />
+                  <X size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
                   {row.agency}
                 </div>
               </div>
@@ -1372,7 +1372,7 @@ function WhyMeSection() {
           <div
             style={{
               marginTop: '28px',
-              backgroundColor: '#1B2A4A',
+              backgroundColor: '#111111',
               borderRadius: '2px',
               padding: '40px 44px',
               textAlign: 'center',
@@ -1383,7 +1383,7 @@ function WhyMeSection() {
                 fontFamily: FONT,
                 fontWeight: 500,
                 fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)',
-                color: '#FAF8F4',
+                color: '#FFFFFF',
                 lineHeight: 1.7,
               }}
             >
@@ -1401,7 +1401,7 @@ function WhyMeSection() {
 
 function TestimonialsSection() {
   return (
-    <section style={{ backgroundColor: '#FAF8F4', padding: '96px 24px' }}>
+    <section style={{ backgroundColor: '#FFFFFF', padding: '96px 24px' }}>
       <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
         <FadeInView>
           <SectionTitle>What Clients Say</SectionTitle>
@@ -1421,10 +1421,10 @@ function TestimonialsSection() {
                 style={{
                   position: 'relative',
                   backgroundColor: '#FFFFFF',
-                  border: '1px solid #E7E2D9',
+                  border: '1px solid #E2E2E2',
                   borderRadius: '2px',
                   padding: '36px 32px',
-                  boxShadow: '0 2px 20px rgba(28,25,23,0.06)',
+                  boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
                   display: 'flex',
                   flexDirection: 'column',
                   overflow: 'hidden',
@@ -1441,7 +1441,7 @@ function TestimonialsSection() {
                     fontSize: '9rem',
                     fontWeight: 700,
                     lineHeight: 1,
-                    color: '#1B2A4A',
+                    color: '#111111',
                     opacity: 0.045,
                     userSelect: 'none',
                     pointerEvents: 'none',
@@ -1453,7 +1453,7 @@ function TestimonialsSection() {
                 {/* Stars */}
                 <div style={{ display: 'flex', gap: '3px', marginBottom: '18px' }}>
                   {[...Array(5)].map((_, j) => (
-                    <span key={j} style={{ color: '#C45C1A', fontSize: '1.1rem' }}>
+                    <span key={j} style={{ color: '#111111', fontSize: '1.1rem' }}>
                       ★
                     </span>
                   ))}
@@ -1463,7 +1463,7 @@ function TestimonialsSection() {
                   style={{
                     fontFamily: FONT,
                     fontSize: '1.1rem',
-                    color: '#1C1917',
+                    color: '#111111',
                     lineHeight: 1.8,
                     flexGrow: 1,
                     marginBottom: '24px',
@@ -1478,7 +1478,7 @@ function TestimonialsSection() {
                       fontFamily: FONT,
                       fontWeight: 700,
                       fontSize: '1.05rem',
-                      color: '#1B2A4A',
+                      color: '#111111',
                     }}
                   >
                     {t.author}
@@ -1487,7 +1487,7 @@ function TestimonialsSection() {
                     style={{
                       fontFamily: FONT,
                       fontSize: '0.95rem',
-                      color: '#57534E',
+                      color: '#666666',
                     }}
                   >
                     {t.role}
@@ -1506,7 +1506,7 @@ function TestimonialsSection() {
 
 function RetainersSection({ onCta }: { onCta: () => void }) {
   return (
-    <section style={{ backgroundColor: '#F3F0EA', padding: '96px 24px' }}>
+    <section style={{ backgroundColor: '#F5F5F5', padding: '96px 24px' }}>
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
         <FadeInView>
           <SectionTitle>Stay Protected After Launch</SectionTitle>
@@ -1514,7 +1514,7 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
             style={{
               fontFamily: FONT,
               fontSize: '1.15rem',
-              color: '#57534E',
+              color: '#666666',
               lineHeight: 1.8,
               marginTop: '12px',
             }}
@@ -1538,10 +1538,10 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
                 style={{
                   position: 'relative',
                   backgroundColor: '#FFFFFF',
-                  border: plan.popular ? '2px solid #1B2A4A' : '1px solid #E7E2D9',
+                  border: plan.popular ? '2px solid #111111' : '1px solid #E2E2E2',
                   borderRadius: '2px',
                   padding: '32px',
-                  boxShadow: '0 2px 20px rgba(28,25,23,0.06)',
+                  boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
                   display: 'flex',
                   flexDirection: 'column',
                 }}
@@ -1555,7 +1555,7 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
                     fontSize: '0.78rem',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    color: '#C45C1A',
+                    color: '#111111',
                     marginBottom: '8px',
                     marginTop: plan.popular ? '8px' : '0',
                   }}
@@ -1568,7 +1568,7 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
                     fontFamily: FONT,
                     fontWeight: 700,
                     fontSize: '1.6rem',
-                    color: '#1B2A4A',
+                    color: '#111111',
                     marginBottom: '4px',
                     letterSpacing: '0.01em',
                   }}
@@ -1580,7 +1580,7 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
                   style={{
                     fontFamily: FONT,
                     fontSize: '1rem',
-                    color: '#57534E',
+                    color: '#666666',
                     marginBottom: '24px',
                   }}
                 >
@@ -1606,11 +1606,11 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
                         gap: '10px',
                         fontFamily: FONT,
                         fontSize: '1.02rem',
-                        color: '#57534E',
+                        color: '#666666',
                         lineHeight: 1.75,
                       }}
                     >
-                      <Check size={14} color="#1A7F5A" style={{ flexShrink: 0, marginTop: '5px' }} />
+                      <Check size={14} color="#111111" style={{ flexShrink: 0, marginTop: '5px' }} />
                       {f}
                     </li>
                   ))}
@@ -1623,9 +1623,9 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
                     fontFamily: FONT,
                     fontWeight: 600,
                     fontSize: '1rem',
-                    backgroundColor: plan.popular ? '#1B2A4A' : 'transparent',
-                    color: plan.popular ? '#FAF8F4' : '#1B2A4A',
-                    border: '2px solid #1B2A4A',
+                    backgroundColor: plan.popular ? '#111111' : 'transparent',
+                    color: plan.popular ? '#FFFFFF' : '#111111',
+                    border: '2px solid #111111',
                     borderRadius: '2px',
                     padding: '11px 20px',
                     cursor: 'pointer',
@@ -1633,12 +1633,12 @@ function RetainersSection({ onCta }: { onCta: () => void }) {
                     width: '100%',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#1B2A4A'
-                    e.currentTarget.style.color = '#FAF8F4'
+                    e.currentTarget.style.backgroundColor = '#111111'
+                    e.currentTarget.style.color = '#FFFFFF'
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = plan.popular ? '#1B2A4A' : 'transparent'
-                    e.currentTarget.style.color = plan.popular ? '#FAF8F4' : '#1B2A4A'
+                    e.currentTarget.style.backgroundColor = plan.popular ? '#111111' : 'transparent'
+                    e.currentTarget.style.color = plan.popular ? '#FFFFFF' : '#111111'
                   }}
                 >
                   Get Started
@@ -1660,7 +1660,7 @@ function FAQSection() {
   return (
     <section
       id="faq"
-      style={{ backgroundColor: '#FAF8F4', padding: '96px 24px' }}
+      style={{ backgroundColor: '#FFFFFF', padding: '96px 24px' }}
     >
       <div style={{ maxWidth: '760px', margin: '0 auto' }}>
         <FadeInView>
@@ -1671,7 +1671,7 @@ function FAQSection() {
         <div>
           {faqs.map((faq, i) => (
             <FadeInView key={i} delay={i * 0.05}>
-              <div style={{ borderBottom: '1px solid #E7E2D9' }}>
+              <div style={{ borderBottom: '1px solid #E2E2E2' }}>
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   aria-expanded={openIndex === i}
@@ -1694,7 +1694,7 @@ function FAQSection() {
                       fontFamily: FONT,
                       fontWeight: 600,
                       fontSize: '1.15rem',
-                      color: '#1B2A4A',
+                      color: '#111111',
                       lineHeight: 1.5,
                     }}
                   >
@@ -1705,7 +1705,7 @@ function FAQSection() {
                     transition={{ duration: 0.28, ease: 'easeInOut' }}
                     style={{ flexShrink: 0 }}
                   >
-                    <ChevronDown size={20} color="#1B2A4A" />
+                    <ChevronDown size={20} color="#111111" />
                   </motion.div>
                 </button>
 
@@ -1723,7 +1723,7 @@ function FAQSection() {
                         style={{
                           fontFamily: FONT,
                           fontSize: '1.08rem',
-                          color: '#57534E',
+                          color: '#666666',
                           lineHeight: 1.85,
                           paddingBottom: '22px',
                         }}
@@ -1747,9 +1747,9 @@ function FAQSection() {
 const inputBaseStyle: React.CSSProperties = {
   fontFamily: FONT,
   fontSize: '1.1rem',
-  backgroundColor: '#FAF8F4',
-  border: '1px solid #E7E2D9',
-  color: '#1C1917',
+  backgroundColor: '#FFFFFF',
+  border: '1px solid #E2E2E2',
+  color: '#111111',
   padding: '12px 16px',
   borderRadius: '2px',
   width: '100%',
@@ -1766,7 +1766,7 @@ const labelStyle: React.CSSProperties = {
   fontSize: '0.72rem',
   letterSpacing: '0.13em',
   textTransform: 'uppercase',
-  color: '#57534E',
+  color: '#666666',
   marginBottom: '6px',
 }
 
@@ -1774,12 +1774,12 @@ function ContactSection({ onCta }: { onCta: () => void }) {
   return (
     <section
       id="contact"
-      style={{ backgroundColor: '#F3F0EA', padding: '96px 24px' }}
+      style={{ backgroundColor: '#F5F5F5', padding: '96px 24px' }}
     >
       <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
         <FadeInView>
           <SectionTitle>Let&apos;s Build Something Together</SectionTitle>
-          <p style={{ fontFamily: FONT, fontSize: '1.15rem', color: '#57534E', lineHeight: 1.8, marginTop: '12px' }}>
+          <p style={{ fontFamily: FONT, fontSize: '1.15rem', color: '#666666', lineHeight: 1.8, marginTop: '12px' }}>
             Share your project details and we will get back to you within 4 hours.
           </p>
           <Divider />
@@ -1791,12 +1791,12 @@ function ContactSection({ onCta }: { onCta: () => void }) {
               onClick={onCta}
               style={{
                 fontFamily: FONT, fontWeight: 600, fontSize: '1.15rem',
-                backgroundColor: '#C45C1A', color: '#FAF8F4',
+                backgroundColor: '#111111', color: '#FFFFFF',
                 border: 'none', borderRadius: '2px', padding: '15px 40px',
                 cursor: 'pointer', transition: 'background-color 0.18s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a04a14')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#C45C1A')}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#333333')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#111111')}
             >
               Send Us Your Project Details →
             </button>
@@ -1820,21 +1820,21 @@ function ContactSection({ onCta }: { onCta: () => void }) {
         <FadeInView delay={0.2}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', justifyContent: 'center' }}>
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#57534E', marginBottom: '6px' }}>Email</p>
-              <a href={`mailto:${EMAIL}`} style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#2E5FA3', textDecoration: 'none' }}
+              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#666666', marginBottom: '6px' }}>Email</p>
+              <a href={`mailto:${EMAIL}`} style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#111111', textDecoration: 'none' }}
                 onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
                 onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
               >{EMAIL}</a>
             </div>
-            <div style={{ width: '1px', backgroundColor: '#E7E2D9' }} />
+            <div style={{ width: '1px', backgroundColor: '#E2E2E2' }} />
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#57534E', marginBottom: '6px' }}>Response time</p>
-              <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#1B2A4A' }}>⚡ Under 4 hours</p>
+              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#666666', marginBottom: '6px' }}>Response time</p>
+              <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#111111' }}>⚡ Under 4 hours</p>
             </div>
-            <div style={{ width: '1px', backgroundColor: '#E7E2D9' }} />
+            <div style={{ width: '1px', backgroundColor: '#E2E2E2' }} />
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#57534E', marginBottom: '6px' }}>Availability</p>
-              <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#1B2A4A' }}>Mon–Sat, 9am–9pm GMT+5:30</p>
+              <p style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.72rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: '#666666', marginBottom: '6px' }}>Availability</p>
+              <p style={{ fontFamily: FONT, fontSize: '1.05rem', color: '#111111' }}>Mon–Sat, 9am–9pm GMT+5:30</p>
             </div>
           </div>
         </FadeInView>
@@ -1855,7 +1855,7 @@ function Footer() {
   ]
 
   return (
-    <footer style={{ backgroundColor: '#1B2A4A', padding: '48px 24px 32px' }}>
+    <footer style={{ backgroundColor: '#111111', padding: '48px 24px 32px' }}>
       <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
         <div
           style={{
@@ -1863,7 +1863,7 @@ function Footer() {
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
             gap: '32px',
             paddingBottom: '32px',
-            borderBottom: '1px solid rgba(250,248,244,0.12)',
+            borderBottom: '1px solid rgba(255,255,255,0.12)',
             alignItems: 'center',
           }}
         >
@@ -1871,7 +1871,7 @@ function Footer() {
             style={{
               fontFamily: FONT,
               fontSize: '1.15rem',
-              color: '#FAF8F4',
+              color: '#FFFFFF',
               lineHeight: 1.7,
             }}
           >
@@ -1894,16 +1894,16 @@ function Footer() {
                 style={{
                   fontFamily: FONT,
                   fontSize: '1rem',
-                  color: 'rgba(250,248,244,0.65)',
+                  color: 'rgba(255,255,255,0.65)',
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
                   padding: '2px 0',
                   transition: 'color 0.15s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#FAF8F4')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = 'rgba(250,248,244,0.65)')
+                  (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')
                 }
               >
                 {link.label}
@@ -1915,7 +1915,7 @@ function Footer() {
             style={{
               fontFamily: FONT,
               fontSize: '0.95rem',
-              color: 'rgba(250,248,244,0.5)',
+              color: 'rgba(255,255,255,0.5)',
               textAlign: 'right',
             }}
           >
@@ -1927,7 +1927,7 @@ function Footer() {
           style={{
             fontFamily: FONT,
             fontSize: '0.88rem',
-            color: 'rgba(250,248,244,0.32)',
+            color: 'rgba(255,255,255,0.32)',
             textAlign: 'center',
             marginTop: '24px',
           }}
@@ -1943,7 +1943,7 @@ function Footer() {
 
 function MontnexusBanner() {
   return (
-    <section style={{ backgroundColor: '#1B2A4A', padding: '72px 24px' }}>
+    <section style={{ backgroundColor: '#111111', padding: '72px 24px' }}>
       <div
         style={{
           maxWidth: '800px',
@@ -1968,7 +1968,7 @@ function MontnexusBanner() {
             fontFamily: HEADING_FONT,
             fontWeight: 400,
             fontSize: 'clamp(1.6rem, 3vw, 2.2rem)',
-            color: '#FAF8F4',
+            color: '#FFFFFF',
             lineHeight: 1.25,
             letterSpacing: '0.01em',
           }}
@@ -1980,7 +1980,7 @@ function MontnexusBanner() {
           style={{
             fontFamily: FONT,
             fontSize: '1.1rem',
-            color: 'rgba(250,248,244,0.72)',
+            color: 'rgba(255,255,255,0.72)',
             lineHeight: 1.8,
             maxWidth: '520px',
           }}
@@ -1996,8 +1996,8 @@ function MontnexusBanner() {
             fontWeight: 600,
             fontSize: '1.05rem',
             backgroundColor: 'transparent',
-            color: '#FAF8F4',
-            border: '1.5px solid rgba(250,248,244,0.45)',
+            color: '#FFFFFF',
+            border: '1.5px solid rgba(255,255,255,0.45)',
             borderRadius: '2px',
             padding: '12px 32px',
             textDecoration: 'none',
@@ -2006,11 +2006,11 @@ function MontnexusBanner() {
             display: 'inline-block',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = '#FAF8F4'
-            e.currentTarget.style.backgroundColor = 'rgba(250,248,244,0.08)'
+            e.currentTarget.style.borderColor = '#FFFFFF'
+            e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.08)'
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(250,248,244,0.45)'
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'
             e.currentTarget.style.backgroundColor = 'transparent'
           }}
         >
@@ -2064,8 +2064,8 @@ function PageContent() {
     <div
       style={{
         fontFamily: FONT,
-        backgroundColor: '#FAF8F4',
-        color: '#1C1917',
+        backgroundColor: '#FFFFFF',
+        color: '#111111',
         overflowX: 'hidden',
       }}
     >
