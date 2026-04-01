@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { PROJECTS, BEHANCE } from '@/components/sections/OurWork'
 
@@ -9,12 +10,17 @@ const FONT = "var(--font-eb-garamond), 'EB Garamond', Georgia, serif"
 const HEADING_FONT = "'The Seasons', Georgia, serif"
 const WHATSAPP_URL = 'https://wa.me/918137871221'
 
-function SitePreview({ url, name }: { url: string; name: string }) {
-  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
+function SitePreview({ screenshot, name }: { screenshot: string; name: string }) {
   return (
     <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#F0F0F0' }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={screenshotUrl} alt={`Screenshot of ${name}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+      <Image
+        src={screenshot}
+        alt={`Screenshot of ${name}`}
+        fill
+        sizes="(max-width: 640px) 100vw, 50vw"
+        style={{ objectFit: 'cover', objectPosition: 'top' }}
+        priority={false}
+      />
     </div>
   )
 }
@@ -48,7 +54,7 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[number]; ind
 
       {/* Preview */}
       <div style={{ position: 'relative' }}>
-        <SitePreview url={project.url} name={project.name} />
+        <SitePreview screenshot={project.screenshot} name={project.name} />
         <a
           href={project.url} target="_blank" rel="noopener noreferrer"
           style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0, background: 'rgba(0,0,0,0.5)', transition: 'opacity 0.2s', textDecoration: 'none', zIndex: 2 }}

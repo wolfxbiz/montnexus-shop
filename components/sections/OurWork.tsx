@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 const FONT = "var(--font-eb-garamond), 'EB Garamond', Georgia, serif"
 const HEADING_FONT = "'The Seasons', Georgia, serif"
@@ -16,6 +17,7 @@ const PROJECTS = [
     category: 'E-commerce',
     description: 'Online bookstore with curated collections and a seamless shopping experience.',
     tags: ['Next.js', 'Shopify', 'UI/UX'],
+    screenshot: '/screenshots/tott-books.png',
   },
   {
     number: '02',
@@ -26,6 +28,7 @@ const PROJECTS = [
     category: 'Brand & Web',
     description: 'Modern brand presence with a polished web experience built for growth.',
     tags: ['Branding', 'Web Design', 'Motion'],
+    screenshot: '/screenshots/turquoic.png',
   },
   {
     number: '03',
@@ -36,6 +39,7 @@ const PROJECTS = [
     category: 'Business Website',
     description: 'High-performance tire distributor site with product catalogue and dealer locator.',
     tags: ['Web', 'Catalogue', 'SEO'],
+    screenshot: '/screenshots/imex-tires.png',
   },
   {
     number: '04',
@@ -46,6 +50,7 @@ const PROJECTS = [
     category: 'SaaS Platform',
     description: 'Full-stack digital platform connecting creators, services, and communities.',
     tags: ['SaaS', 'Full-stack', 'React'],
+    screenshot: '/screenshots/montnexus.png',
   },
   {
     number: '05',
@@ -56,6 +61,7 @@ const PROJECTS = [
     category: 'Web App',
     description: 'A modern web application crafted for an engaging, immersive user experience.',
     tags: ['Web App', 'UI/UX', 'Lovable'],
+    screenshot: '/screenshots/greek-street-lab.png',
   },
   {
     number: '06',
@@ -66,6 +72,7 @@ const PROJECTS = [
     category: 'Landing Page',
     description: 'Clean, conversion-focused landing page designed to capture and convert.',
     tags: ['Landing Page', 'Design', 'React'],
+    screenshot: '/screenshots/alya.png',
   },
   {
     number: '07',
@@ -76,6 +83,7 @@ const PROJECTS = [
     category: 'Business Web App',
     description: 'Effortless business solutions platform built for the UAE market.',
     tags: ['Web App', 'Business', 'Lovable'],
+    screenshot: '/screenshots/paperwurk.png',
   },
 ]
 
@@ -93,18 +101,16 @@ const BEHANCE = [
   },
 ]
 
-// Screenshot preview using Microlink API — works on all devices, no iframe blocks
-function SitePreview({ url, name }: { url: string; name: string }) {
-  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
-
+function SitePreview({ screenshot, name }: { screenshot: string; name: string }) {
   return (
     <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#F0F0F0' }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={screenshotUrl}
+      <Image
+        src={screenshot}
         alt={`Screenshot of ${name}`}
-        loading="lazy"
-        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
+        fill
+        sizes="(max-width: 640px) 100vw, 50vw"
+        style={{ objectFit: 'cover', objectPosition: 'top' }}
+        priority={false}
       />
     </div>
   )
@@ -131,7 +137,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
           order: isEven ? 0 : 1,
         }}
       >
-        <SitePreview url={project.url} name={project.name} />
+        <SitePreview screenshot={project.screenshot} name={project.name} />
 
         {/* Hover overlay — sits on top of the preview */}
         <a
