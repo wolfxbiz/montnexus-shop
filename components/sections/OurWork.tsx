@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const FONT = "var(--font-eb-garamond), 'EB Garamond', Georgia, serif"
@@ -58,6 +58,50 @@ const BEHANCE = [
   },
 ]
 
+// Renders a live scaled iframe that fills its container width perfectly
+function SitePreview({ url, name }: { url: string; name: string }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [scale, setScale] = useState(0.5)
+  const IFRAME_W = 1440
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const update = () => setScale(el.offsetWidth / IFRAME_W)
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  const IFRAME_H = 900
+  const containerH = Math.round(IFRAME_H * scale)
+
+  return (
+    <div
+      ref={containerRef}
+      style={{ position: 'relative', overflow: 'hidden', height: containerH, width: '100%', backgroundColor: '#0A0A0A' }}
+    >
+      <iframe
+        src={url}
+        title={`Preview of ${name}`}
+        scrolling="no"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: `${IFRAME_W}px`,
+          height: `${IFRAME_H}px`,
+          border: 'none',
+          transform: `scale(${scale})`,
+          transformOrigin: 'top left',
+          pointerEvents: 'none',
+        }}
+      />
+    </div>
+  )
+}
+
 function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
@@ -71,57 +115,23 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
       transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))',
         gap: '0',
         borderTop: '1px solid rgba(255,255,255,0.08)',
       }}
     >
-      {/* Preview — order flips on even rows via CSS order */}
+      {/* Preview */}
       <div
         style={{
           position: 'relative',
           overflow: 'hidden',
           backgroundColor: '#0A0A0A',
-          minHeight: '340px',
           order: isEven ? 0 : 1,
         }}
       >
-        {/* iframe scaled preview */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            overflow: 'hidden',
-          }}
-        >
-          <iframe
-            src={project.url}
-            title={`Preview of ${project.name}`}
-            scrolling="no"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '1280px',
-              height: '960px',
-              border: 'none',
-              transform: 'scale(0.38)',
-              transformOrigin: 'top left',
-              pointerEvents: 'none',
-            }}
-          />
-          {/* Dark tint over iframe */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(135deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 100%)',
-              pointerEvents: 'none',
-            }}
-          />
-        </div>
+        <SitePreview url={project.url} name={project.name} />
 
-        {/* Hover overlay */}
+        {/* Hover overlay — sits on top of the preview */}
         <a
           href={project.url}
           target="_blank"
@@ -133,7 +143,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
             alignItems: 'center',
             justifyContent: 'center',
             opacity: 0,
-            background: 'rgba(0,0,0,0.6)',
+            background: 'rgba(0,0,0,0.55)',
             transition: 'opacity 0.3s',
             textDecoration: 'none',
             zIndex: 2,
