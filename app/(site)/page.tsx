@@ -1326,111 +1326,6 @@ function WhyMeSection() {
   )
 }
 
-// ─── Section: Testimonials ────────────────────────────────────────────────────
-
-function TestimonialsSection() {
-  return (
-    <section style={{ backgroundColor: '#FFFFFF', padding: '96px 24px' }}>
-      <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
-        <FadeInView>
-          <SectionTitle>What Clients Say</SectionTitle>
-          <Divider />
-        </FadeInView>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '24px',
-          }}
-        >
-          {testimonials.map((t, i) => (
-            <FadeInView key={i} delay={i * 0.1}>
-              <div
-                style={{
-                  position: 'relative',
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E2E2E2',
-                  borderRadius: '2px',
-                  padding: '36px 32px',
-                  boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  overflow: 'hidden',
-                }}
-              >
-                {/* Decorative quote */}
-                <div
-                  aria-hidden="true"
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '20px',
-                    fontFamily: FONT,
-                    fontSize: '9rem',
-                    fontWeight: 700,
-                    lineHeight: 1,
-                    color: '#111111',
-                    opacity: 0.045,
-                    userSelect: 'none',
-                    pointerEvents: 'none',
-                  }}
-                >
-                  &ldquo;
-                </div>
-
-                {/* Stars */}
-                <div style={{ display: 'flex', gap: '3px', marginBottom: '18px' }}>
-                  {[...Array(5)].map((_, j) => (
-                    <span key={j} style={{ color: '#111111', fontSize: '1.1rem' }}>
-                      ★
-                    </span>
-                  ))}
-                </div>
-
-                <p
-                  style={{
-                    fontFamily: FONT,
-                    fontSize: '1.1rem',
-                    color: '#111111',
-                    lineHeight: 1.8,
-                    flexGrow: 1,
-                    marginBottom: '24px',
-                  }}
-                >
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-
-                <div>
-                  <p
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: '1.05rem',
-                      color: '#111111',
-                    }}
-                  >
-                    {t.author}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: FONT,
-                      fontSize: '0.95rem',
-                      color: '#666666',
-                    }}
-                  >
-                    {t.role}
-                  </p>
-                </div>
-              </div>
-            </FadeInView>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ─── Section: Maintenance Retainers ──────────────────────────────────────────
 
 function RetainersSection({ onCta }: { onCta: () => void }) {
@@ -2007,7 +1902,6 @@ function PageContent() {
         <HowItWorksSection />
         <PricingSection onCta={open} />
         <WhyMeSection />
-        <TestimonialsSection />
         <OurWork />
         <RetainersSection onCta={open} />
         <FAQSection />
