@@ -140,19 +140,13 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))',
-        gap: '0',
-        borderTop: '1px solid rgba(255,255,255,0.08)',
-      }}
+      className="ow-row"
+      style={{ gap: 0 }}
     >
       {/* Preview */}
       <div
+        className="ow-preview"
         style={{
-          position: 'relative',
-          overflow: 'hidden',
-          backgroundColor: '#0A0A0A',
           order: isEven ? 0 : 1,
         }}
       >
@@ -197,11 +191,8 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
 
       {/* Info */}
       <div
+        className="ow-info"
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: 'clamp(40px, 6vw, 72px) clamp(32px, 5vw, 64px)',
           order: isEven ? 1 : 0,
           borderLeft: isEven ? '1px solid rgba(255,255,255,0.08)' : 'none',
           borderRight: isEven ? 'none' : '1px solid rgba(255,255,255,0.08)',
@@ -303,6 +294,16 @@ export function OurWork() {
 
   return (
     <section style={{ backgroundColor: '#111111', overflow: 'hidden' }}>
+      <style>{`
+        .ow-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); border-top: 1px solid rgba(255,255,255,0.08); }
+        .ow-preview { position: relative; overflow: hidden; background: #0A0A0A; }
+        .ow-info { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px,6vw,72px) clamp(32px,5vw,64px); }
+        @media (max-width: 640px) {
+          .ow-row { grid-template-columns: 1fr; }
+          .ow-preview { order: 0 !important; border-left: none !important; border-right: none !important; }
+          .ow-info { order: 1 !important; border-left: none !important; border-right: none !important; padding: 32px 24px; }
+        }
+      `}</style>
 
       {/* Header */}
       <motion.div
