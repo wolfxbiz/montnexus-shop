@@ -93,46 +93,55 @@ const BEHANCE = [
   },
 ]
 
-// Renders a live scaled iframe that fills its container width perfectly
+// Lazy-loads iframe only when scrolled into view
 function SitePreview({ url, name }: { url: string; name: string }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(0.5)
+  const [shouldLoad, setShouldLoad] = useState(false)
   const IFRAME_W = 1440
+  const IFRAME_H = 900
 
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-    const update = () => setScale(el.offsetWidth / IFRAME_W)
-    update()
-    const ro = new ResizeObserver(update)
+    const updateScale = () => setScale(el.offsetWidth / IFRAME_W)
+    updateScale()
+    const ro = new ResizeObserver(updateScale)
     ro.observe(el)
-    return () => ro.disconnect()
+    // Only load iframe when 200px away from viewport
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setShouldLoad(true); io.disconnect() } },
+      { rootMargin: '200px' }
+    )
+    io.observe(el)
+    return () => { ro.disconnect(); io.disconnect() }
   }, [])
 
-  const IFRAME_H = 900
   const containerH = Math.round(IFRAME_H * scale)
 
   return (
     <div
       ref={containerRef}
-      style={{ position: 'relative', overflow: 'hidden', height: containerH, width: '100%', backgroundColor: '#0A0A0A' }}
+      style={{ position: 'relative', overflow: 'hidden', height: containerH, width: '100%', backgroundColor: '#F0F0F0' }}
     >
-      <iframe
-        src={url}
-        title={`Preview of ${name}`}
-        scrolling="no"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: `${IFRAME_W}px`,
-          height: `${IFRAME_H}px`,
-          border: 'none',
-          transform: `scale(${scale})`,
-          transformOrigin: 'top left',
-          pointerEvents: 'none',
-        }}
-      />
+      {/* Skeleton shown until iframe loads */}
+      {!shouldLoad && (
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, #F0F0F0 25%, #E4E4E4 50%, #F0F0F0 75%)', backgroundSize: '200% 100%', animation: 'skeleton-shimmer 1.4s infinite' }} />
+      )}
+      {shouldLoad && (
+        <iframe
+          src={url}
+          title={`Preview of ${name}`}
+          scrolling="no"
+          loading="lazy"
+          style={{
+            position: 'absolute', top: 0, left: 0,
+            width: `${IFRAME_W}px`, height: `${IFRAME_H}px`,
+            border: 'none', transform: `scale(${scale})`,
+            transformOrigin: 'top left', pointerEvents: 'none',
+          }}
+        />
+      )}
     </div>
   )
 }
@@ -310,6 +319,10 @@ export function OurWork() {
           .ow-row { grid-template-columns: 1fr; }
           .ow-preview { order: 0 !important; border-left: none !important; border-right: none !important; }
           .ow-info { order: 1 !important; border-left: none !important; border-right: none !important; padding: 32px 24px; }
+        }
+        @keyframes skeleton-shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
         }
       `}</style>
 
