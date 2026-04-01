@@ -9,7 +9,6 @@ import { ProductGrid } from '@/components/sections/ProductGrid'
 import { HowItWorks } from '@/components/sections/HowItWorks'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { WorkWithUsCta } from '@/components/sections/WorkWithUsCta'
-import { OurWork } from '@/components/sections/OurWork'
 import { Newsletter } from '@/components/sections/Newsletter'
 import { ServiceGrid } from '@/components/sections/ServiceGrid'
 import { ShowcaseFeed } from '@/components/sections/ShowcaseFeed'
@@ -100,7 +99,6 @@ export default async function HomePage() {
         <FreeSpotlight products={free} viewAllHref="/bundles?free=true" />
         <ShowcaseFeed posts={recentShowcase} label="Community" title="Fresh work from creators" viewAllHref="/showcase" />
         <ArticlesFeed articles={articles.slice(0, 6)} />
-        <OurWork />
         <WorkWithUsCta />
         <CtaBanner />
         <Newsletter />

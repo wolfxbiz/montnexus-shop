@@ -1,5 +1,6 @@
 'use client'
 
+import { OurWork } from '@/components/sections/OurWork'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { EnquiryProvider, useEnquiry } from '@/components/work-with-us/EnquiryModal'
@@ -2007,6 +2008,7 @@ function PageContent() {
         <PricingSection onCta={open} />
         <WhyMeSection />
         <TestimonialsSection />
+        <OurWork />
         <RetainersSection onCta={open} />
         <FAQSection />
         <ContactSection onCta={open} />
