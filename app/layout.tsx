@@ -12,8 +12,8 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Montnexus — Digital Product Marketplace',
-  description: 'Curated digital bundles for designers, developers, and indie creators. UI kits, code templates, eBooks, icon sets, and productivity templates.',
+  title: 'Montnexus — We Build Digital Products',
+  description: 'We design and build custom websites, web apps, mobile apps and desktop software. AI-assisted workflows, fixed pricing, fast delivery.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
