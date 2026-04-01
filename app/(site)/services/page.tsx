@@ -1,3 +1,15 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Hire a Creator — Custom Digital Services',
+  description: 'Browse and hire skilled creators for websites, design, development and more. Fixed-price services delivered fast by vetted professionals on Montnexus.',
+  openGraph: {
+    title: 'Hire a Creator — Custom Digital Services | Montnexus',
+    description: 'Browse and hire skilled creators for websites, design, development and more. Fixed-price services delivered fast by vetted professionals on Montnexus.',
+    url: 'https://montnexus.com/services',
+  },
+}
+
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import { ServiceCard } from '@/components/ui/ServiceCard'

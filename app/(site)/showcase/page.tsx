@@ -1,3 +1,15 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Showcase — Fresh Work From the Community',
+  description: 'Explore a curated feed of design and development work from creators on Montnexus. Get inspired, share your own work, and grow alongside a community of builders.',
+  openGraph: {
+    title: 'Showcase — Fresh Work From the Community | Montnexus',
+    description: 'Explore a curated feed of design and development work from creators on Montnexus. Get inspired, share your own work, and grow alongside a community of builders.',
+    url: 'https://montnexus.com/showcase',
+  },
+}
+
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import { ShowcaseItem } from '@/components/ui/ShowcaseItem'

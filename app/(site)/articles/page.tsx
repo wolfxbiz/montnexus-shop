@@ -1,5 +1,17 @@
 export const dynamic = 'force-dynamic'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Articles — Design & Development Insights',
+  description: 'Read articles on design, development, productivity and the creator economy — written by and for the Montnexus community.',
+  openGraph: {
+    title: 'Articles — Design & Development Insights | Montnexus',
+    description: 'Read articles on design, development, productivity and the creator economy — written by and for the Montnexus community.',
+    url: 'https://montnexus.com/articles',
+  },
+}
+
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'

@@ -1,6 +1,18 @@
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Marketplace — Where Designers Build, Learn & Grow',
+  description: 'Discover curated digital bundles, UI kits, code templates, icon sets and eBooks. A community marketplace built for designers, developers and indie creators.',
+  openGraph: {
+    title: 'Montnexus Marketplace — Where Designers Build, Learn & Grow',
+    description: 'Discover curated digital bundles, UI kits, code templates, icon sets and eBooks. A community marketplace built for designers, developers and indie creators.',
+    url: 'https://montnexus.com/marketplace',
+  },
+}
+
 import { Nav } from '@/components/layout/Nav'
 import { AnnouncementBanner } from '@/components/layout/AnnouncementBanner'
 import { Footer } from '@/components/layout/Footer'

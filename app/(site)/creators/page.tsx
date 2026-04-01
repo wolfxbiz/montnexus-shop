@@ -1,5 +1,17 @@
 export const dynamic = 'force-dynamic'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Creators — Sell Your Work, Build Your Audience',
+  description: 'Join a growing community of designers and developers selling digital products on Montnexus. Upload your work, set your price and start earning.',
+  openGraph: {
+    title: 'Creators — Sell Your Work, Build Your Audience | Montnexus',
+    description: 'Join a growing community of designers and developers selling digital products on Montnexus. Upload your work, set your price and start earning.',
+    url: 'https://montnexus.com/creators',
+  },
+}
+
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'

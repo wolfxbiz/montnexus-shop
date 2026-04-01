@@ -12,8 +12,25 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Montnexus — We Build Digital Products',
+  title: {
+    default: 'Montnexus — We Build Digital Products That Grow Your Business',
+    template: '%s | Montnexus',
+  },
   description: 'We design and build custom websites, web apps, mobile apps and desktop software. AI-assisted workflows, fixed pricing, fast delivery.',
+  metadataBase: new URL('https://montnexus.com'),
+  openGraph: {
+    title: 'Montnexus — We Build Digital Products That Grow Your Business',
+    description: 'Custom websites, web apps, mobile apps and desktop software. AI-assisted workflows, fixed pricing, fast delivery.',
+    url: 'https://montnexus.com',
+    siteName: 'Montnexus',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Montnexus — We Build Digital Products That Grow Your Business',
+    description: 'Custom websites, web apps, mobile apps and desktop software. AI-assisted workflows, fixed pricing, fast delivery.',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
