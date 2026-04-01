@@ -42,7 +42,7 @@ const EMPTY: FormState = {
 
 const inputStyle: React.CSSProperties = {
   fontFamily: FONT,
-  fontSize: '1.05rem',
+  fontSize: '1rem',
   width: '100%',
   padding: '11px 14px',
   backgroundColor: '#FFFFFF',
@@ -68,7 +68,9 @@ const labelStyle: React.CSSProperties = {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div>
-      <label style={labelStyle}>{label}{required && <span style={{ color: '#111111', marginLeft: 2 }}>*</span>}</label>
+      <label style={labelStyle}>
+        {label}{required && <span style={{ color: '#111111', marginLeft: 2 }}>*</span>}
+      </label>
       {children}
     </div>
   )
@@ -88,6 +90,20 @@ export function useEnquiry() {
   return useContext(EnquiryContext)
 }
 
+// ── Hook: detect mobile ──────────────────────────────────────────────────────
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 600px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return isMobile
+}
+
 // ── Provider + Modal ────────────────────────────────────────────────────────
 
 export function EnquiryProvider({ children }: { children: React.ReactNode }) {
@@ -96,6 +112,7 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const [error, setError] = useState('')
+  const isMobile = useIsMobile()
 
   const open = useCallback(() => { setDone(false); setError(''); setForm(EMPTY); setVisible(true) }, [])
   const close = useCallback(() => setVisible(false), [])
@@ -141,6 +158,59 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // ── Layout values based on viewport ────────────────────────────────────────
+
+  const panelStyle: React.CSSProperties = isMobile
+    ? {
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 201,
+        width: '100%',
+        maxHeight: '92dvh',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '16px 16px 0 0',
+        boxShadow: '0 -8px 40px rgba(0,0,0,0.18)',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }
+    : {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 201,
+        width: 'min(620px, calc(100vw - 40px))',
+        maxHeight: 'calc(100vh - 48px)',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '6px',
+        boxShadow: '0 24px 80px rgba(0,0,0,0.18)',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }
+
+  const mobileAnimation = {
+    initial: { y: '100%' },
+    animate: { y: 0 },
+    exit: { y: '100%' },
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+  }
+
+  const desktopAnimation = {
+    initial: { opacity: 0, y: 28, scale: 0.97 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, y: 16, scale: 0.97 },
+    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+  }
+
+  const animation = isMobile ? mobileAnimation : desktopAnimation
+
+  const hPad = isMobile ? '20px' : '32px'
+  const vPad = isMobile ? '20px' : '28px'
+
   return (
     <EnquiryContext.Provider value={{ open }}>
       {children}
@@ -163,36 +233,28 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
               }}
             />
 
-            {/* Modal panel */}
+            {/* Modal / bottom sheet */}
             <motion.div
               key="modal"
-              initial={{ opacity: 0, y: 32, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.97 }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                position: 'fixed',
-                top: '50%', left: '50%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 201,
-                width: 'min(600px, calc(100vw - 32px))',
-                maxHeight: 'calc(100vh - 48px)',
-                backgroundColor: '#FFFFFF',
-                borderRadius: '4px',
-                boxShadow: '0 24px 80px rgba(0,0,0,0.18)',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden',
-              }}
+              {...animation}
+              style={panelStyle}
             >
+              {/* Drag handle (mobile only) */}
+              {isMobile && (
+                <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '12px', flexShrink: 0 }}>
+                  <div style={{ width: 36, height: 4, borderRadius: 2, backgroundColor: '#DDDDDD' }} />
+                </div>
+              )}
+
               {/* Header */}
               <div
                 style={{
-                  padding: '28px 32px 24px',
+                  padding: `${isMobile ? '14px' : vPad} ${hPad} ${isMobile ? '14px' : '20px'}`,
                   borderBottom: '1px solid #E2E2E2',
                   display: 'flex',
                   alignItems: 'flex-start',
                   justifyContent: 'space-between',
+                  gap: '12px',
                   flexShrink: 0,
                 }}
               >
@@ -201,15 +263,15 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                     style={{
                       fontFamily: HEADING_FONT,
                       fontWeight: 400,
-                      fontSize: '1.75rem',
+                      fontSize: isMobile ? '1.4rem' : '1.75rem',
                       color: '#111111',
                       lineHeight: 1.2,
-                      marginBottom: '6px',
+                      marginBottom: '4px',
                     }}
                   >
                     Tell Us About Your Project
                   </h2>
-                  <p style={{ fontFamily: FONT, fontSize: '1rem', color: '#666666', lineHeight: 1.7 }}>
+                  <p style={{ fontFamily: FONT, fontSize: '0.95rem', color: '#666666', lineHeight: 1.6 }}>
                     We&apos;ll get back to you within 4 hours.
                   </p>
                 </div>
@@ -219,6 +281,7 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                   style={{
                     background: 'none', border: 'none', cursor: 'pointer',
                     padding: '4px', color: '#666666', flexShrink: 0,
+                    marginTop: '2px',
                     transition: 'color 0.15s',
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = '#111111')}
@@ -229,12 +292,20 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
               </div>
 
               {/* Body */}
-              <div style={{ overflowY: 'auto', padding: '28px 32px', flexGrow: 1 }}>
+              <div
+                style={{
+                  overflowY: 'auto',
+                  padding: `${vPad} ${hPad}`,
+                  flexGrow: 1,
+                  // iOS momentum scrolling
+                  WebkitOverflowScrolling: 'touch' as React.CSSProperties['WebkitOverflowScrolling'],
+                }}
+              >
                 {done ? (
                   <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    style={{ textAlign: 'center', padding: '40px 0' }}
+                    style={{ textAlign: 'center', padding: '32px 0' }}
                   >
                     <div
                       style={{
@@ -265,25 +336,35 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                         backgroundColor: '#111111', color: '#FFFFFF',
                         border: 'none', borderRadius: '2px',
                         padding: '12px 32px', cursor: 'pointer',
+                        width: isMobile ? '100%' : 'auto',
                       }}
                     >
                       Close
                     </button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-                    {/* Name + Email */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                  <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+                    {/* Name + Email — side by side on desktop, stacked on mobile */}
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                        gap: '14px',
+                      }}
+                    >
                       <Field label="Full Name" required>
                         <input
                           type="text" required value={form.name} onChange={set('name')}
                           placeholder="Your name" style={inputStyle} onFocus={focus} onBlur={blur}
+                          autoComplete="name"
                         />
                       </Field>
                       <Field label="Email" required>
                         <input
                           type="email" required value={form.email} onChange={set('email')}
                           placeholder="your@email.com" style={inputStyle} onFocus={focus} onBlur={blur}
+                          autoComplete="email"
                         />
                       </Field>
                     </div>
@@ -293,11 +374,18 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                       <input
                         type="tel" value={form.phone} onChange={set('phone')}
                         placeholder="+1 234 567 8900" style={inputStyle} onFocus={focus} onBlur={blur}
+                        autoComplete="tel"
                       />
                     </Field>
 
-                    {/* Service + Budget */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                    {/* Service + Budget — side by side on desktop, stacked on mobile */}
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                        gap: '14px',
+                      }}
+                    >
                       <Field label="Service">
                         <select value={form.service} onChange={set('service')} style={inputStyle} onFocus={focus} onBlur={blur}>
                           <option value="">Select a service</option>
@@ -315,7 +403,7 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                     {/* Description */}
                     <Field label="Project Description" required>
                       <textarea
-                        required rows={4} value={form.description} onChange={set('description')}
+                        required rows={isMobile ? 3 : 4} value={form.description} onChange={set('description')}
                         placeholder="Tell us what you want to build..."
                         style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }}
                         onFocus={focus} onBlur={blur}
@@ -330,11 +418,12 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                       type="submit"
                       disabled={loading}
                       style={{
-                        fontFamily: FONT, fontWeight: 600, fontSize: '1.1rem',
+                        fontFamily: FONT, fontWeight: 600, fontSize: '1.05rem',
                         backgroundColor: loading ? '#333333' : '#111111',
                         color: '#FFFFFF', border: 'none', borderRadius: '2px',
                         padding: '14px 24px', cursor: loading ? 'not-allowed' : 'pointer',
                         transition: 'background-color 0.18s', width: '100%',
+                        marginTop: '4px',
                       }}
                       onMouseEnter={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#333333' }}
                       onMouseLeave={(e) => { if (!loading) e.currentTarget.style.backgroundColor = '#111111' }}
@@ -342,10 +431,14 @@ export function EnquiryProvider({ children }: { children: React.ReactNode }) {
                       {loading ? 'Sending…' : 'Send My Project Details →'}
                     </button>
 
-                    <p style={{ fontFamily: FONT, fontSize: '0.88rem', color: '#666666', textAlign: 'center' }}>
+                    <p style={{ fontFamily: FONT, fontSize: '0.88rem', color: '#666666', textAlign: 'center', paddingBottom: isMobile ? '8px' : '0' }}>
                       Or reach us directly on{' '}
-                      <a href="https://wa.me/918137871221" target="_blank" rel="noopener noreferrer"
-                        style={{ color: '#111111', textDecoration: 'none' }}>
+                      <a
+                        href="https://wa.me/918137871221"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: '#111111', textDecoration: 'none' }}
+                      >
                         WhatsApp
                       </a>
                     </p>

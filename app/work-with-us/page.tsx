@@ -91,7 +91,7 @@ const services: Service[] = [
   {
     icon: Globe,
     name: 'Website',
-    price: 'From ₹15,000 / $180',
+    price: 'From $180',
     features: [
       'Custom design',
       'Mobile responsive',
@@ -103,7 +103,7 @@ const services: Service[] = [
   {
     icon: Monitor,
     name: 'Web Application',
-    price: 'From ₹80,000 / $964',
+    price: 'From $964',
     features: [
       'Full-stack development',
       'User authentication',
@@ -115,7 +115,7 @@ const services: Service[] = [
   {
     icon: Smartphone,
     name: 'Mobile App',
-    price: 'From ₹1,00,000 / $1,200',
+    price: 'From $1,200',
     features: [
       'iOS + Android (Flutter)',
       'Push notifications',
@@ -127,7 +127,7 @@ const services: Service[] = [
   {
     icon: Laptop,
     name: 'Desktop Software',
-    price: 'From ₹80,000 / $964',
+    price: 'From $964',
     features: [
       'Windows + macOS',
       'Offline functionality',
@@ -168,7 +168,7 @@ const steps: Step[] = [
 const pricingTiers: PricingTier[] = [
   {
     name: 'Basic',
-    priceRange: '₹15,000–₹50,000\n$180–$600',
+    priceRange: '$180–$600',
     description: 'Websites & landing pages',
     timeline: '2–4 weeks',
     popular: false,
@@ -182,7 +182,7 @@ const pricingTiers: PricingTier[] = [
   },
   {
     name: 'Business',
-    priceRange: '₹50,000–₹3,00,000\n$600–$3,600',
+    priceRange: '$600–$3,600',
     description: 'Web & mobile apps',
     timeline: '4–10 weeks',
     popular: true,
@@ -196,7 +196,7 @@ const pricingTiers: PricingTier[] = [
   },
   {
     name: 'Advanced',
-    priceRange: '₹3,00,000–₹15,00,000\n$3,600–$18,000',
+    priceRange: '$3,600–$18,000',
     description: 'SaaS & complex platforms',
     timeline: '2–5 months',
     popular: false,
@@ -210,7 +210,7 @@ const pricingTiers: PricingTier[] = [
   },
   {
     name: 'Enterprise',
-    priceRange: '₹15,00,000+\n$18,000+',
+    priceRange: '$18,000+',
     description: 'Enterprise systems',
     timeline: '4–8 months',
     popular: false,
@@ -276,7 +276,7 @@ const testimonials: Testimonial[] = [
 const retainerPlans: RetainerPlan[] = [
   {
     name: 'Essential',
-    priceRange: '₹3,500–₹7,500/mo',
+    priceRange: '$42–$90/mo',
     description: 'For websites',
     popular: false,
     features: [
@@ -289,7 +289,7 @@ const retainerPlans: RetainerPlan[] = [
   },
   {
     name: 'Growth',
-    priceRange: '₹10,000–₹25,000/mo',
+    priceRange: '$120–$300/mo',
     description: 'For apps',
     popular: true,
     features: [
@@ -301,7 +301,7 @@ const retainerPlans: RetainerPlan[] = [
   },
   {
     name: 'Scale',
-    priceRange: '₹75,000+/mo',
+    priceRange: '$900+/mo',
     description: 'For SaaS & enterprise',
     popular: false,
     features: [
@@ -517,11 +517,11 @@ function StickyNav({ onCta }: { onCta: () => void }) {
         }}
       >
         <Image
-          src="/mnx-logo.png"
+          src={scrolled ? '/mnx-logo.png' : '/images/mnx-logo-light.png'}
           alt="Montnexus"
           width={152}
           height={38}
-          style={{ filter: 'brightness(0)', objectFit: 'contain' }}
+          style={{ objectFit: 'contain', filter: scrolled ? 'brightness(0)' : 'none' }}
           priority
         />
 
@@ -533,15 +533,15 @@ function StickyNav({ onCta }: { onCta: () => void }) {
               style={{
                 fontFamily: FONT,
                 fontSize: '1.05rem',
-                color: '#111111',
+                color: scrolled ? '#111111' : 'rgba(255,255,255,0.9)',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
                 padding: '0',
                 transition: 'color 0.15s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#111111')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#111111')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = scrolled ? '#555555' : '#FFFFFF')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = scrolled ? '#111111' : 'rgba(255,255,255,0.9)')}
             >
               {link.label}
             </button>
@@ -588,19 +588,33 @@ function Hero({ onCta }: { onCta: () => void }) {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '136px 24px 96px',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#111111',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Subtle radial gradient */}
+      {/* Background mountain image */}
+      <Image
+        src="/images/hero-mountains.jpg"
+        alt=""
+        fill
+        priority
+        aria-hidden="true"
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+          opacity: 0.45,
+        }}
+      />
+
+      {/* Dark overlay for text legibility */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse 90% 70% at 50% 40%, rgba(0,0,0,0.03) 0%, transparent 68%)',
+            'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.65) 100%)',
           pointerEvents: 'none',
         }}
       />
@@ -615,24 +629,6 @@ function Hero({ onCta }: { onCta: () => void }) {
           50% { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
         }
       `}</style>
-
-      {/* Animated soft blob */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          width: '600px',
-          height: '400px',
-          borderRadius: '50%',
-          background:
-            'radial-gradient(ellipse, rgba(0,0,0,0.04) 0%, transparent 70%)',
-          top: '20%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          animation: 'hbg 8s ease-in-out infinite',
-          pointerEvents: 'none',
-        }}
-      />
 
       <div
         style={{
@@ -652,7 +648,7 @@ function Hero({ onCta }: { onCta: () => void }) {
             fontWeight: 400,
             lineHeight: 1.13,
             letterSpacing: '0.01em',
-            color: '#111111',
+            color: '#FFFFFF',
             fontSize: 'clamp(2.6rem, 6vw, 5rem)',
             marginBottom: '32px',
           }}
@@ -682,7 +678,7 @@ function Hero({ onCta }: { onCta: () => void }) {
           style={{
             fontFamily: FONT,
             fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)',
-            color: '#666666',
+            color: 'rgba(255,255,255,0.8)',
             lineHeight: 1.8,
             maxWidth: '640px',
             margin: '0 auto 44px',
@@ -756,22 +752,22 @@ function Hero({ onCta }: { onCta: () => void }) {
               fontWeight: 600,
               fontSize: '1.15rem',
               backgroundColor: 'transparent',
-              color: '#111111',
-              border: '2px solid #111111',
+              color: '#FFFFFF',
+              border: '2px solid rgba(255,255,255,0.8)',
               borderRadius: '2px',
               padding: '12px 36px',
               cursor: 'pointer',
               textDecoration: 'none',
               display: 'inline-block',
-              transition: 'background-color 0.18s, color 0.18s',
+              transition: 'background-color 0.18s, color 0.18s, border-color 0.18s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#111111'
-              e.currentTarget.style.color = '#FFFFFF'
+              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)'
+              e.currentTarget.style.borderColor = '#FFFFFF'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent'
-              e.currentTarget.style.color = '#111111'
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'
             }}
             aria-label="Let's Talk on WhatsApp"
           >
@@ -1129,20 +1125,17 @@ function PricingSection({ onCta }: { onCta: () => void }) {
 
                 {/* Price */}
                 <div style={{ marginBottom: '16px' }}>
-                  {tier.priceRange.split('\n').map((line, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        fontFamily: HEADING_FONT,
-                        fontWeight: 400,
-                        fontSize: idx === 0 ? '1.55rem' : '1.15rem',
-                        color: idx === 0 ? '#111111' : '#666666',
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {line}
-                    </div>
-                  ))}
+                  <div
+                    style={{
+                      fontFamily: HEADING_FONT,
+                      fontWeight: 400,
+                      fontSize: '1.55rem',
+                      color: '#111111',
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {tier.priceRange}
+                  </div>
                 </div>
 
                 {/* Description + timeline */}
@@ -1235,19 +1228,6 @@ function PricingSection({ onCta }: { onCta: () => void }) {
           ))}
         </div>
 
-        <FadeInView delay={0.35}>
-          <p
-            style={{
-              fontFamily: FONT,
-              fontSize: '0.95rem',
-              color: '#666666',
-              textAlign: 'center',
-              marginTop: '36px',
-            }}
-          >
-            🌍 Working with a US, UK or Australian team? International rates apply — typically 1.5–2× the base price.
-          </p>
-        </FadeInView>
       </div>
     </section>
   )
@@ -1258,6 +1238,30 @@ function PricingSection({ onCta }: { onCta: () => void }) {
 function WhyMeSection() {
   return (
     <section style={{ backgroundColor: '#F5F5F5', padding: '96px 24px' }}>
+      <style>{`
+        .cmp-table { border-radius: 2px; overflow: hidden; border: 1px solid #E2E2E2; }
+        .cmp-header { display: grid; grid-template-columns: 1fr 2fr 2fr; background-color: #FFFFFF; }
+        .cmp-header-empty { padding: 16px 20px; }
+        .cmp-header-us { padding: 16px 20px; font-weight: 700; font-size: 1.1rem; color: #111111; border-left: 1px solid #E2E2E2; }
+        .cmp-header-agency { padding: 16px 20px; font-weight: 700; font-size: 1.1rem; color: #666666; border-left: 1px solid #E2E2E2; }
+        .cmp-row { display: grid; grid-template-columns: 1fr 2fr 2fr; border-top: 1px solid #E2E2E2; background-color: #FFFFFF; }
+        .cmp-label { padding: 16px 20px; font-weight: 600; font-size: 0.95rem; color: #111111; display: flex; align-items: center; }
+        .cmp-me { padding: 14px 20px; font-size: 1rem; color: #666666; line-height: 1.75; border-left: 1px solid #E2E2E2; display: flex; align-items: flex-start; gap: 10px; }
+        .cmp-agency { padding: 14px 20px; font-size: 1rem; color: #666666; line-height: 1.75; border-left: 1px solid #E2E2E2; display: flex; align-items: flex-start; gap: 10px; }
+        @media (max-width: 600px) {
+          .cmp-header { display: none; }
+          .cmp-row { grid-template-columns: 1fr 1fr; }
+          .cmp-label { grid-column: 1 / -1; background-color: #F0F0F0; border-bottom: 1px solid #E2E2E2; font-size: 0.88rem; padding: 10px 14px; }
+          .cmp-me { border-left: none; padding: 12px 14px; font-size: 0.88rem; line-height: 1.5; }
+          .cmp-agency { padding: 12px 14px; font-size: 0.88rem; line-height: 1.5; }
+          .cmp-col-header { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+          .cmp-col-header-us { color: #111111; }
+          .cmp-col-header-agency { color: #999999; }
+        }
+        @media (min-width: 601px) {
+          .cmp-col-header { display: none; }
+        }
+      `}</style>
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
         <FadeInView>
           <SectionTitle>Why Work With Us Over a Larger Agency?</SectionTitle>
@@ -1265,100 +1269,24 @@ function WhyMeSection() {
         </FadeInView>
 
         <FadeInView delay={0.1}>
-          <div
-            style={{
-              borderRadius: '2px',
-              overflow: 'hidden',
-              border: '1px solid #E2E2E2',
-            }}
-          >
-            {/* Header row */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 2fr 2fr',
-                backgroundColor: '#FFFFFF',
-              }}
-            >
-              <div style={{ padding: '16px 20px' }} />
-              <div
-                style={{
-                  padding: '16px 20px',
-                  fontFamily: FONT,
-                  fontWeight: 700,
-                  fontSize: '1.1rem',
-                  color: '#111111',
-                  borderLeft: '1px solid #E2E2E2',
-                }}
-              >
-                Working with us
-              </div>
-              <div
-                style={{
-                  padding: '16px 20px',
-                  fontFamily: FONT,
-                  fontWeight: 700,
-                  fontSize: '1.1rem',
-                  color: '#666666',
-                  borderLeft: '1px solid #E2E2E2',
-                }}
-              >
-                Large agency
-              </div>
+          <div className="cmp-table">
+            {/* Header row — hidden on mobile */}
+            <div className="cmp-header">
+              <div className="cmp-header-empty" />
+              <div className="cmp-header-us" style={{ fontFamily: FONT }}>Working with us</div>
+              <div className="cmp-header-agency" style={{ fontFamily: FONT }}>Large agency</div>
             </div>
 
             {comparison.map((row, i) => (
-              <div
-                key={i}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 2fr 2fr',
-                  borderTop: '1px solid #E2E2E2',
-                  backgroundColor: i % 2 === 0 ? '#FFFFFF' : '#FFFFFF',
-                }}
-              >
-                <div
-                  style={{
-                    padding: '16px 20px',
-                    fontFamily: FONT,
-                    fontWeight: 600,
-                    fontSize: '0.95rem',
-                    color: '#111111',
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  {row.label}
-                </div>
-                <div
-                  style={{
-                    padding: '14px 20px',
-                    fontFamily: FONT,
-                    fontSize: '1rem',
-                    color: '#666666',
-                    lineHeight: 1.75,
-                    borderLeft: '1px solid #E2E2E2',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '10px',
-                  }}
-                >
+              <div key={i} className="cmp-row">
+                <div className="cmp-label" style={{ fontFamily: FONT }}>{row.label}</div>
+                <div className="cmp-me" style={{ fontFamily: FONT }}>
+                  <span className="cmp-col-header cmp-col-header-us">Working with us</span>
                   <Check size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
                   {row.me}
                 </div>
-                <div
-                  style={{
-                    padding: '14px 20px',
-                    fontFamily: FONT,
-                    fontSize: '1rem',
-                    color: '#666666',
-                    lineHeight: 1.75,
-                    borderLeft: '1px solid #E2E2E2',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '10px',
-                  }}
-                >
+                <div className="cmp-agency" style={{ fontFamily: FONT }}>
+                  <span className="cmp-col-header cmp-col-header-agency">Large agency</span>
                   <X size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
                   {row.agency}
                 </div>
@@ -1374,7 +1302,7 @@ function WhyMeSection() {
               marginTop: '28px',
               backgroundColor: '#111111',
               borderRadius: '2px',
-              padding: '40px 44px',
+              padding: 'clamp(24px, 5vw, 40px) clamp(20px, 5vw, 44px)',
               textAlign: 'center',
             }}
           >
@@ -1382,7 +1310,7 @@ function WhyMeSection() {
               style={{
                 fontFamily: FONT,
                 fontWeight: 500,
-                fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)',
+                fontSize: 'clamp(1.1rem, 2.5vw, 1.65rem)',
                 color: '#FFFFFF',
                 lineHeight: 1.7,
               }}
