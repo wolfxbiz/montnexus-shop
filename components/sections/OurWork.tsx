@@ -37,8 +37,8 @@ const PROJECTS = [
   {
     number: '04',
     name: 'Montnexus',
-    url: 'https://montnexus.com',
-    domain: 'montnexus.com',
+    url: 'https://montnexus.com/marketplace',
+    domain: 'montnexus.com/marketplace',
     category: 'SaaS Platform',
     description: 'Full-stack digital platform connecting creators, services, and communities.',
     tags: ['SaaS', 'Full-stack', 'React'],
