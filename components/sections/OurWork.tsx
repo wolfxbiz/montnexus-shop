@@ -164,7 +164,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
             alignItems: 'center',
             justifyContent: 'center',
             opacity: 0,
-            background: 'rgba(0,0,0,0.55)',
+            background: 'rgba(0,0,0,0.5)',
             transition: 'opacity 0.3s',
             textDecoration: 'none',
             zIndex: 2,
@@ -176,8 +176,8 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
             style={{
               fontFamily: FONT,
               fontSize: '1rem',
-              color: '#FFFFFF',
-              border: '1px solid rgba(255,255,255,0.5)',
+              color: '#111111',
+              border: '1px solid rgba(255,255,255,0.7)',
               padding: '10px 28px',
               borderRadius: '2px',
               letterSpacing: '0.06em',
@@ -194,8 +194,8 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
         className="ow-info"
         style={{
           order: isEven ? 1 : 0,
-          borderLeft: isEven ? '1px solid rgba(255,255,255,0.08)' : 'none',
-          borderRight: isEven ? 'none' : '1px solid rgba(255,255,255,0.08)',
+          borderLeft: isEven ? '1px solid #E2E2E2' : 'none',
+          borderRight: isEven ? 'none' : '1px solid #E2E2E2',
         }}
       >
         <div
@@ -210,7 +210,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
             style={{
               fontFamily: 'monospace',
               fontSize: '0.72rem',
-              color: 'rgba(255,255,255,0.25)',
+              color: 'rgba(0,0,0,0.25)',
               letterSpacing: '0.15em',
             }}
           >
@@ -220,7 +220,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
             style={{
               width: '32px',
               height: '1px',
-              background: 'rgba(255,255,255,0.2)',
+              background: 'rgba(0,0,0,0.2)',
               display: 'inline-block',
             }}
           />
@@ -228,7 +228,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
             style={{
               fontFamily: FONT,
               fontSize: '0.72rem',
-              color: 'rgba(255,255,255,0.45)',
+              color: 'rgba(0,0,0,0.45)',
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
             }}
@@ -242,7 +242,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
             fontFamily: HEADING_FONT,
             fontWeight: 400,
             fontSize: 'clamp(2rem, 3.5vw, 3rem)',
-            color: '#FFFFFF',
+            color: '#111111',
             lineHeight: 1.1,
             margin: '0 0 20px',
           }}
@@ -254,7 +254,7 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
           style={{
             fontFamily: FONT,
             fontSize: '1.05rem',
-            color: 'rgba(255,255,255,0.55)',
+            color: '#666666',
             lineHeight: 1.85,
             margin: '0 0 32px',
             maxWidth: '380px',
@@ -270,8 +270,8 @@ function ProjectRow({ project, index }: { project: typeof PROJECTS[number]; inde
               style={{
                 fontFamily: FONT,
                 fontSize: '0.78rem',
-                color: 'rgba(255,255,255,0.35)',
-                border: '1px solid rgba(255,255,255,0.12)',
+                color: 'rgba(0,0,0,0.35)',
+                border: '1px solid #E2E2E2',
                 padding: '4px 14px',
                 borderRadius: '2px',
                 letterSpacing: '0.05em',
@@ -293,10 +293,10 @@ export function OurWork() {
   const behanceInView = useInView(behanceRef, { once: true, margin: '-60px' })
 
   return (
-    <section style={{ backgroundColor: '#111111', overflow: 'hidden' }}>
+    <section style={{ backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
       <style>{`
-        .ow-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); border-top: 1px solid rgba(255,255,255,0.08); }
-        .ow-preview { position: relative; overflow: hidden; background: #0A0A0A; }
+        .ow-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); border-top: 1px solid #E2E2E2; }
+        .ow-preview { position: relative; overflow: hidden; background: #F5F5F5; }
         .ow-info { display: flex; flex-direction: column; justify-content: center; padding: clamp(40px,6vw,72px) clamp(32px,5vw,64px); }
         @media (max-width: 640px) {
           .ow-row { grid-template-columns: 1fr; }
@@ -313,7 +313,7 @@ export function OurWork() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         style={{
           padding: 'clamp(64px, 8vw, 96px) clamp(32px, 6vw, 96px) clamp(40px, 5vw, 64px)',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          borderBottom: '1px solid #E2E2E2',
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'space-between',
@@ -326,7 +326,7 @@ export function OurWork() {
             style={{
               fontFamily: FONT,
               fontSize: '0.75rem',
-              color: 'rgba(255,255,255,0.35)',
+              color: 'rgba(0,0,0,0.35)',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
               marginBottom: '14px',
@@ -339,7 +339,7 @@ export function OurWork() {
               fontFamily: HEADING_FONT,
               fontWeight: 400,
               fontSize: 'clamp(2.4rem, 5vw, 4rem)',
-              color: '#FFFFFF',
+              color: '#111111',
               lineHeight: 1.1,
               margin: 0,
             }}
@@ -351,7 +351,7 @@ export function OurWork() {
           style={{
             fontFamily: FONT,
             fontSize: '1rem',
-            color: 'rgba(255,255,255,0.4)',
+            color: 'rgba(0,0,0,0.4)',
             lineHeight: 1.8,
             maxWidth: '320px',
             margin: 0,
@@ -370,7 +370,7 @@ export function OurWork() {
       <div
         ref={behanceRef}
         style={{
-          borderTop: '1px solid rgba(255,255,255,0.08)',
+          borderTop: '1px solid #E2E2E2',
           padding: 'clamp(56px, 7vw, 96px) clamp(32px, 6vw, 96px)',
         }}
       >
@@ -384,7 +384,7 @@ export function OurWork() {
             style={{
               fontFamily: FONT,
               fontSize: '0.75rem',
-              color: 'rgba(255,255,255,0.35)',
+              color: 'rgba(0,0,0,0.35)',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
               marginBottom: '12px',
@@ -397,7 +397,7 @@ export function OurWork() {
               fontFamily: HEADING_FONT,
               fontWeight: 400,
               fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-              color: '#FFFFFF',
+              color: '#111111',
               margin: 0,
             }}
           >
@@ -419,14 +419,14 @@ export function OurWork() {
             <div
               key={i}
               style={{
-                border: '1px solid rgba(255,255,255,0.1)',
+                border: '1px solid #E2E2E2',
                 borderRadius: '2px',
                 overflow: 'hidden',
                 flexShrink: 0,
                 transition: 'border-color 0.25s',
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)' }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#111111' }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E2E2E2' }}
             >
               <iframe
                 src={item.src}
