@@ -43,6 +43,33 @@ const PROJECTS = [
     description: 'Full-stack digital platform connecting creators, services, and communities.',
     tags: ['SaaS', 'Full-stack', 'React'],
   },
+  {
+    number: '05',
+    name: 'Greek Street Lab',
+    url: 'https://greekstreetlab.lovable.app',
+    domain: 'greekstreetlab.lovable.app',
+    category: 'Web App',
+    description: 'A modern web application crafted for an engaging, immersive user experience.',
+    tags: ['Web App', 'UI/UX', 'Lovable'],
+  },
+  {
+    number: '06',
+    name: 'Alya',
+    url: 'https://alya-landing.onrender.com',
+    domain: 'alya-landing.onrender.com',
+    category: 'Landing Page',
+    description: 'Clean, conversion-focused landing page designed to capture and convert.',
+    tags: ['Landing Page', 'Design', 'React'],
+  },
+  {
+    number: '07',
+    name: 'Paperwurk',
+    url: 'https://paperwurk-ae.lovable.app',
+    domain: 'paperwurk-ae.lovable.app',
+    category: 'Business Web App',
+    description: 'Effortless business solutions platform built for the UAE market.',
+    tags: ['Web App', 'Business', 'Lovable'],
+  },
 ]
 
 const BEHANCE = [
