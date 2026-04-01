@@ -10,6 +10,7 @@ const PROJECTS = [
   {
     number: '01',
     name: 'Tott Books',
+    slug: 'tott-books',
     url: 'https://tottbooks.com',
     domain: 'tottbooks.com',
     category: 'E-commerce',
@@ -19,6 +20,7 @@ const PROJECTS = [
   {
     number: '02',
     name: 'Turquoic',
+    slug: 'turquoic',
     url: 'https://turquoic.com',
     domain: 'turquoic.com',
     category: 'Brand & Web',
@@ -28,6 +30,7 @@ const PROJECTS = [
   {
     number: '03',
     name: 'Imex Tires',
+    slug: 'imex-tires',
     url: 'https://imextires.com',
     domain: 'imextires.com',
     category: 'Business Website',
@@ -37,6 +40,7 @@ const PROJECTS = [
   {
     number: '04',
     name: 'Montnexus',
+    slug: 'montnexus',
     url: 'https://montnexus.com/marketplace',
     domain: 'montnexus.com/marketplace',
     category: 'SaaS Platform',
@@ -46,6 +50,7 @@ const PROJECTS = [
   {
     number: '05',
     name: 'Greek Street Lab',
+    slug: 'greek-street-lab',
     url: 'https://greekstreetlab.lovable.app',
     domain: 'greekstreetlab.lovable.app',
     category: 'Web App',
@@ -55,6 +60,7 @@ const PROJECTS = [
   {
     number: '06',
     name: 'Alya',
+    slug: 'alya',
     url: 'https://alya-landing.onrender.com',
     domain: 'alya-landing.onrender.com',
     category: 'Landing Page',
@@ -64,6 +70,7 @@ const PROJECTS = [
   {
     number: '07',
     name: 'Paperwurk',
+    slug: 'paperwurk',
     url: 'https://paperwurk-ae.lovable.app',
     domain: 'paperwurk-ae.lovable.app',
     category: 'Business Web App',
@@ -71,6 +78,7 @@ const PROJECTS = [
     tags: ['Web App', 'Business', 'Lovable'],
   },
 ]
+
 
 const BEHANCE = [
   {
@@ -371,72 +379,51 @@ export function OurWork() {
         ref={behanceRef}
         style={{
           borderTop: '1px solid #E2E2E2',
-          padding: 'clamp(56px, 7vw, 96px) clamp(32px, 6vw, 96px)',
+          padding: 'clamp(56px, 7vw, 96px) clamp(24px, 6vw, 96px)',
         }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={behanceInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          style={{ marginBottom: '40px' }}
+          style={{ marginBottom: '40px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}
         >
-          <p
-            style={{
-              fontFamily: FONT,
-              fontSize: '0.75rem',
-              color: 'rgba(0,0,0,0.35)',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              marginBottom: '12px',
-            }}
+          <div>
+            <p style={{ fontFamily: FONT, fontSize: '0.75rem', color: 'rgba(0,0,0,0.35)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '12px' }}>
+              Design Work
+            </p>
+            <h3 style={{ fontFamily: HEADING_FONT, fontWeight: 400, fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', color: '#111111', margin: 0 }}>
+              Featured on Behance
+            </h3>
+          </div>
+          <a
+            href="/work"
+            style={{ fontFamily: FONT, fontSize: '0.95rem', color: '#111111', textDecoration: 'none', borderBottom: '1px solid #111111', paddingBottom: '2px', whiteSpace: 'nowrap' }}
           >
-            Design Work
-          </p>
-          <h3
-            style={{
-              fontFamily: HEADING_FONT,
-              fontWeight: 400,
-              fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
-              color: '#111111',
-              margin: 0,
-            }}
-          >
-            Featured on Behance
-          </h3>
+            View all work →
+          </a>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={behanceInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.15 }}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '24px',
-          }}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 380px), 1fr))', gap: '24px' }}
         >
           {BEHANCE.map((item, i) => (
             <div
               key={i}
-              style={{
-                border: '1px solid #E2E2E2',
-                borderRadius: '2px',
-                overflow: 'hidden',
-                flexShrink: 0,
-                transition: 'border-color 0.25s',
-              }}
+              style={{ border: '1px solid #E2E2E2', borderRadius: '2px', overflow: 'hidden', transition: 'border-color 0.25s', position: 'relative', paddingBottom: '78.2%' /* 316/404 */ }}
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#111111' }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#E2E2E2' }}
             >
               <iframe
                 src={item.src}
-                height={316}
-                width={404}
                 allowFullScreen
                 frameBorder={0}
                 allow="clipboard-write"
                 referrerPolicy="strict-origin-when-cross-origin"
-                style={{ display: 'block' }}
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'block' }}
               />
             </div>
           ))}
@@ -445,3 +432,5 @@ export function OurWork() {
     </section>
   )
 }
+
+export { PROJECTS, BEHANCE }
