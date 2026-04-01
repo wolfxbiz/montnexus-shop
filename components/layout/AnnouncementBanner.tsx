@@ -65,7 +65,7 @@ export function AnnouncementBanner() {
       >
         Need a custom website, app or software?&nbsp;
         <Link
-          href="/work-with-us"
+          href="/"
           style={{
             color: 'var(--color-accent)',
             textDecoration: 'none',
