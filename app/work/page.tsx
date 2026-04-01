@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import { PROJECTS, BEHANCE } from '@/components/sections/OurWork'
@@ -10,40 +10,11 @@ const HEADING_FONT = "'The Seasons', Georgia, serif"
 const WHATSAPP_URL = 'https://wa.me/918137871221'
 
 function SitePreview({ url, name }: { url: string; name: string }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [scale, setScale] = useState(0.5)
-  const [shouldLoad, setShouldLoad] = useState(false)
-  const IFRAME_W = 1440
-  const IFRAME_H = 900
-
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const updateScale = () => setScale(el.offsetWidth / IFRAME_W)
-    updateScale()
-    const ro = new ResizeObserver(updateScale)
-    ro.observe(el)
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setShouldLoad(true); io.disconnect() } },
-      { rootMargin: '200px' }
-    )
-    io.observe(el)
-    return () => { ro.disconnect(); io.disconnect() }
-  }, [])
-
-  const containerH = Math.round(IFRAME_H * scale)
-
+  const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
   return (
-    <div ref={containerRef} style={{ position: 'relative', overflow: 'hidden', height: containerH, width: '100%', backgroundColor: '#F0F0F0' }}>
-      {!shouldLoad && (
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg,#F0F0F0 25%,#E4E4E4 50%,#F0F0F0 75%)', backgroundSize: '200% 100%', animation: 'skeleton-shimmer 1.4s infinite' }} />
-      )}
-      {shouldLoad && (
-        <iframe
-          src={url} title={`Preview of ${name}`} scrolling="no" loading="lazy"
-          style={{ position: 'absolute', top: 0, left: 0, width: `${IFRAME_W}px`, height: `${IFRAME_H}px`, border: 'none', transform: `scale(${scale})`, transformOrigin: 'top left', pointerEvents: 'none' }}
-        />
-      )}
+    <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#F0F0F0' }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={screenshotUrl} alt={`Screenshot of ${name}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
     </div>
   )
 }
@@ -106,7 +77,6 @@ function ProjectCard({ project, index }: { project: typeof PROJECTS[number]; ind
 export default function WorkPage() {
   return (
     <div style={{ fontFamily: FONT, backgroundColor: '#FFFFFF', color: '#111111', minHeight: '100vh' }}>
-      <style>{`@keyframes skeleton-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }`}</style>
 
       {/* Simple nav */}
       <nav style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'rgba(255,255,255,0.95)', borderBottom: '1px solid #E2E2E2', backdropFilter: 'blur(8px)', padding: '16px clamp(24px, 5vw, 64px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
