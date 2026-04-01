@@ -274,6 +274,62 @@ export function OurWork() {
             <ProjectCard key={project.domain} project={project} index={i} />
           ))}
         </div>
+
+        {/* Behance embeds */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
+        >
+          <p
+            style={{
+              fontFamily: FONT,
+              fontSize: '0.78rem',
+              color: '#999999',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              marginTop: '64px',
+              marginBottom: '24px',
+            }}
+          >
+            Design Work
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '24px',
+            }}
+          >
+            {[
+              'https://www.behance.net/embed/project/227338135?ilo0=1',
+              'https://www.behance.net/embed/project/227337443?ilo0=1',
+            ].map((src, i) => (
+              <div
+                key={i}
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #E2E2E2',
+                  borderRadius: '2px',
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
+                  flexShrink: 0,
+                }}
+              >
+                <iframe
+                  src={src}
+                  height={316}
+                  width={404}
+                  allowFullScreen
+                  frameBorder={0}
+                  allow="clipboard-write"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  style={{ display: 'block' }}
+                />
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   )
