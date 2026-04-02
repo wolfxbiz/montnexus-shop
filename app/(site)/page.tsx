@@ -25,6 +25,7 @@ const WHATSAPP_URL = 'https://wa.me/918137871221'
 const EMAIL = 'hello@montnexus.com'
 const FONT = "var(--font-eb-garamond), 'EB Garamond', Georgia, serif"
 const HEADING_FONT = "'The Seasons', Georgia, serif"
+const BTN_FONT = "'Inter', 'Helvetica Neue', Arial, sans-serif"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -552,9 +553,10 @@ function StickyNav({ onCta }: { onCta: () => void }) {
         <button
           onClick={onCta}
           style={{
-            fontFamily: FONT,
-            fontWeight: 600,
-            fontSize: '1rem',
+            fontFamily: BTN_FONT,
+            fontWeight: 500,
+            fontSize: '0.92rem',
+            letterSpacing: '0.02em',
             backgroundColor: '#111111',
             color: '#FFFFFF',
             border: 'none',
@@ -601,7 +603,7 @@ function Hero({ onCta }: { onCta: () => void }) {
           min-height: 100vh;
         }
         .hero-content-col {
-          flex: 0 0 55%;
+          flex: 0 0 48%;
           display: flex;
           align-items: center;
           padding: 140px 64px 96px 64px;
@@ -610,13 +612,15 @@ function Hero({ onCta }: { onCta: () => void }) {
           background-color: #0a0a0a;
         }
         .hero-image-col {
-          flex: 0 0 45%;
+          flex: 0 0 52%;
           position: relative;
         }
+        .hero-img { object-position: 50% 15%; }
         @media (max-width: 768px) {
           .hero-layout { flex-direction: column-reverse; }
           .hero-content-col { flex: none; width: 100%; padding: 48px 24px 64px; }
-          .hero-image-col { flex: none; width: 100%; height: 100vw; min-height: 380px; max-height: 600px; }
+          .hero-image-col { flex: none; width: 100%; height: 110vw; min-height: 420px; max-height: 640px; }
+          .hero-img { object-position: 50% 45%; transform: scale(1.15); }
         }
       `}</style>
 
@@ -679,9 +683,10 @@ function Hero({ onCta }: { onCta: () => void }) {
               <button
                 onClick={onCta}
                 style={{
-                  fontFamily: FONT,
-                  fontWeight: 600,
-                  fontSize: '1rem',
+                  fontFamily: BTN_FONT,
+                  fontWeight: 500,
+                  fontSize: '0.95rem',
+                  letterSpacing: '0.02em',
                   backgroundColor: '#FFFFFF',
                   color: '#0a0a0a',
                   border: 'none',
@@ -701,9 +706,10 @@ function Hero({ onCta }: { onCta: () => void }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontFamily: FONT,
-                  fontWeight: 600,
-                  fontSize: '1rem',
+                  fontFamily: BTN_FONT,
+                  fontWeight: 500,
+                  fontSize: '0.95rem',
+                  letterSpacing: '0.02em',
                   backgroundColor: 'transparent',
                   color: '#FFFFFF',
                   border: '1.5px solid rgba(255,255,255,0.45)',
@@ -731,12 +737,13 @@ function Hero({ onCta }: { onCta: () => void }) {
         {/* Right: cover image */}
         <div className="hero-image-col">
           <Image
-            src="/images/cover.png"
+            src="/images/cover-hero.png"
             alt=""
             fill
             priority
             aria-hidden="true"
-            style={{ objectFit: 'contain', objectPosition: 'center bottom' }}
+            className="hero-img"
+            style={{ objectFit: 'cover' }}
           />
           {/* Fade left edge into dark bg */}
           <div
@@ -802,162 +809,141 @@ function SocialProofBar() {
 
 // ─── Section: Services ────────────────────────────────────────────────────────
 
+function ServiceCard({ service, dark }: { service: Service; dark: boolean }) {
+  const Icon = service.icon
+  const bg = dark ? 'rgba(10,10,10,0.72)' : 'rgba(255,255,255,0.82)'
+  const borderColor = dark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)'
+  const textColor = dark ? '#FFFFFF' : '#111111'
+  const subColor = dark ? 'rgba(255,255,255,0.65)' : '#555555'
+  const iconBg = dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.07)'
+  const iconColor = dark ? '#FFFFFF' : '#111111'
+  const priceBg = dark ? 'rgba(255,255,255,0.15)' : '#111111'
+  const priceText = '#FFFFFF'
+
+  return (
+    <div
+      style={{
+        backgroundColor: bg,
+        border: `1px solid ${borderColor}`,
+        borderLeft: `1px solid ${borderColor}`,
+        borderRadius: '2px',
+        padding: '28px',
+        backdropFilter: 'blur(12px)',
+        transition: 'transform 0.25s, box-shadow 0.25s, border-left 0.2s',
+        cursor: 'default',
+        height: '100%',
+        boxSizing: 'border-box',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-4px)'
+        e.currentTarget.style.boxShadow = dark
+          ? '0 16px 48px rgba(0,0,0,0.6)'
+          : '0 16px 48px rgba(0,0,0,0.2)'
+        e.currentTarget.style.borderLeft = `3px solid ${dark ? '#FFFFFF' : '#111111'}`
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)'
+        e.currentTarget.style.boxShadow = 'none'
+        e.currentTarget.style.borderLeft = `1px solid ${borderColor}`
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '20px' }}>
+        <div style={{ padding: '10px', backgroundColor: iconBg, borderRadius: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icon size={22} color={iconColor} />
+        </div>
+        <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: '0.85rem', backgroundColor: priceBg, color: priceText, padding: '4px 12px', borderRadius: '2px' }}>
+          {service.price}
+        </span>
+      </div>
+
+      <h3 style={{ fontFamily: HEADING_FONT, fontWeight: 400, fontSize: '1.4rem', color: textColor, marginBottom: '14px', letterSpacing: '0.01em' }}>
+        {service.name}
+      </h3>
+
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '7px' }}>
+        {service.features.map((feat, j) => (
+          <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontFamily: FONT, fontSize: '1rem', color: subColor, lineHeight: 1.7 }}>
+            <Check size={14} color={iconColor} style={{ flexShrink: 0, marginTop: '4px' }} />
+            {feat}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function ServicesSection() {
   return (
-    <section
-      id="services"
-      style={{ position: 'relative', overflow: 'hidden' }}
-    >
-      {/* Full-bleed background */}
+    <section id="services" style={{ position: 'relative', overflow: 'hidden' }}>
+      <style>{`
+        .svc-layout {
+          display: grid;
+          grid-template-columns: 30% 40% 30%;
+          min-height: 100vh;
+          position: relative;
+          z-index: 1;
+        }
+        .svc-col {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          padding: 96px 28px;
+        }
+        .svc-col-left { padding-left: 48px; padding-right: 20px; }
+        .svc-col-right { padding-right: 48px; padding-left: 20px; }
+        .svc-middle { pointer-events: none; }
+        .svc-bg-img { object-position: 40% center; }
+        @media (max-width: 900px) {
+          .svc-layout { grid-template-columns: 1fr 1fr; min-height: auto; }
+          .svc-middle { display: none; }
+          .svc-col-left { padding: 64px 20px 32px 24px; }
+          .svc-col-right { padding: 64px 24px 32px 20px; }
+          .svc-bg-img { object-position: 35% center; }
+        }
+        @media (max-width: 560px) {
+          .svc-layout { grid-template-columns: 1fr; }
+          .svc-col-left { padding: 64px 24px 16px; }
+          .svc-col-right { padding: 16px 24px 64px; }
+          .svc-bg-img { object-position: 40% 30%; }
+        }
+      `}</style>
+
+      {/* Full-bleed background image */}
       <Image
         src="/images/what-we-build.png"
         alt=""
         fill
         aria-hidden="true"
-        style={{ objectFit: 'cover', objectPosition: 'center' }}
-      />
-      {/* Dark overlay */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: 'rgba(0,0,0,0.72)',
-        }}
+        className="svc-bg-img"
+        style={{ objectFit: 'cover' }}
       />
 
-      <div style={{ position: 'relative', zIndex: 1, padding: '96px 24px' }}>
-        <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
+      <div className="svc-layout">
+        {/* Left column — sky side — cards 1 & 2 */}
+        <div className="svc-col svc-col-left">
           <FadeInView>
-            <h2
-              style={{
-                fontFamily: HEADING_FONT,
-                color: '#FFFFFF',
-                fontSize: 'clamp(2rem, 4vw, 3.25rem)',
-                fontWeight: 400,
-                lineHeight: 1.2,
-                letterSpacing: '0.015em',
-              }}
-            >
+            <h2 style={{ fontFamily: HEADING_FONT, color: '#FFFFFF', fontSize: 'clamp(1.6rem, 2.5vw, 2.5rem)', fontWeight: 400, lineHeight: 1.2, letterSpacing: '0.015em', textShadow: '0 2px 16px rgba(0,0,0,0.6)', marginBottom: '8px' }}>
               What We Build
             </h2>
-            <div
-              style={{
-                height: '1px',
-                width: '72px',
-                backgroundColor: 'rgba(255,255,255,0.3)',
-                marginTop: '20px',
-                marginBottom: '48px',
-              }}
-            />
+            <div style={{ height: '1px', width: '56px', backgroundColor: 'rgba(255,255,255,0.6)', marginBottom: '8px' }} />
           </FadeInView>
+          {services.slice(0, 2).map((service, i) => (
+            <FadeInView key={i} delay={i * 0.12}>
+              <ServiceCard service={service} dark={false} />
+            </FadeInView>
+          ))}
+        </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '24px',
-            }}
-          >
-            {services.map((service, i) => {
-              const Icon = service.icon
-              return (
-                <FadeInView key={i} delay={i * 0.1}>
-                  <div
-                    style={{
-                      backgroundColor: 'rgba(255,255,255,0.93)',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                      borderLeft: '1px solid rgba(255,255,255,0.2)',
-                      borderRadius: '2px',
-                      padding: '32px',
-                      backdropFilter: 'blur(8px)',
-                      transition: 'box-shadow 0.25s, transform 0.25s, border-left 0.2s',
-                      cursor: 'default',
-                      height: '100%',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-4px)'
-                      e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.35)'
-                      e.currentTarget.style.borderLeft = '3px solid #111111'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)'
-                      e.currentTarget.style.boxShadow = 'none'
-                      e.currentTarget.style.borderLeft = '1px solid rgba(255,255,255,0.2)'
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        justifyContent: 'space-between',
-                        marginBottom: '24px',
-                      }}
-                    >
-                      <div
-                        style={{
-                          padding: '10px',
-                          backgroundColor: 'rgba(0,0,0,0.07)',
-                          borderRadius: '2px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <Icon size={22} color="#111111" />
-                      </div>
-                      <span
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 600,
-                          fontSize: '0.88rem',
-                          backgroundColor: '#111111',
-                          color: '#FFFFFF',
-                          padding: '4px 12px',
-                          borderRadius: '2px',
-                        }}
-                      >
-                        {service.price}
-                      </span>
-                    </div>
+        {/* Middle column — empty — shows the figure */}
+        <div className="svc-middle" />
 
-                    <h3
-                      style={{
-                        fontFamily: HEADING_FONT,
-                        fontWeight: 400,
-                        fontSize: '1.5rem',
-                        color: '#111111',
-                        marginBottom: '16px',
-                        letterSpacing: '0.01em',
-                      }}
-                    >
-                      {service.name}
-                    </h3>
-
-                    <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      {service.features.map((feat, j) => (
-                        <li
-                          key={j}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                            gap: '10px',
-                            fontFamily: FONT,
-                            fontSize: '1.05rem',
-                            color: '#555555',
-                            lineHeight: 1.75,
-                          }}
-                        >
-                          <Check size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
-                          {feat}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </FadeInView>
-              )
-            })}
-          </div>
+        {/* Right column — stars side — cards 3 & 4 */}
+        <div className="svc-col svc-col-right" style={{ justifyContent: 'flex-end' }}>
+          {services.slice(2, 4).map((service, i) => (
+            <FadeInView key={i} delay={(i + 2) * 0.12}>
+              <ServiceCard service={service} dark={true} />
+            </FadeInView>
+          ))}
         </div>
       </div>
     </section>
@@ -968,148 +954,95 @@ function ServicesSection() {
 
 function HowItWorksSection() {
   return (
-    <section id="how-it-works">
-      {/* Dramatic full-width image banner */}
-      <div
-        style={{
-          position: 'relative',
-          height: 'clamp(220px, 32vw, 420px)',
-          overflow: 'hidden',
-        }}
-      >
+    <section id="how-it-works" style={{ position: 'relative', overflow: 'hidden' }}>
+      <style>{`
+        .hiw-steps {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 2px;
+        }
+        .hiw-banner { height: clamp(340px, 55vw, 680px); }
+        .hiw-img { object-position: center 40%; }
+        @media (max-width: 900px) {
+          .hiw-steps { grid-template-columns: repeat(2, 1fr); }
+          .hiw-banner { height: clamp(240px, 50vw, 400px); }
+          .hiw-img { object-position: center 35%; }
+        }
+        @media (max-width: 480px) {
+          .hiw-steps { grid-template-columns: 1fr; }
+          .hiw-banner { height: 56vw; }
+          .hiw-img { object-position: 45% 40%; }
+        }
+      `}</style>
+
+      {/* Full image — tall enough to see both hands */}
+      <div className="hiw-banner" style={{ position: 'relative', overflow: 'hidden' }}>
         <Image
           src="/images/how-we-work-together.png"
           alt=""
           fill
           aria-hidden="true"
-          style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+          className="hiw-img"
+          style={{ objectFit: 'cover' }}
         />
-        {/* Gradient overlays — top and bottom fade */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 50%, rgba(245,245,245,1) 100%)',
-            pointerEvents: 'none',
-          }}
-        />
-        {/* Section title overlaid */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingBottom: '10%',
-          }}
-        >
+        {/* Subtle dark vignette top */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 40%, rgba(0,0,0,0.55) 100%)', pointerEvents: 'none' }} />
+
+        {/* Title centred over the hands */}
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', paddingTop: 'clamp(48px, 6vw, 80px)' }}>
           <FadeInView>
-            <h2
-              style={{
-                fontFamily: HEADING_FONT,
-                color: '#FFFFFF',
-                fontSize: 'clamp(1.8rem, 4vw, 3.25rem)',
-                fontWeight: 400,
-                lineHeight: 1.2,
-                letterSpacing: '0.015em',
-                textAlign: 'center',
-                textShadow: '0 2px 24px rgba(0,0,0,0.5)',
-              }}
-            >
+            <h2 style={{
+              fontFamily: HEADING_FONT,
+              color: '#FFFFFF',
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+              fontWeight: 400,
+              lineHeight: 1.15,
+              letterSpacing: '0.02em',
+              textAlign: 'center',
+              textShadow: '0 2px 32px rgba(0,0,0,0.55)',
+            }}>
               How We Work Together
             </h2>
+            <div style={{ height: '1px', width: '56px', backgroundColor: 'rgba(255,255,255,0.5)', margin: '16px auto 0' }} />
           </FadeInView>
         </div>
       </div>
 
-      {/* Steps */}
-      <div style={{ backgroundColor: '#F5F5F5', padding: '64px 24px 96px' }}>
-        <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '40px',
-              position: 'relative',
-            }}
-          >
-            {steps.map((step, i) => {
-              const Icon = step.icon
-              return (
-                <FadeInView key={i} delay={i * 0.12} slideFrom="left">
-                  <div style={{ position: 'relative' }}>
-                    <div
-                      aria-hidden="true"
-                      style={{
-                        position: 'absolute',
-                        top: '-16px',
-                        left: '-8px',
-                        fontFamily: FONT,
-                        fontWeight: 700,
-                        fontSize: '6.5rem',
-                        lineHeight: 1,
-                        color: '#111111',
-                        opacity: 0.06,
-                        userSelect: 'none',
-                        pointerEvents: 'none',
-                      }}
-                    >
-                      {step.number}
-                    </div>
-
-                    <div
-                      style={{
-                        position: 'relative',
-                        zIndex: 1,
-                        width: '48px',
-                        height: '48px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#FFFFFF',
-                        border: '1px solid #E2E2E2',
-                        borderRadius: '2px',
-                        boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-                        marginBottom: '16px',
-                      }}
-                    >
-                      <Icon size={22} color="#111111" />
-                    </div>
-
-                    <h3
-                      style={{
-                        position: 'relative',
-                        zIndex: 1,
-                        fontFamily: HEADING_FONT,
-                        fontWeight: 400,
-                        fontSize: '1.25rem',
-                        color: '#111111',
-                        marginBottom: '10px',
-                        letterSpacing: '0.01em',
-                      }}
-                    >
-                      {step.title}
-                    </h3>
-                    <p
-                      style={{
-                        position: 'relative',
-                        zIndex: 1,
-                        fontFamily: FONT,
-                        fontSize: '1.05rem',
-                        color: '#666666',
-                        lineHeight: 1.8,
-                      }}
-                    >
-                      {step.description}
-                    </p>
+      {/* Steps — dark band directly below the image */}
+      <div style={{ backgroundColor: '#111111' }}>
+        <div className="hiw-steps">
+          {steps.map((step, i) => {
+            const Icon = step.icon
+            return (
+              <FadeInView key={i} delay={i * 0.1} slideFrom="bottom">
+                <div
+                  style={{
+                    padding: '40px 32px',
+                    borderRight: i < steps.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                    height: '100%',
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  {/* Step number */}
+                  <div style={{ fontFamily: FONT, fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.18em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', marginBottom: '20px' }}>
+                    {step.number}
                   </div>
-                </FadeInView>
-              )
-            })}
-          </div>
+
+                  {/* Icon */}
+                  <div style={{ width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '2px', marginBottom: '20px' }}>
+                    <Icon size={20} color="rgba(255,255,255,0.8)" />
+                  </div>
+
+                  <h3 style={{ fontFamily: HEADING_FONT, fontWeight: 400, fontSize: '1.2rem', color: '#FFFFFF', marginBottom: '10px', letterSpacing: '0.01em', lineHeight: 1.3 }}>
+                    {step.title}
+                  </h3>
+                  <p style={{ fontFamily: FONT, fontSize: '0.97rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: 0 }}>
+                    {step.description}
+                  </p>
+                </div>
+              </FadeInView>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -1137,17 +1070,26 @@ function PricingSection({ onCta }: { onCta: () => void }) {
         .pricing-hero {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          min-height: clamp(280px, 38vw, 480px);
         }
+        .pricing-hero-text {
+          min-height: clamp(280px, 40vw, 560px);
+        }
+        .pricing-hero-img {
+          aspect-ratio: 1 / 1;
+        }
+        .pricing-cat-img { object-position: center center; }
         @media (max-width: 700px) {
           .pricing-hero { grid-template-columns: 1fr; }
-          .pricing-hero-img { min-height: 52vw; }
+          .pricing-hero-text { min-height: auto; padding: 48px 24px; }
+          .pricing-hero-img { aspect-ratio: 4 / 3; width: 100%; }
+          .pricing-cat-img { object-fit: cover !important; object-position: center 25%; }
         }
       `}</style>
 
       {/* Split header: text left, image right */}
       <div className="pricing-hero">
         <div
+          className="pricing-hero-text"
           style={{
             backgroundColor: '#111111',
             padding: 'clamp(48px, 6vw, 80px) clamp(28px, 5vw, 64px)',
@@ -1183,13 +1125,14 @@ function PricingSection({ onCta }: { onCta: () => void }) {
             </p>
           </FadeInView>
         </div>
-        <div className="pricing-hero-img" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="pricing-hero-img" style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#1a1a1a' }}>
           <Image
             src="/images/pricing-bg.png"
             alt=""
             fill
             aria-hidden="true"
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            className="pricing-cat-img"
+            style={{ objectFit: 'contain' }}
           />
         </div>
       </div>
@@ -1310,9 +1253,10 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                   onClick={onCta}
                   style={{
                     marginTop: '32px',
-                    fontFamily: FONT,
-                    fontWeight: 600,
-                    fontSize: '0.98rem',
+                    fontFamily: BTN_FONT,
+                    fontWeight: 500,
+                    fontSize: '0.92rem',
+                    letterSpacing: '0.02em',
                     backgroundColor: tier.popular ? '#111111' : 'transparent',
                     color: tier.popular ? '#FFFFFF' : '#111111',
                     border: '1.5px solid #111111',
@@ -1321,7 +1265,6 @@ function PricingSection({ onCta }: { onCta: () => void }) {
                     cursor: 'pointer',
                     transition: 'background-color 0.18s, color 0.18s',
                     width: '100%',
-                    letterSpacing: '0.02em',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#111111'
@@ -1359,10 +1302,13 @@ function WhyMeSection() {
         .cmp-label { padding: 16px 20px; font-weight: 600; font-size: 0.95rem; color: #111111; display: flex; align-items: center; }
         .cmp-me { padding: 14px 20px; font-size: 1rem; color: #666666; line-height: 1.75; border-left: 1px solid #E2E2E2; display: flex; align-items: flex-start; gap: 10px; }
         .cmp-agency { padding: 14px 20px; font-size: 1rem; color: #666666; line-height: 1.75; border-left: 1px solid #E2E2E2; display: flex; align-items: flex-start; gap: 10px; }
-        .why-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: clamp(280px, 38vw, 480px); }
+        .why-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: clamp(360px, 45vw, 580px); }
+        .why-hero-img { aspect-ratio: 3/4; }
+        .why-kid-img { object-position: center 30%; }
         @media (max-width: 700px) {
           .why-hero { grid-template-columns: 1fr; }
-          .why-hero-img { min-height: 56vw; }
+          .why-hero-img { aspect-ratio: 4/3; min-height: 260px; }
+          .why-kid-img { object-position: center 20%; }
         }
         @media (max-width: 600px) {
           .cmp-header { display: none; }
@@ -1387,7 +1333,8 @@ function WhyMeSection() {
             alt=""
             fill
             aria-hidden="true"
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            className="why-kid-img"
+            style={{ objectFit: 'cover' }}
           />
         </div>
         <div
@@ -1425,7 +1372,7 @@ function WhyMeSection() {
       </div>
 
       {/* Comparison table */}
-      <div style={{ padding: '64px 24px 96px' }}>
+      <div style={{ padding: '40px 24px 96px' }}>
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
 
         <FadeInView delay={0.1}>
@@ -1774,7 +1721,8 @@ function ContactSection({ onCta }: { onCta: () => void }) {
             <button
               onClick={onCta}
               style={{
-                fontFamily: FONT, fontWeight: 600, fontSize: '1.15rem',
+                fontFamily: BTN_FONT, fontWeight: 500, fontSize: '0.95rem',
+                letterSpacing: '0.02em',
                 backgroundColor: '#111111', color: '#FFFFFF',
                 border: 'none', borderRadius: '2px', padding: '15px 40px',
                 cursor: 'pointer', transition: 'background-color 0.18s',
@@ -1782,21 +1730,23 @@ function ContactSection({ onCta }: { onCta: () => void }) {
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#333333')}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#111111')}
             >
-              Send Us Your Project Details →
+              Send Us Your Project Details &rarr;
             </button>
             <a
               href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
               style={{
-                fontFamily: FONT, fontWeight: 600, fontSize: '1.15rem',
-                backgroundColor: '#25D366', color: '#FFFFFF',
-                textDecoration: 'none', borderRadius: '2px', padding: '15px 32px',
+                fontFamily: BTN_FONT, fontWeight: 500, fontSize: '0.95rem',
+                letterSpacing: '0.02em',
+                backgroundColor: 'transparent', color: '#111111',
+                textDecoration: 'none', borderRadius: '2px', padding: '14px 32px',
+                border: '1.5px solid #111111',
                 display: 'inline-flex', alignItems: 'center', gap: '10px',
-                transition: 'background-color 0.18s',
+                transition: 'background-color 0.18s, color 0.18s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1daa52')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#25D366')}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#111111'; e.currentTarget.style.color = '#FFFFFF' }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#111111' }}
             >
-              <WhatsAppIcon size={20} /> Chat on WhatsApp
+              <WhatsAppIcon size={18} /> Chat on WhatsApp
             </a>
           </div>
         </FadeInView>
@@ -2057,7 +2007,6 @@ function PageContent() {
 
       <main>
         <Hero onCta={open} />
-        <SocialProofBar />
         <ServicesSection />
         <HowItWorksSection />
         <PricingSection onCta={open} />
