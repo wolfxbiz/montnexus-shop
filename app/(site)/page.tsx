@@ -585,198 +585,180 @@ function Hero({ onCta }: { onCta: () => void }) {
       style={{
         minHeight: '100vh',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '136px 24px 96px',
-        backgroundColor: '#111111',
+        backgroundColor: '#0a0a0a',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Background mountain image */}
-      <Image
-        src="/images/hero-mountains.jpg"
-        alt=""
-        fill
-        priority
-        aria-hidden="true"
-        style={{
-          objectFit: 'cover',
-          objectPosition: 'center',
-          opacity: 0.45,
-        }}
-      />
-
-      {/* Dark overlay for text legibility */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.65) 100%)',
-          pointerEvents: 'none',
-        }}
-      />
-
       <style>{`
-        @keyframes hbg {
-          0%, 100% { opacity: 0.35; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(1.06); }
-        }
         @keyframes wa-pulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.45); }
           50% { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
         }
+        .hero-layout {
+          display: flex;
+          width: 100%;
+          min-height: 100vh;
+        }
+        .hero-content-col {
+          flex: 0 0 55%;
+          display: flex;
+          align-items: center;
+          padding: 140px 64px 96px 64px;
+          position: relative;
+          z-index: 1;
+          background-color: #0a0a0a;
+        }
+        .hero-image-col {
+          flex: 0 0 45%;
+          position: relative;
+        }
+        @media (max-width: 768px) {
+          .hero-layout { flex-direction: column-reverse; }
+          .hero-content-col { flex: none; width: 100%; padding: 48px 24px 64px; }
+          .hero-image-col { flex: none; width: 100%; height: 100vw; min-height: 380px; max-height: 600px; }
+        }
       `}</style>
 
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          maxWidth: '900px',
-          width: '100%',
-          textAlign: 'center',
-        }}
-      >
-
-        {/* Headline — staggered word entrance */}
-        <h1
-          aria-label="We Build Digital Products That Grow Your Business"
-          style={{
-            fontFamily: HEADING_FONT,
-            fontWeight: 400,
-            lineHeight: 1.13,
-            letterSpacing: '0.01em',
-            color: '#FFFFFF',
-            fontSize: 'clamp(2.6rem, 6vw, 5rem)',
-            marginBottom: '32px',
-          }}
-        >
-          {headline.map((word, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 44 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.85,
-                delay: 0.25 + i * 0.09,
-                ease: [0.22, 1, 0.36, 1],
+      <div className="hero-layout">
+        {/* Left: text content */}
+        <div className="hero-content-col">
+          <div>
+            <h1
+              aria-label="We Build Digital Products That Grow Your Business"
+              style={{
+                fontFamily: HEADING_FONT,
+                fontWeight: 400,
+                lineHeight: 1.13,
+                letterSpacing: '0.01em',
+                color: '#FFFFFF',
+                fontSize: 'clamp(2.6rem, 5vw, 4.5rem)',
+                marginBottom: '32px',
               }}
-              style={{ display: 'inline-block', marginRight: '0.28em' }}
             >
-              {word}
-            </motion.span>
-          ))}
-        </h1>
+              {headline.map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 44 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.85,
+                    delay: 0.25 + i * 0.09,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  style={{ display: 'inline-block', marginRight: '0.28em' }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h1>
 
-        {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1, ease: 'easeOut' }}
-          style={{
-            fontFamily: FONT,
-            fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)',
-            color: 'rgba(255,255,255,0.8)',
-            lineHeight: 1.8,
-            maxWidth: '640px',
-            margin: '0 auto 44px',
-          }}
-        >
-          Websites, web apps, mobile apps and desktop software — built by a specialist
-          studio, powered by AI, delivered fast.
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.1, ease: 'easeOut' }}
+              style={{
+                fontFamily: FONT,
+                fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
+                color: 'rgba(255,255,255,0.72)',
+                lineHeight: 1.8,
+                maxWidth: '480px',
+                marginBottom: '44px',
+              }}
+            >
+              Websites, web apps, mobile apps and desktop software — built by a specialist
+              studio, powered by AI, delivered fast.
+            </motion.p>
 
-        {/* CTA buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.45, ease: 'easeOut' }}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '14px',
-            justifyContent: 'center',
-            marginBottom: '40px',
-          }}
-        >
-          <button
-            onClick={onCta}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.45, ease: 'easeOut' }}
+              style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}
+            >
+              <button
+                onClick={onCta}
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  backgroundColor: '#FFFFFF',
+                  color: '#0a0a0a',
+                  border: 'none',
+                  borderRadius: '2px',
+                  padding: '13px 32px',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.18s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#e0e0e0')}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFFFF')}
+              >
+                Get a Free Quote
+              </button>
+
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  backgroundColor: 'transparent',
+                  color: '#FFFFFF',
+                  border: '1.5px solid rgba(255,255,255,0.45)',
+                  borderRadius: '2px',
+                  padding: '12px 32px',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  transition: 'border-color 0.18s, background-color 0.18s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#FFFFFF'
+                  e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.08)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }}
+              >
+                WhatsApp Us
+              </a>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Right: cover image */}
+        <div className="hero-image-col">
+          <Image
+            src="/images/cover.png"
+            alt=""
+            fill
+            priority
+            aria-hidden="true"
+            style={{ objectFit: 'contain', objectPosition: 'center bottom' }}
+          />
+          {/* Fade left edge into dark bg */}
+          <div
+            aria-hidden="true"
             style={{
-              fontFamily: FONT,
-              fontWeight: 600,
-              fontSize: '1.15rem',
-              backgroundColor: '#111111',
-              color: '#FFFFFF',
-              border: 'none',
-              borderRadius: '2px',
-              padding: '14px 36px',
-              cursor: 'pointer',
-              transition: 'background-color 0.18s',
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to right, #0a0a0a 0%, transparent 20%)',
+              pointerEvents: 'none',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#333333')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#111111')}
-            aria-label="Get a Free Quote"
-          >
-            Get a Free Quote
-          </button>
-
-          <button
-            onClick={() => scrollTo('services')}
+          />
+          {/* Fade bottom on mobile */}
+          <div
+            aria-hidden="true"
             style={{
-              fontFamily: FONT,
-              fontWeight: 600,
-              fontSize: '1.15rem',
-              backgroundColor: '#111111',
-              color: '#FFFFFF',
-              border: 'none',
-              borderRadius: '2px',
-              padding: '14px 36px',
-              cursor: 'pointer',
-              transition: 'background-color 0.18s',
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, #0a0a0a 0%, transparent 15%)',
+              pointerEvents: 'none',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#333333')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#111111')}
-            aria-label="See Our Services"
-          >
-            See Our Services
-          </button>
-
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              fontFamily: FONT,
-              fontWeight: 600,
-              fontSize: '1.15rem',
-              backgroundColor: 'transparent',
-              color: '#FFFFFF',
-              border: '2px solid rgba(255,255,255,0.8)',
-              borderRadius: '2px',
-              padding: '12px 36px',
-              cursor: 'pointer',
-              textDecoration: 'none',
-              display: 'inline-block',
-              transition: 'background-color 0.18s, color 0.18s, border-color 0.18s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)'
-              e.currentTarget.style.borderColor = '#FFFFFF'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'
-            }}
-            aria-label="Let's Talk on WhatsApp"
-          >
-            Let&apos;s Talk on WhatsApp
-          </a>
-        </motion.div>
-
-        {/* Trust indicators */}
+          />
+        </div>
       </div>
     </section>
   )
@@ -824,119 +806,158 @@ function ServicesSection() {
   return (
     <section
       id="services"
-      style={{ backgroundColor: '#FFFFFF', padding: '96px 24px' }}
+      style={{ position: 'relative', overflow: 'hidden' }}
     >
-      <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
-        <FadeInView>
-          <SectionTitle>What We Build</SectionTitle>
-          <Divider />
-        </FadeInView>
+      {/* Full-bleed background */}
+      <Image
+        src="/images/what-we-build.png"
+        alt=""
+        fill
+        aria-hidden="true"
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
+      />
+      {/* Dark overlay */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: 'rgba(0,0,0,0.72)',
+        }}
+      />
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '24px',
-          }}
-        >
-          {services.map((service, i) => {
-            const Icon = service.icon
-            return (
-              <FadeInView key={i} delay={i * 0.1}>
-                <div
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #E2E2E2',
-                    borderLeft: '1px solid #E2E2E2',
-                    borderRadius: '2px',
-                    padding: '32px',
-                    boxShadow: '0 2px 20px rgba(0,0,0,0.05)',
-                    transition: 'box-shadow 0.25s, transform 0.25s, border-left 0.2s',
-                    cursor: 'default',
-                    height: '100%',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)'
-                    e.currentTarget.style.transform = 'translateY(-3px)'
-                    e.currentTarget.style.borderLeft = '3px solid #111111'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)'
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.borderLeft = '1px solid #E2E2E2'
-                  }}
-                >
+      <div style={{ position: 'relative', zIndex: 1, padding: '96px 24px' }}>
+        <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
+          <FadeInView>
+            <h2
+              style={{
+                fontFamily: HEADING_FONT,
+                color: '#FFFFFF',
+                fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+                fontWeight: 400,
+                lineHeight: 1.2,
+                letterSpacing: '0.015em',
+              }}
+            >
+              What We Build
+            </h2>
+            <div
+              style={{
+                height: '1px',
+                width: '72px',
+                backgroundColor: 'rgba(255,255,255,0.3)',
+                marginTop: '20px',
+                marginBottom: '48px',
+              }}
+            />
+          </FadeInView>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '24px',
+            }}
+          >
+            {services.map((service, i) => {
+              const Icon = service.icon
+              return (
+                <FadeInView key={i} delay={i * 0.1}>
                   <div
                     style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      justifyContent: 'space-between',
-                      marginBottom: '24px',
+                      backgroundColor: 'rgba(255,255,255,0.93)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      borderLeft: '1px solid rgba(255,255,255,0.2)',
+                      borderRadius: '2px',
+                      padding: '32px',
+                      backdropFilter: 'blur(8px)',
+                      transition: 'box-shadow 0.25s, transform 0.25s, border-left 0.2s',
+                      cursor: 'default',
+                      height: '100%',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-4px)'
+                      e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.35)'
+                      e.currentTarget.style.borderLeft = '3px solid #111111'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)'
+                      e.currentTarget.style.boxShadow = 'none'
+                      e.currentTarget.style.borderLeft = '1px solid rgba(255,255,255,0.2)'
                     }}
                   >
                     <div
                       style={{
-                        padding: '10px',
-                        backgroundColor: 'rgba(0,0,0,0.07)',
-                        borderRadius: '2px',
                         display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                        justifyContent: 'space-between',
+                        marginBottom: '24px',
                       }}
                     >
-                      <Icon size={22} color="#111111" />
-                    </div>
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 600,
-                        fontSize: '0.88rem',
-                        backgroundColor: '#111111',
-                        color: '#FFFFFF',
-                        padding: '4px 12px',
-                        borderRadius: '2px',
-                      }}
-                    >
-                      {service.price}
-                    </span>
-                  </div>
-
-                  <h3
-                    style={{
-                      fontFamily: HEADING_FONT,
-                      fontWeight: 400,
-                      fontSize: '1.5rem',
-                      color: '#111111',
-                      marginBottom: '16px',
-                      letterSpacing: '0.01em',
-                    }}
-                  >
-                    {service.name}
-                  </h3>
-
-                  <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    {service.features.map((feat, j) => (
-                      <li
-                        key={j}
+                      <div
                         style={{
+                          padding: '10px',
+                          backgroundColor: 'rgba(0,0,0,0.07)',
+                          borderRadius: '2px',
                           display: 'flex',
-                          alignItems: 'flex-start',
-                          gap: '10px',
-                          fontFamily: FONT,
-                          fontSize: '1.05rem',
-                          color: '#666666',
-                          lineHeight: 1.75,
+                          alignItems: 'center',
+                          justifyContent: 'center',
                         }}
                       >
-                        <Check size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </FadeInView>
-            )
-          })}
+                        <Icon size={22} color="#111111" />
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 600,
+                          fontSize: '0.88rem',
+                          backgroundColor: '#111111',
+                          color: '#FFFFFF',
+                          padding: '4px 12px',
+                          borderRadius: '2px',
+                        }}
+                      >
+                        {service.price}
+                      </span>
+                    </div>
+
+                    <h3
+                      style={{
+                        fontFamily: HEADING_FONT,
+                        fontWeight: 400,
+                        fontSize: '1.5rem',
+                        color: '#111111',
+                        marginBottom: '16px',
+                        letterSpacing: '0.01em',
+                      }}
+                    >
+                      {service.name}
+                    </h3>
+
+                    <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {service.features.map((feat, j) => (
+                        <li
+                          key={j}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                            gap: '10px',
+                            fontFamily: FONT,
+                            fontSize: '1.05rem',
+                            color: '#555555',
+                            lineHeight: 1.75,
+                          }}
+                        >
+                          <Check size={15} color="#111111" style={{ flexShrink: 0, marginTop: '4px' }} />
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </FadeInView>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -947,99 +968,148 @@ function ServicesSection() {
 
 function HowItWorksSection() {
   return (
-    <section
-      id="how-it-works"
-      style={{ backgroundColor: '#F5F5F5', padding: '96px 24px' }}
-    >
-      <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
-        <FadeInView>
-          <SectionTitle>How We Work Together</SectionTitle>
-          <Divider />
-        </FadeInView>
-
+    <section id="how-it-works">
+      {/* Dramatic full-width image banner */}
+      <div
+        style={{
+          position: 'relative',
+          height: 'clamp(220px, 32vw, 420px)',
+          overflow: 'hidden',
+        }}
+      >
+        <Image
+          src="/images/how-we-work-together.png"
+          alt=""
+          fill
+          aria-hidden="true"
+          style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+        />
+        {/* Gradient overlays — top and bottom fade */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 50%, rgba(245,245,245,1) 100%)',
+            pointerEvents: 'none',
+          }}
+        />
+        {/* Section title overlaid */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '40px',
-            position: 'relative',
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingBottom: '10%',
           }}
         >
-          {steps.map((step, i) => {
-            const Icon = step.icon
-            return (
-              <FadeInView key={i} delay={i * 0.12} slideFrom="left">
-                <div style={{ position: 'relative' }}>
-                  {/* Decorative number */}
-                  <div
-                    aria-hidden="true"
-                    style={{
-                      position: 'absolute',
-                      top: '-16px',
-                      left: '-8px',
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: '6.5rem',
-                      lineHeight: 1,
-                      color: '#111111',
-                      opacity: 0.06,
-                      userSelect: 'none',
-                      pointerEvents: 'none',
-                    }}
-                  >
-                    {step.number}
-                  </div>
+          <FadeInView>
+            <h2
+              style={{
+                fontFamily: HEADING_FONT,
+                color: '#FFFFFF',
+                fontSize: 'clamp(1.8rem, 4vw, 3.25rem)',
+                fontWeight: 400,
+                lineHeight: 1.2,
+                letterSpacing: '0.015em',
+                textAlign: 'center',
+                textShadow: '0 2px 24px rgba(0,0,0,0.5)',
+              }}
+            >
+              How We Work Together
+            </h2>
+          </FadeInView>
+        </div>
+      </div>
 
-                  {/* Icon */}
-                  <div
-                    style={{
-                      position: 'relative',
-                      zIndex: 1,
-                      width: '48px',
-                      height: '48px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid #E2E2E2',
-                      borderRadius: '2px',
-                      boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-                      marginBottom: '16px',
-                    }}
-                  >
-                    <Icon size={22} color="#111111" />
-                  </div>
+      {/* Steps */}
+      <div style={{ backgroundColor: '#F5F5F5', padding: '64px 24px 96px' }}>
+        <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '40px',
+              position: 'relative',
+            }}
+          >
+            {steps.map((step, i) => {
+              const Icon = step.icon
+              return (
+                <FadeInView key={i} delay={i * 0.12} slideFrom="left">
+                  <div style={{ position: 'relative' }}>
+                    <div
+                      aria-hidden="true"
+                      style={{
+                        position: 'absolute',
+                        top: '-16px',
+                        left: '-8px',
+                        fontFamily: FONT,
+                        fontWeight: 700,
+                        fontSize: '6.5rem',
+                        lineHeight: 1,
+                        color: '#111111',
+                        opacity: 0.06,
+                        userSelect: 'none',
+                        pointerEvents: 'none',
+                      }}
+                    >
+                      {step.number}
+                    </div>
 
-                  <h3
-                    style={{
-                      position: 'relative',
-                      zIndex: 1,
-                      fontFamily: HEADING_FONT,
-                      fontWeight: 400,
-                      fontSize: '1.25rem',
-                      color: '#111111',
-                      marginBottom: '10px',
-                      letterSpacing: '0.01em',
-                    }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p
-                    style={{
-                      position: 'relative',
-                      zIndex: 1,
-                      fontFamily: FONT,
-                      fontSize: '1.05rem',
-                      color: '#666666',
-                      lineHeight: 1.8,
-                    }}
-                  >
-                    {step.description}
-                  </p>
-                </div>
-              </FadeInView>
-            )
-          })}
+                    <div
+                      style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        width: '48px',
+                        height: '48px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#FFFFFF',
+                        border: '1px solid #E2E2E2',
+                        borderRadius: '2px',
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
+                        marginBottom: '16px',
+                      }}
+                    >
+                      <Icon size={22} color="#111111" />
+                    </div>
+
+                    <h3
+                      style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        fontFamily: HEADING_FONT,
+                        fontWeight: 400,
+                        fontSize: '1.25rem',
+                        color: '#111111',
+                        marginBottom: '10px',
+                        letterSpacing: '0.01em',
+                      }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        fontFamily: FONT,
+                        fontSize: '1.05rem',
+                        color: '#666666',
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </FadeInView>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -1050,10 +1120,7 @@ function HowItWorksSection() {
 
 function PricingSection({ onCta }: { onCta: () => void }) {
   return (
-    <section
-      id="pricing"
-      style={{ backgroundColor: '#FFFFFF', padding: '96px 24px' }}
-    >
+    <section id="pricing" style={{ backgroundColor: '#FFFFFF' }}>
       <style>{`
         .pricing-grid {
           display: grid;
@@ -1067,26 +1134,69 @@ function PricingSection({ onCta }: { onCta: () => void }) {
         @media (max-width: 540px) {
           .pricing-grid { grid-template-columns: 1fr; }
         }
+        .pricing-hero {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          min-height: clamp(280px, 38vw, 480px);
+        }
+        @media (max-width: 700px) {
+          .pricing-hero { grid-template-columns: 1fr; }
+          .pricing-hero-img { min-height: 52vw; }
+        }
       `}</style>
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <FadeInView>
-          <SectionTitle>Simple, Transparent Pricing</SectionTitle>
-          <p
-            style={{
-              fontFamily: FONT,
-              fontSize: '1.15rem',
-              color: '#666666',
-              lineHeight: 1.8,
-              marginTop: '12px',
-            }}
-          >
-            No hidden fees. No hourly billing surprises. A fixed price agreed before a
-            single line of code is written.
-          </p>
-          <Divider />
-        </FadeInView>
+      {/* Split header: text left, image right */}
+      <div className="pricing-hero">
+        <div
+          style={{
+            backgroundColor: '#111111',
+            padding: 'clamp(48px, 6vw, 80px) clamp(28px, 5vw, 64px)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          <FadeInView>
+            <h2
+              style={{
+                fontFamily: HEADING_FONT,
+                color: '#FFFFFF',
+                fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
+                fontWeight: 400,
+                lineHeight: 1.2,
+                letterSpacing: '0.015em',
+                marginBottom: '20px',
+              }}
+            >
+              Simple, Transparent Pricing
+            </h2>
+            <p
+              style={{
+                fontFamily: FONT,
+                fontSize: 'clamp(0.95rem, 1.4vw, 1.15rem)',
+                color: 'rgba(255,255,255,0.65)',
+                lineHeight: 1.8,
+              }}
+            >
+              No hidden fees. No hourly billing surprises. A fixed price agreed before a
+              single line of code is written.
+            </p>
+          </FadeInView>
+        </div>
+        <div className="pricing-hero-img" style={{ position: 'relative', overflow: 'hidden' }}>
+          <Image
+            src="/images/pricing-bg.png"
+            alt=""
+            fill
+            aria-hidden="true"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+      </div>
 
+      {/* Pricing cards */}
+      <div style={{ padding: '64px 24px 96px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div className="pricing-grid">
           {pricingTiers.map((tier, i) => (
             <FadeInView key={i} delay={i * 0.08} slideFrom="scale" className="h-full">
@@ -1228,7 +1338,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
             </FadeInView>
           ))}
         </div>
-
+      </div>
       </div>
     </section>
   )
@@ -1238,7 +1348,7 @@ function PricingSection({ onCta }: { onCta: () => void }) {
 
 function WhyMeSection() {
   return (
-    <section style={{ backgroundColor: '#F5F5F5', padding: '96px 24px' }}>
+    <section style={{ backgroundColor: '#F5F5F5' }}>
       <style>{`
         .cmp-table { border-radius: 2px; overflow: hidden; border: 1px solid #E2E2E2; }
         .cmp-header { display: grid; grid-template-columns: 1fr 2fr 2fr; background-color: #FFFFFF; }
@@ -1249,6 +1359,11 @@ function WhyMeSection() {
         .cmp-label { padding: 16px 20px; font-weight: 600; font-size: 0.95rem; color: #111111; display: flex; align-items: center; }
         .cmp-me { padding: 14px 20px; font-size: 1rem; color: #666666; line-height: 1.75; border-left: 1px solid #E2E2E2; display: flex; align-items: flex-start; gap: 10px; }
         .cmp-agency { padding: 14px 20px; font-size: 1rem; color: #666666; line-height: 1.75; border-left: 1px solid #E2E2E2; display: flex; align-items: flex-start; gap: 10px; }
+        .why-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: clamp(280px, 38vw, 480px); }
+        @media (max-width: 700px) {
+          .why-hero { grid-template-columns: 1fr; }
+          .why-hero-img { min-height: 56vw; }
+        }
         @media (max-width: 600px) {
           .cmp-header { display: none; }
           .cmp-row { grid-template-columns: 1fr 1fr; }
@@ -1263,11 +1378,55 @@ function WhyMeSection() {
           .cmp-col-header { display: none; }
         }
       `}</style>
+
+      {/* Split header: image left, title right */}
+      <div className="why-hero">
+        <div className="why-hero-img" style={{ position: 'relative', overflow: 'hidden' }}>
+          <Image
+            src="/images/why-work-with-us.png"
+            alt=""
+            fill
+            aria-hidden="true"
+            style={{ objectFit: 'cover', objectPosition: 'center top' }}
+          />
+        </div>
+        <div
+          style={{
+            backgroundColor: '#F5F5F5',
+            padding: 'clamp(48px, 6vw, 80px) clamp(28px, 5vw, 64px)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          <FadeInView>
+            <h2
+              style={{
+                fontFamily: HEADING_FONT,
+                color: '#111111',
+                fontSize: 'clamp(1.8rem, 3vw, 3rem)',
+                fontWeight: 400,
+                lineHeight: 1.2,
+                letterSpacing: '0.015em',
+              }}
+            >
+              Why Work With Us Over a Larger Agency?
+            </h2>
+            <div
+              style={{
+                height: '1px',
+                width: '72px',
+                backgroundColor: '#E2E2E2',
+                marginTop: '20px',
+              }}
+            />
+          </FadeInView>
+        </div>
+      </div>
+
+      {/* Comparison table */}
+      <div style={{ padding: '64px 24px 96px' }}>
       <div style={{ maxWidth: '960px', margin: '0 auto' }}>
-        <FadeInView>
-          <SectionTitle>Why Work With Us Over a Larger Agency?</SectionTitle>
-          <Divider />
-        </FadeInView>
 
         <FadeInView delay={0.1}>
           <div className="cmp-table">
@@ -1321,6 +1480,7 @@ function WhyMeSection() {
             </p>
           </div>
         </FadeInView>
+      </div>
       </div>
     </section>
   )
